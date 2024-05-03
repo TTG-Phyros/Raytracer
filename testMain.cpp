@@ -19,5 +19,5 @@ int main (void)
         std::cout << ray << "\nhits\n" << sphere << std::endl;
     else
         std::cout << ray << " does not hit " << sphere << std::endl;
-    return 1;
+    return 84;
 }
