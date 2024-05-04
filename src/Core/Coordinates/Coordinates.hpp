@@ -20,6 +20,7 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
+#include <tuple>
 
 class Coordinates
 {

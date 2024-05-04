@@ -35,6 +35,8 @@ int main(int ac, char **av)
 
             loader.swapLib(av[1]);
 
+            std::cout << "ici fdp" << std::endl;
+
             return 0;
         } else {
             throw std::invalid_argument("Error: invalid arguments value");
