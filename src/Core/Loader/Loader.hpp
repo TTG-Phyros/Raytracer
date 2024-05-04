@@ -133,8 +133,4 @@ class Loader {
 
         std::vector<std::string> _path; /**< Vector containing paths to available libraries. */
         int _lib; /**< Index of the current library in the path vector. */
-
-        int loadSDL2; /**< Indicator for SDL2 library loading status. */
-        int loadNCURSES; /**< Indicator for NCURSES library loading status. */
-        int loadSFML; /**< Indicator for SFML library loading status. */
 };

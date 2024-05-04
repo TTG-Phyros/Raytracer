@@ -64,6 +64,13 @@
         "numeric": "cpp",
         "random": "cpp",
         "type_traits": "cpp",
-        "utility": "cpp"
+        "utility": "cpp",
+        "codecvt": "cpp",
+        "deque": "cpp",
+        "map": "cpp",
+        "system_error": "cpp",
+        "fstream": "cpp",
+        "iomanip": "cpp",
+        "cinttypes": "cpp"
     }
 }

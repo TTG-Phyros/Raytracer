@@ -35,7 +35,7 @@ int main(int ac, char **av)
 
             loader.swapLib(av[1]);
 
-            std::cout << "ici fdp" << std::endl;
+            loader.currInst("loadSphere");
 
             return 0;
         } else {
