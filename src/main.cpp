@@ -21,6 +21,7 @@
 #include <iostream>
 #include <utility>
 
+#include "Parser/Parser.hpp"
 #include "Utils/Exception/Exception.hpp"
 #include "Utils/Loader/Loader.hpp"
 #include "Plugins/Primitives/IPrimitives.hpp"
@@ -31,11 +32,14 @@ int main(int ac, char **av)
         if (ac == 2 && (std::string(av[1]) == "--help")) {
             std::cout << "USAGE: ./raytracer <SCENE_FILE>\n\tSCENE_FILE: scene configuration" << std::endl;
         } if (ac == 2) {
+            Parser parser(av[1]);
             // Loader <IPrimitives> loader;
 
             // loader.swapLib(av[1]);
 
             // loader.currInst("loadSphere");
+        } else if ((ac == 3) && (std::string(av[2]) == "--debug")) {
+            Parser parser(av[1], "--debug");
         } else {
             throw Exception("Error: invalid arguments");
         }

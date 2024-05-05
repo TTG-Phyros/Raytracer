@@ -15,6 +15,8 @@ PATH_SRC    =   ./src/
 
 PATH_CORE   = $(PATH_SRC)Core/
 
+PATH_PARSER =	$(PATH_SRC)Parser/
+
 PATH_UTILS  = $(PATH_SRC)Utils/
 
 PATH_LOADER =   $(PATH_UTILS)Loader/
@@ -37,7 +39,7 @@ generateSo:
 	g++ -shared -fPIC -o ./plugins/raytracer_sphere.so $(PATH_SPHERE)*.cpp $(PATH_COLOR)*.cpp $(PATH_COORDINATES)*.cpp -fno-gnu-unique
 
 core:
-	g++ $(PATH_SRC)*.cpp $(PATH_EXCEPTION)*.cpp $(PATH_COLOR)*.cpp $(PATH_COORDINATES)*.cpp -ldl -o $(NAME) -fno-gnu-unique
+	g++ $(PATH_SRC)*.cpp $(PATH_PARSER)*.cpp $(PATH_EXCEPTION)*.cpp $(PATH_COLOR)*.cpp $(PATH_COORDINATES)*.cpp -ldl -o $(NAME) -fno-gnu-unique
 
 clean:
 	rm -f ./plugins/*.so
