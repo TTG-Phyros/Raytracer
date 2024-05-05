@@ -24,7 +24,7 @@
 #include <stdexcept>
 #include <dlfcn.h>
 
-#include "Loader/Loader.hpp"
+#include "../Utils/Loader/Loader.hpp"
 #include "../Plugins/Primitives/IPrimitives.hpp"
 
 int main(int ac, char **av)

@@ -46,7 +46,11 @@ bool Sphere::hits(Coordinates vectorOrigin, Coordinates vectorDirection)
     double offsetY = _origin.getY();
     double offsetZ = _origin.getZ();
 
-    Coordinates point = Coordinates(vectorOrigin.getX() - _origin.getX(), vectorOrigin.getY() - _origin.getY(), vectorOrigin.getZ() - _origin.getZ());
+    Coordinates point = Coordinates(
+        vectorOrigin.getX() - _origin.getX(),
+        vectorOrigin.getY() - _origin.getY(),
+        vectorOrigin.getZ() - _origin.getZ()
+    );
 
     Coordinates vector = Coordinates(
         vectorDirection.getX() - _origin.getX(),

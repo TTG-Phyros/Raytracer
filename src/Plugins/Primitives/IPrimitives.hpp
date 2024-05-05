@@ -15,8 +15,8 @@
 #ifndef IPRIMITIVESphereS_HPP
 #define IPRIMITIVES_HPP
 
-#include "../../Core/Coordinates/Coordinates.hpp"
-#include "../../Core/Color/Color.hpp"
+#include "../../Utils/Coordinates/Coordinates.hpp"
+#include "../../Utils/Color/Color.hpp"
 
 class IPrimitives
 {
