@@ -25,7 +25,6 @@
 class Color
 {
     public:
-
         Color();
         Color(int red, int green, int blue, int opacity);
 
@@ -40,7 +39,6 @@ class Color
     protected:
 
     private:
-
         std::vector<std::tuple<std::string, int>> _Color;
 
 };

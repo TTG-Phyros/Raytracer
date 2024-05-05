@@ -25,7 +25,6 @@
 class Coordinates
 {
     public:
-
         Coordinates();
         Coordinates(double x, double y, double z);
 
@@ -39,7 +38,6 @@ class Coordinates
     protected:
 
     private:
-
         std::vector<std::tuple<std::string, double>> _Coordinates;
 
 };

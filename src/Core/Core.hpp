@@ -11,3 +11,28 @@
  * @copyright Copyright (c) 2024
  *
  */
+
+#ifndef CORE_HPP
+#define CORE_HPP
+
+#include <algorithm>
+#include <iterator>
+#include <sstream>
+#include <fstream>
+#include <vector>
+#include <iostream>
+#include <utility>
+#include <map>
+
+class Core
+{
+    public:
+        Core();
+        ~Core();
+
+    protected:
+
+    private:
+};
+
+#endif // !CORE_HPP

@@ -39,7 +39,7 @@ generateSo:
 	g++ -shared -fPIC -o ./plugins/raytracer_sphere.so $(PATH_SPHERE)*.cpp $(PATH_COLOR)*.cpp $(PATH_COORDINATES)*.cpp -fno-gnu-unique
 
 core:
-	g++ $(PATH_SRC)*.cpp $(PATH_PARSER)*.cpp $(PATH_EXCEPTION)*.cpp $(PATH_COLOR)*.cpp $(PATH_COORDINATES)*.cpp -ldl -o $(NAME) -fno-gnu-unique
+	g++ $(PATH_SRC)*.cpp $(PATH_PARSER)Parser.cpp $(PATH_EXCEPTION)*.cpp $(PATH_COLOR)*.cpp $(PATH_COORDINATES)*.cpp -ldl -o $(NAME) -fno-gnu-unique -lconfig++
 
 clean:
 	rm -f ./plugins/*.so

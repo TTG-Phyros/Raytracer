@@ -20,7 +20,6 @@
 class Sphere : public IPrimitives
 {
     public:
-
         Sphere();
         Sphere(Coordinates origin, double radius, Color color);
         ~Sphere();

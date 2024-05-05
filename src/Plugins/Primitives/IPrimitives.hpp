@@ -21,7 +21,6 @@
 class IPrimitives
 {
     public:
-
         ~IPrimitives() = default;
 
         virtual bool hits(Coordinates vectorOrigin, Coordinates vectorDirection) = 0;
