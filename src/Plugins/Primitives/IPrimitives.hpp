@@ -26,8 +26,10 @@ class IPrimitives
 
         virtual bool hits(Coordinates vectorOrigin, Coordinates vectorDirection) = 0;
 
+        virtual void setForm(std::string form) = 0;
         virtual void setOrigin(Coordinates origin) = 0;
         virtual void setColor(Color color) = 0;
+        virtual void setRadius(double radius) = 0;
 
         virtual std::string getForm() = 0;
         virtual Coordinates getOrigin() = 0;

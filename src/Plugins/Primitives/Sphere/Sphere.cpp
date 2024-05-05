@@ -67,14 +67,24 @@ bool Sphere::hits(Coordinates vectorOrigin, Coordinates vectorDirection)
     return delta < 0 ? false : true;
 }
 
-void Sphere::setColor(Color color)
+void Sphere::setForm(std::string form)
 {
-    _color = color;
+    _form = form;
 }
 
 void Sphere::setOrigin(Coordinates origin)
 {
     _origin = origin;
+}
+
+void Sphere::setColor(Color color)
+{
+    _color = color;
+}
+
+void Sphere::setRadius(double radius)
+{
+    _radius = radius;
 }
 
 std::string Sphere::getForm()

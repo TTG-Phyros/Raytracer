@@ -20,29 +20,28 @@
 #include <vector>
 #include <iostream>
 #include <utility>
-#include <map>
-#include <stdexcept>
-#include <dlfcn.h>
 
-#include "../Utils/Loader/Loader.hpp"
-#include "../Plugins/Primitives/IPrimitives.hpp"
+#include "Utils/Exception/Exception.hpp"
+#include "Utils/Loader/Loader.hpp"
+#include "Plugins/Primitives/IPrimitives.hpp"
 
 int main(int ac, char **av)
 {
     try {
-        if (ac == 2) {
-            Loader <IPrimitives> loader;
+        if (ac == 2 && (std::string(av[1]) == "--help")) {
+            std::cout << "USAGE: ./raytracer <SCENE_FILE>\n\tSCENE_FILE: scene configuration" << std::endl;
+        } if (ac == 2) {
+            // Loader <IPrimitives> loader;
 
-            loader.swapLib(av[1]);
+            // loader.swapLib(av[1]);
 
-            loader.currInst("loadSphere");
-
-            return 0;
+            // loader.currInst("loadSphere");
         } else {
-            throw std::invalid_argument("Error: invalid arguments value");
+            throw Exception("Error: invalid arguments");
         }
-    } catch(const std::exception &e) {
+    } catch(Exception &e) {
         std::cerr << e.what() << std::endl;
-        return 84;
+        exit(84);
     }
+    return 0;
 }

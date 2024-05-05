@@ -5,7 +5,7 @@
 ## RayTracer
 ##
 
-NAME    =   RayTracer
+NAME    =   raytracer
 
 IFLAGS  =   -I ./src/
 
@@ -23,6 +23,8 @@ PATH_COLOR  =   $(PATH_UTILS)Color/
 
 PATH_COORDINATES    =   $(PATH_UTILS)Coordinates/
 
+PATH_EXCEPTION    =   $(PATH_UTILS)Exception/
+
 PATH_PLUGINS    =   $(PATH_SRC)Plugins/
 
 PATH_PRIMITIVES =   $(PATH_PLUGINS)Primitives/
@@ -32,10 +34,10 @@ PATH_SPHERE =   $(PATH_PRIMITIVES)Sphere/
 all: generateSo core
 
 generateSo:
-	g++ -shared -fPIC -o ./plugins/raytracer_sphere.so ./src/Plugins/Primitives/Sphere/Sphere.cpp $(PATH_COLOR)Color.cpp $(PATH_COORDINATES)Coordinates.cpp -fno-gnu-unique
+	g++ -shared -fPIC -o ./plugins/raytracer_sphere.so $(PATH_SPHERE)*.cpp $(PATH_COLOR)*.cpp $(PATH_COORDINATES)*.cpp -fno-gnu-unique
 
 core:
-	g++ $(PATH_CORE)*.cpp $(PATH_COLOR)*.cpp $(PATH_COORDINATES)*.cpp -ldl -o $(NAME) -fno-gnu-unique
+	g++ $(PATH_SRC)*.cpp $(PATH_EXCEPTION)*.cpp $(PATH_COLOR)*.cpp $(PATH_COORDINATES)*.cpp -ldl -o $(NAME) -fno-gnu-unique
 
 clean:
 	rm -f ./plugins/*.so

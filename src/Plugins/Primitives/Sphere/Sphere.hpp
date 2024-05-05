@@ -28,8 +28,10 @@ class Sphere : public IPrimitives
         bool hits(Coordinates vectorOrigin, Coordinates vectorDirection) override;
 
         // SETTER
-        void setColor(Color color) override;
+        void setForm(std::string form) override;
         void setOrigin(Coordinates origin) override;
+        void setColor(Color color) override;
+        void setRadius(double radius) override;
 
         // GETTER
         std::string getForm() override;
