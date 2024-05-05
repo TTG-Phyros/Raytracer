@@ -82,12 +82,12 @@ class Loader {
             struct dirent *ent;
             std::vector<std::string> location;
 
-            if ((Directory = opendir ("./lib")) != NULL) {
+            if ((Directory = opendir ("./plugins")) != NULL) {
                 for (struct dirent* ent = readdir(Directory); ent != NULL; ent = readdir(Directory)) {
                     if (ent->d_name[0] == '.') {
                         continue;
                     } else {
-                        std::string tmp = "./lib/" + std::string(ent->d_name);
+                        std::string tmp = "./plugins/" + std::string(ent->d_name);
                         location.push_back(tmp);
                     }
                 }
