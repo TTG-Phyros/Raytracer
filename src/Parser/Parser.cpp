@@ -122,8 +122,39 @@ void Parser::parserInfoPrimitives(const Setting& root)
 
             _primitivesInfo.push_back(std::make_tuple("forme", forme));
             _primitivesInfo.push_back(std::make_tuple("color_r", color_r));
-            _primitivesInfo.push_back(std::make_tuple("color_g", color_r));
-            _primitivesInfo.push_back(std::make_tuple("color_b", color_r));
+            _primitivesInfo.push_back(std::make_tuple("color_g", color_g));
+            _primitivesInfo.push_back(std::make_tuple("color_b", color_b));
+        }
+    } catch(const SettingNotFoundException &nfex) {
+        // Ignorer
+    }
+}
+
+void Parser::parserInfoLight(const Setting& root)
+{
+    try {
+        const Setting &light = root["inventory"]["light"];
+        int count = light.getLength();
+
+        for(int i = 0; i < count; ++i) {
+            const Setting &mylight = light[i];
+
+            string ambient, diffuse, point_x, point_y, point_z, directional;
+
+            if(!(mylight.lookupValue("ambient", ambient)
+                && mylight.lookupValue("diffuse", diffuse)
+                && mylight.lookupValue("point_x", point_x)
+                && mylight.lookupValue("point_y", point_y)
+                && mylight.lookupValue("point_z", point_z)
+                && mylight.lookupValue("directional", directional)))
+                continue;
+
+            _lightInfo.push_back(std::make_tuple("ambient", ambient));
+            _lightInfo.push_back(std::make_tuple("diffuse", diffuse));
+            _lightInfo.push_back(std::make_tuple("point_x", point_x));
+            _lightInfo.push_back(std::make_tuple("point_y", point_y));
+            _lightInfo.push_back(std::make_tuple("point_z", point_z));
+            _lightInfo.push_back(std::make_tuple("directional", directional));
         }
     } catch(const SettingNotFoundException &nfex) {
         // Ignorer
@@ -170,4 +201,9 @@ std::vector<std::tuple<std::string, std::string>> Parser::getCameraInfo()
 std::vector<std::tuple<std::string, std::string>> Parser::getPrimitivesInfo()
 {
     return _primitivesInfo;
+}
+
+std::vector<std::tuple<std::string, std::string>> Parser::getLightInfo()
+{
+    return _lightInfo;
 }
