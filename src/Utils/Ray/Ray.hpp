@@ -16,7 +16,7 @@
 #define RAY_HPP_
 
 #include "../Points/Point3D.hpp"
-#include "../Vectors/Vector3D.hpp"
+#include "../Vector/Vector3D.hpp"
 
 namespace RayTracer {
     class Ray {
