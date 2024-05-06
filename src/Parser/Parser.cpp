@@ -82,7 +82,12 @@ void Parser::getInfoCamera(const Setting& root)
                 && book.lookupValue("color_b", color_b)))
                 continue;
 
-            camerasInfo.push_back(std::make_tuple(width_resolution, height_resolution, color_r, color_g, color_b));
+            //camerasInfo.push_back(std::make_tuple(width_resolution, height_resolution, color_r, color_g, color_b));
+            _camerasInfo.push_back((std::make_tuple("width_resolution", width_resolution)));
+            _camerasInfo.push_back((std::make_tuple("height_resolution", height_resolution)));
+            _camerasInfo.push_back((std::make_tuple("color_r", color_r)));
+            _camerasInfo.push_back((std::make_tuple("color_g", color_g)));
+            _camerasInfo.push_back((std::make_tuple("color_b", color_b)));
         }
     } catch(const SettingNotFoundException &nfex) {
         // Ignorer
@@ -104,28 +109,17 @@ void Parser::getInfoPrimitives(const Setting& root)
                 && movie.lookupValue("media", media)))
                 continue;
 
-            primitivesInfo.push_back(std::make_tuple(forme, media));
+            _primitivesInfo.push_back(std::make_tuple("forme", forme));
+            _primitivesInfo.push_back(std::make_tuple("media", media));
         }
     } catch(const SettingNotFoundException &nfex) {
         // Ignorer
     }
 }
 
+
 void Parser::printInfoFile()
 {
-    std::cout << "cameras :" << std::endl;
-    for (const auto& camera : camerasInfo) {
-        std::cout << "Width Resolution: " << std::get<0>(camera) << std::endl;
-        std::cout << "Height Resolution: " << std::get<1>(camera) << std::endl;
-        std::cout << "Color R: " << std::get<2>(camera) << std::endl;
-        std::cout << "Color G: " << std::get<3>(camera) << std::endl;
-        std::cout << "Color B: " << std::get<4>(camera) << std::endl;
-        std::cout << std::endl;
-    }
 
-    std::cout << "primitives :" << std::endl;
-    for (const auto& primitive : primitivesInfo) {
-        std::cout << "Forme: " << std::get<0>(primitive);
-        std::cout << std::endl;
-    }
 }
+

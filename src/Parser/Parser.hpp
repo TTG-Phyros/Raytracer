@@ -21,6 +21,7 @@
 #include <vector>
 #include <tuple>
 
+#include "Creation.hpp"
 #include "../Utils/Exception/Exception.hpp"
 
 using namespace std;
@@ -47,8 +48,10 @@ class Parser
     private:
         std::string _filePath;            ///< The path to the file to be parsed.
         std::string _flag;                ///< Additional flag for parsing, if needed.
-        std::vector<std::tuple<std::string, std::string, std::string, std::string, std::string>> camerasInfo;
-        std::vector<std::tuple<std::string, std::string>> primitivesInfo;
+        std::vector<std::tuple<std::string, std::string>> _camerasInfo;
+        std::vector<std::tuple<std::string, std::string>> _primitivesInfo;
+        //std::vector<std::tuple<std::string, std::string, std::string, std::string, std::string>> camerasInfo;
+        //std::vector<std::tuple<std::string, std::string>> primitivesInfo;
 };
 
 #endif // !PARSER_HPP
