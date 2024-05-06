@@ -21,3 +21,4 @@ int main (void)
         std::cout << ray << " does not hit " << sphere << std::endl;
     return 84;
 }
+
