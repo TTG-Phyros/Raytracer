@@ -22,7 +22,7 @@ Core::Core()
 
     loader.swapLib("./plugins/raytracer_sphere.so");
 
-    loader.currInst("loadSphere");
+    loader.getNewInstance("loadSphere");
 }
 
 Core::~Core()
