@@ -23,12 +23,12 @@ extern "C" IPrimitives *loadSphere()
 Sphere::Sphere()
 {
     _form = "Sphere";
-    _origin = Coordinates();
+    _origin = Math::Point3D();
     _radius = 0.0;
     _color = Color();
 }
 
-Sphere::Sphere(Coordinates origin, double radius, Color color)
+Sphere::Sphere(Math::Point3D origin, double radius, Color color)
 {
     _form = "Sphere";
     _origin = origin;
@@ -40,27 +40,26 @@ Sphere::~Sphere()
 {
 }
 
-bool Sphere::hits(Coordinates vectorOrigin, Coordinates vectorDirection)
+bool Sphere::hits(RayTracer::Ray &ray)
 {
-    double offsetX = _origin.getX();
-    double offsetY = _origin.getY();
-    double offsetZ = _origin.getZ();
+    double offsetX = _origin._x;
+    double offsetY = _origin._y;
+    double offsetZ = _origin._z;
 
-    Coordinates point = Coordinates(
-        vectorOrigin.getX() - _origin.getX(),
-        vectorOrigin.getY() - _origin.getY(),
-        vectorOrigin.getZ() - _origin.getZ()
+    Math::Point3D point = Math::Point3D(
+        ray._origin._x + offsetX,
+        ray._origin._y + offsetY,
+        ray._origin._z + offsetZ
+    );
+    Math::Vector3D vector = Math::Vector3D(
+        ray._direction._x + offsetX,
+        ray._direction._y + offsetY,
+        ray._direction._z + offsetZ
     );
 
-    Coordinates vector = Coordinates(
-        vectorDirection.getX() - _origin.getX(),
-        vectorDirection.getY() - _origin.getY(),
-        vectorDirection.getZ() - _origin.getZ()
-    );
-
-    double a = ((vector.getX() * vector.getX()) + (vector.getY() * vector.getY()) + (vector.getZ() * vector.getZ()));
-    double b = (2 * ((point.getX() * vector.getX()) + (point.getY() * vector.getY()) + (point.getZ() * vector.getZ())));
-    double c = ((point.getX() * point.getX()) + (point.getY() * point.getY()) + (point.getZ() * point.getZ()) - (_radius * _radius));
+    double a = ((vector._x * vector._x) + (vector._y * vector._y) + (vector._z * vector._z));
+    double b = (2 * ((point._x * vector._x) + (point._y * vector._y) + (point._z * vector._z)));
+    double c = ((point._x * point._x) + (point._y * point._y) + (point._z * point._z) - (_radius * _radius));
 
     double delta = (b * b) - (4 * a * c);
 
@@ -72,7 +71,7 @@ void Sphere::setForm(std::string form)
     _form = form;
 }
 
-void Sphere::setOrigin(Coordinates origin)
+void Sphere::setOrigin(Math::Point3D origin)
 {
     _origin = origin;
 }
@@ -82,9 +81,11 @@ void Sphere::setColor(Color color)
     _color = color;
 }
 
-void Sphere::setRadius(double radius)
+void Sphere::setSize(std::vector<double> size)
 {
-    _radius = radius;
+    if (size.size() != 1)
+        return;
+    _radius = size[0];
 }
 
 std::string Sphere::getForm()
@@ -92,7 +93,7 @@ std::string Sphere::getForm()
     return _form;
 }
 
-Coordinates Sphere::getOrigin()
+Math::Point3D Sphere::getOrigin()
 {
     return _origin;
 }
@@ -102,7 +103,7 @@ Color Sphere::getColor()
     return _color;
 }
 
-double Sphere::getRadius()
+std::vector<double> Sphere::getSize()
 {
-    return _radius;
+    return std::vector<double>(1, _radius);
 }

@@ -1,5 +1,5 @@
 /**
- * @file Sphere.hpp
+ * @file Cube.hpp
  * @author COUSTABEAU Maxime (maxime.coustabeau@epitech.eu)
  *         GIRARD Anthony (anthony1.girard@epitech.eu)
  *         MERY Baptiste (baptiste.mery@epitech.eu)
@@ -15,17 +15,17 @@
 #include "../IPrimitives.hpp"
 #include "../../../Utils/Ray/Ray.hpp"
 
-#ifndef SPHERE_HPP
-#define SPHERE_HPP
+#ifndef CUBE_HPP
+#define CUBE_HPP
 
-class Sphere : public IPrimitives
+class Cube : public IPrimitives
 {
     public:
-        Sphere();
-        Sphere(Math::Point3D origin, double radius, Color color);
-        ~Sphere();
+        Cube();
+        Cube(Math::Point3D origin, double side, Color color);
+        ~Cube();
 
-        bool Sphere::hits(RayTracer::Ray &ray) override;
+        bool hits(RayTracer::Ray &ray) override;
 
         // SETTER
         void setForm(std::string form) override;
@@ -45,7 +45,7 @@ class Sphere : public IPrimitives
         std::string _form;
         Color _color;
         Math::Point3D _origin;
-        double _radius;
+        double _side;
 };
 
-#endif // !SPHERE_HPP
+#endif // !CUBE_HPP

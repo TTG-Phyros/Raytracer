@@ -23,7 +23,9 @@ PATH_LOADER =   $(PATH_UTILS)Loader/
 
 PATH_COLOR  =   $(PATH_UTILS)Color/
 
-PATH_COORDINATES    =   $(PATH_UTILS)Coordinates/
+PATH_POINT    =   $(PATH_UTILS)Points/
+
+PATH_VECTOR    =   $(PATH_UTILS)Vectors/
 
 PATH_EXCEPTION    =   $(PATH_UTILS)Exception/
 
@@ -33,13 +35,16 @@ PATH_PRIMITIVES =   $(PATH_PLUGINS)Primitives/
 
 PATH_SPHERE =   $(PATH_PRIMITIVES)Sphere/
 
+PATH_CUBE =   $(PATH_PRIMITIVES)Cube/
+
 all: generateSo core
 
 generateSo:
-	g++ -shared -fPIC -o ./plugins/raytracer_sphere.so $(PATH_SPHERE)*.cpp $(PATH_COLOR)*.cpp $(PATH_COORDINATES)*.cpp -fno-gnu-unique
+	g++ -shared -fPIC -o ./plugins/raytracer_sphere.so $(PATH_SPHERE)*.cpp $(PATH_COLOR)*.cpp $(PATH_POINT)*.cpp $(PATH_VECTOR)*.cpp -fno-gnu-unique
+	g++ -shared -fPIC -o ./plugins/raytracer_cube.so $(PATH_CUBE)*.cpp $(PATH_COLOR)*.cpp $(PATH_POINT)*.cpp $(PATH_VECTOR)*.cpp -fno-gnu-unique
 
 core:
-	g++ $(PATH_SRC)*.cpp $(PATH_PARSER)Parser.cpp $(PATH_EXCEPTION)*.cpp $(PATH_COLOR)*.cpp $(PATH_COORDINATES)*.cpp -ldl -o $(NAME) -fno-gnu-unique -lconfig++
+	g++ $(PATH_SRC)*.cpp $(PATH_PARSER)Parser.cpp $(PATH_EXCEPTION)*.cpp $(PATH_COLOR)*.cpp $(PATH_POINT)*.cpp $(PATH_VECTOR)*.cpp -ldl -o $(NAME) -fno-gnu-unique -lconfig++
 
 clean:
 	rm -f ./plugins/*.so
