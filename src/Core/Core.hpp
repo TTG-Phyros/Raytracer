@@ -27,6 +27,7 @@
 
 #include "../Utils/Loader/Loader.hpp"
 #include "../Plugins/Primitives/IPrimitives.hpp"
+#include "Factory/Factory.hpp"
 
 class Core
 {
