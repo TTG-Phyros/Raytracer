@@ -24,7 +24,7 @@
 #include "Parser/Parser.hpp"
 #include "Utils/Exception/Exception.hpp"
 
-int create_header_ppm(std::vector<std::tuple<std::string, std::string>> camerasInfo, std::vector<std::tuple<std::string, std::string>> primitiveInfo)
+int create_header_ppm(std::vector<std::tuple<std::string, std::string>> camerasInfo, std::vector<std::tuple<std::string, std::string>> primitivesInfo)
 {
     std::ofstream image;
     image.open("image.ppm");
@@ -42,7 +42,7 @@ int create_header_ppm(std::vector<std::tuple<std::string, std::string>> camerasI
             height = std::get<1>(info);
     }
 
-    for (const auto& info : primitiveInfo) {
+    for (const auto& info : primitivesInfo) {
         if (std::get<0>(info) == "color_r")
             color_r = std::get<1>(info);
         if (std::get<0>(info) == "color_g")
