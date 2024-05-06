@@ -17,5 +17,30 @@
 
 #include "../Utils/Loader/Loader.hpp"
 #include "../Plugins/Primitives/IPrimitives.hpp"
+#include "../Utils/Exception/Exception.hpp"
+
+#include <memory>
+
+class Factory
+{
+    public:
+        Loader <IPrimitives> createPrimitives(const std::string &form, Loader <IPrimitives> loader) const {
+            if (form == "sphere") {
+                loader.swapLib("./plugins/raytracer_sphere.so");
+                return (createSphere(loader));
+            } else if (form == "plane") {
+                loader.swapLib("./plugins/raytracer_plane.so");
+                return (createPlane(loader));
+            } else {
+                throw Exception("Factory: invalid primitive form");
+            }
+        }
+
+    protected:
+
+    private:
+        Loader <IPrimitives> createSphere(Loader <IPrimitives> loader) const noexcept { loader.getNewInstance("loadSphere"); return loader; }
+        Loader <IPrimitives> createPlane(Loader <IPrimitives> loader) const noexcept { loader.getNewInstance("loadPlane"); return loader; }
+};
 
 #endif /* !FACTORY_HPP */

@@ -13,16 +13,9 @@
  */
 
 #include "Core.hpp"
-#include "Utils/Loader/Loader.hpp"
-#include "Plugins/Primitives/IPrimitives.hpp"
 
 Core::Core()
 {
-    Loader <IPrimitives> loader;
-
-    loader.swapLib("./plugins/raytracer_sphere.so");
-
-    loader.getNewInstance("loadSphere");
 }
 
 Core::~Core()

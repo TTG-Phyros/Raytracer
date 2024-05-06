@@ -24,6 +24,10 @@
 #include <utility>
 #include <map>
 
+
+#include "../Utils/Loader/Loader.hpp"
+#include "../Plugins/Primitives/IPrimitives.hpp"
+
 class Core
 {
     public:
@@ -33,6 +37,7 @@ class Core
     protected:
 
     private:
+        std::vector<std::string, Loader <IPrimitives>> _formList;
 };
 
 #endif // !CORE_HPP
