@@ -38,10 +38,15 @@ class Parser
         Parser(const std::string &filepath = "", const std::string &flag = "");
         ~Parser();
 
+        // Getter
+        std::vector<std::tuple<std::string, std::string>> getCameraInfo();
+        std::vector<std::tuple<std::string, std::string>> getPrimitivesInfo();
+
         bool readFileConfig(Config& cfg);
-        void getInfoCamera(const Setting& root);
-        void getInfoPrimitives(const Setting& root);
-        void printInfoFile();
+        void parserInfoCamera(const Setting& root);
+        void parserInfoPrimitives(const Setting& root);
+        void printInfoFile() const ;
+        std::vector<std::pair<std::string, std::string>> GetInfo(const Parser& parser);
 
     protected:
 
@@ -50,8 +55,6 @@ class Parser
         std::string _flag;                ///< Additional flag for parsing, if needed.
         std::vector<std::tuple<std::string, std::string>> _camerasInfo;
         std::vector<std::tuple<std::string, std::string>> _primitivesInfo;
-        //std::vector<std::tuple<std::string, std::string, std::string, std::string, std::string>> camerasInfo;
-        //std::vector<std::tuple<std::string, std::string>> primitivesInfo;
 };
 
 #endif // !PARSER_HPP
