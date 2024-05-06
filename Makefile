@@ -23,7 +23,7 @@ PATH_LOADER =   $(PATH_UTILS)Loader/
 
 PATH_COLOR  =   $(PATH_UTILS)Color/
 
-PATH_POINT    =   $(PATH_UTILS)Points/
+PATH_POINT    =   $(PATH_UTILS)Point/
 
 PATH_VECTOR    =   $(PATH_UTILS)Vector/
 
