@@ -25,7 +25,7 @@ PATH_COLOR  =   $(PATH_UTILS)Color/
 
 PATH_POINT    =   $(PATH_UTILS)Points/
 
-PATH_VECTOR    =   $(PATH_UTILS)Vectors/
+PATH_VECTOR    =   $(PATH_UTILS)Vector/
 
 PATH_EXCEPTION    =   $(PATH_UTILS)Exception/
 
