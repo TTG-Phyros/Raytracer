@@ -1,5 +1,5 @@
 /**
- * @file Core.cpp
+ * @file Factory.hpp
  * @author COUSTABEAU Maxime (maxime.coustabeau@epitech.eu)
  *         GIRARD Anthony (anthony1.girard@epitech.eu)
  *         MERY Baptiste (baptiste.mery@epitech.eu)
@@ -12,19 +12,10 @@
  *
  */
 
-#include "Core.hpp"
-#include "Utils/Loader/Loader.hpp"
-#include "Plugins/Primitives/IPrimitives.hpp"
+#ifndef FACTORY_HPP
+#define FACTORY_HPP
 
-Core::Core()
-{
-    Loader <IPrimitives> loader;
+#include "../Utils/Loader/Loader.hpp"
+#include "../Plugins/Primitives/IPrimitives.hpp"
 
-    loader.swapLib("./plugins/raytracer_sphere.so");
-
-    loader.getNewInstance("loadSphere");
-}
-
-Core::~Core()
-{
-}
+#endif /* !FACTORY_HPP */

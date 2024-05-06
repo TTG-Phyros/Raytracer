@@ -55,7 +55,7 @@ class Loader {
          * @param param The name of the class to instantiate.
          * @return A pointer to the instantiated object.
          */
-        ClassContainer* currInst(const std::string& param) {
+        ClassContainer* getNewInstance(const std::string& param) {
             ClassContainer* layer = nullptr;
 
             if (_loadedLib != nullptr) {

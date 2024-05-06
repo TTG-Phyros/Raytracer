@@ -37,7 +37,8 @@ Parser::Parser(const std::string &filepath, const std::string &flag)
         const Setting &root = cfg.getRoot();
         parserInfoCamera(root);
         parserInfoPrimitives(root);
-        printInfoFile();
+        if (!_flag.empty())
+            printInfoFile();
 
     } catch(Exception &e) {
         std::cerr << e.what() << std::endl;
