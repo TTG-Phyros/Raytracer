@@ -25,7 +25,7 @@ class Sphere : public IPrimitives
         Sphere(Math::Point3D origin, double radius, Color color);
         ~Sphere();
 
-        bool Sphere::hits(RayTracer::Ray &ray) override;
+        bool hits(RayTracer::Ray &ray) override;
 
         // SETTER
         void setForm(std::string form) override;

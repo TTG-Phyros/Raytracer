@@ -24,7 +24,7 @@
 #include "Parser/Parser.hpp"
 #include "Utils/Exception/Exception.hpp"
 
-int create_ppm ()
+void create_ppm ()
 {
     std::ofstream image;
     image.open("image.ppm");
