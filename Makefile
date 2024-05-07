@@ -73,5 +73,7 @@ clean:
 
 fclean: clean
 	rm -rf $(NAME)
+	rm -rf html
+	rm -rf latex
 
 re: fclean all
