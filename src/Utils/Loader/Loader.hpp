@@ -46,7 +46,7 @@ class Loader {
          * @brief Destructor for cleaning up resources.
          */
         ~Loader() {
-            (_loadedLib != nullptr) ? dlclose(_loadedLib) : 0;
+            // (_loadedLib != nullptr) ? dlclose(_loadedLib) : 0;
         }
 
         /**

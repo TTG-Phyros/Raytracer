@@ -66,7 +66,7 @@ generateSo:
 	g++ -shared -fPIC -o ./plugins/raytracer_cube.so $(PATH_CUBE) $(FLAGS_UTILS) -fno-gnu-unique
 
 core:
-	g++ $(PATH_SRC)main.cpp $(PATH_PARSER) $(PATH_CORE) $(PATH_OUTPUT) $(FLAGS_UTILS) -ldl -o $(NAME) -fno-gnu-unique -lconfig++
+	g++ $(PATH_SRC)main.cpp $(PATH_PARSER) $(PATH_CORE) $(PATH_OUTPUT) $(FLAGS_UTILS) -ldl -o $(NAME) -fno-gnu-unique -lconfig++ -g3
 
 clean:
 	rm -f ./plugins/*.so

@@ -25,13 +25,13 @@ class Factory
 {
     public:
         IPrimitives *createPrimitives(const std::string &form, Loader <IPrimitives> loader) const {
-            if (form == "sphere") {
+            if (form == "sphere" || form == "Sphere") {
                 loader.swapLib("./plugins/raytracer_sphere.so");
                 return (createSphere(loader));
-            } else if (form == "cube") {
+            } else if (form == "cube" || form == "Cube") {
                 loader.swapLib("./plugins/raytracer_cube.so");
-                return (createSphere(loader));
-            } else if (form == "plane") {
+                return (createCube(loader));
+            } else if (form == "plane" || form == "Plane") {
                 loader.swapLib("./plugins/raytracer_plane.so");
                 return (createPlane(loader));
             } else {
