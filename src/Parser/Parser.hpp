@@ -22,6 +22,7 @@
 #include <tuple>
 
 #include "../Utils/Exception/Exception.hpp"
+#include "../Core/Factory/Factory.hpp"
 
 using namespace std;
 using namespace libconfig;
@@ -39,7 +40,7 @@ class Parser
 
         // Getter
         std::vector<std::tuple<std::string, std::string>> getCameraInfo();
-        std::vector<std::tuple<std::string, std::string>> getPrimitivesInfo();
+        std::vector<IPrimitives *> getPrimitivesInfo();
         std::vector<std::tuple<std::string, std::string>> getLightInfo();
 
         bool readFileConfig(Config& cfg);
@@ -56,7 +57,7 @@ class Parser
         std::string _flag; ///< Additional flag for additional information, if needed.
         
         std::vector<std::tuple<std::string, std::string>> _camerasInfo;
-        std::vector<std::tuple<std::string, std::string>> _primitivesInfo;
+        std::vector<IPrimitives *> _primitivesInfo;
         std::vector<std::tuple<std::string, std::string>> _lightInfo;
 };
 

@@ -106,60 +106,43 @@ void Parser::parserInfoCamera(const Setting& root)
 void Parser::parserInfoPrimitives(const Setting& root)
 {
     try {
+        Loader <IPrimitives> loader;
+        Factory factory;
+        IPrimitives *current_Form;
+        std::vector<double> size_list;
+        std::string current_size;
         const Setting &primitive = root["inventory"]["primitive"];
         int count = primitive.getLength();
 
         for(int i = 0; i < count; ++i) {
             const Setting &movie = primitive[i];
 
-            string forme, color_r, color_g, color_b;
+            string forme, color_r, color_g, color_b, pos_x, pos_y, pos_z, size;
 
             if(!(movie.lookupValue("forme", forme)
                 && movie.lookupValue("color_r", color_r)
                 && movie.lookupValue("color_g", color_g)
-                && movie.lookupValue("color_b", color_b)))
+                && movie.lookupValue("color_b", color_b)
+                && movie.lookupValue("pos_x", pos_x)
+                && movie.lookupValue("pos_y", pos_y)
+                && movie.lookupValue("pos_z", pos_z)
+                && movie.lookupValue("size", size)))
                 continue;
 
-            _primitivesInfo.push_back(std::make_tuple("forme", forme));
-            _primitivesInfo.push_back(std::make_tuple("color_r", color_r));
-            _primitivesInfo.push_back(std::make_tuple("color_g", color_g));
-            _primitivesInfo.push_back(std::make_tuple("color_b", color_b));
+            current_Form = factory.createPrimitives(forme, loader);
+            current_Form->setOrigin(Math::Point3D(atof(pos_x.c_str()), atof(pos_y.c_str()), atof(pos_z.c_str())));
+            current_Form->setColor(Color(atoi(color_r.c_str()), atoi(color_g.c_str()), atoi(color_b.c_str()), 255));
+
+            std::istringstream iss(size);
+            while (std::getline(iss, current_size, '/'))
+                size_list.push_back(atof(current_size.c_str()));
+            current_Form->setSize(size_list);
+            _primitivesInfo.push_back(current_Form);
         }
     } catch(const SettingNotFoundException &nfex) {
         // Ignorer
     }
-}
-
-void Parser::parserInfoLight(const Setting& root)
-{
-    try {
-        const Setting &light = root["inventory"]["light"];
-        int count = light.getLength();
-
-        for(int i = 0; i < count; ++i) {
-            const Setting &mylight = light[i];
-
-            string ambient, diffuse, point_x, point_y, point_z, directional;
-
-            if(!(mylight.lookupValue("ambient", ambient)
-                && mylight.lookupValue("diffuse", diffuse)
-                && mylight.lookupValue("point_x", point_x)
-                && mylight.lookupValue("point_y", point_y)
-                && mylight.lookupValue("point_z", point_z)
-                && mylight.lookupValue("directional", directional)))
-                continue;
-
-            _lightInfo.push_back(std::make_tuple("ambient", ambient));
-            _lightInfo.push_back(std::make_tuple("diffuse", diffuse));
-            _lightInfo.push_back(std::make_tuple("point_x", point_x));
-            _lightInfo.push_back(std::make_tuple("point_y", point_y));
-            _lightInfo.push_back(std::make_tuple("point_z", point_z));
-            _lightInfo.push_back(std::make_tuple("directional", directional));
-        }
-    } catch(const SettingNotFoundException &nfex) {
-        // Ignorer
-    }
-}
+}   
 
 std::vector<std::pair<std::string, std::string>> Parser::GetInfo(const Parser& parser)
 {
@@ -169,23 +152,23 @@ std::vector<std::pair<std::string, std::string>> Parser::GetInfo(const Parser& p
         allInfo.emplace_back(std::get<0>(cameraInfo), std::get<1>(cameraInfo));
     }
 
-    for (const auto& primitiveInfo : parser._primitivesInfo) {
-        allInfo.emplace_back(std::get<0>(primitiveInfo), std::get<1>(primitiveInfo));
-    }
+    // for (const auto& primitiveInfo : parser._primitivesInfo) {
+    //     allInfo.emplace_back(std::get<0>(primitiveInfo->getForm()), std::get<1>(primitiveInfo));
+    // }
 
     return allInfo;
 }
 
 void Parser::printInfoFile() const
 {
-    std::cout << "Informations sur les caméras :" << std::endl;
+    std::cout << "Informations sur les camÃ©ras :" << std::endl;
     for (const auto& cameraInfo : _camerasInfo) {
         std::cout << std::get<0>(cameraInfo) << ": " << std::get<1>(cameraInfo) << std::endl;
     }
 
     std::cout << "\nInformations sur les primitives :" << std::endl;
     for (const auto& primitiveInfo : _primitivesInfo) {
-        std::cout << std::get<0>(primitiveInfo) << ": " << std::get<1>(primitiveInfo) << std::endl;
+        std::cout << primitiveInfo->getForm() << std::endl;
     }
 }
 
@@ -194,7 +177,7 @@ std::vector<std::tuple<std::string, std::string>> Parser::getCameraInfo()
     return _camerasInfo;
 }
 
-std::vector<std::tuple<std::string, std::string>> Parser::getPrimitivesInfo()
+std::vector<IPrimitives *> Parser::getPrimitivesInfo()
 {
     return _primitivesInfo;
 }
