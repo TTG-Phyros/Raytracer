@@ -1,5 +1,5 @@
 /**
- * @file Core.hpp
+ * @file Output.hpp
  * @author COUSTABEAU Maxime (maxime.coustabeau@epitech.eu)
  *         GIRARD Anthony (anthony1.girard@epitech.eu)
  *         MERY Baptiste (baptiste.mery@epitech.eu)
@@ -12,8 +12,8 @@
  *
  */
 
-#ifndef CORE_HPP
-#define CORE_HPP
+#ifndef OUTPUT_HPP_
+#define OUTPUT_HPP_
 
 #include <algorithm>
 #include <iterator>
@@ -24,17 +24,19 @@
 #include <utility>
 #include <map>
 
-#include "Factory/Factory.hpp"
+#include "../Utils/Exception/Exception.hpp"
 
-class Core
+class Output
 {
     public:
-        Core();
-        ~Core();
+        Output(std::vector<std::tuple<std::string, std::string>> camerasInfo, std::vector<std::tuple<std::string, std::string>> primitivesInfo, const std::string &filepath = "", const std::string &flag = "");
+        ~Output();
 
     protected:
 
     private:
+        std::string _filePath;
+        std::string _flag;
 };
 
-#endif // !CORE_HPP
+#endif /* !OUTPUT_HPP_ */

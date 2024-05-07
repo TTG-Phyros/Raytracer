@@ -15,9 +15,9 @@
 #ifndef FACTORY_HPP
 #define FACTORY_HPP
 
-#include "../Utils/Loader/Loader.hpp"
-#include "../Plugins/Primitives/IPrimitives.hpp"
-#include "../Utils/Exception/Exception.hpp"
+#include "../../Utils/Loader/Loader.hpp"
+#include "../../Plugins/Primitives/IPrimitives.hpp"
+#include "../../Utils/Exception/Exception.hpp"
 
 #include <memory>
 
@@ -31,6 +31,9 @@ class Factory
             } else if (form == "plane") {
                 loader.swapLib("./plugins/raytracer_plane.so");
                 return (createPlane(loader));
+            } else if (form == "cube") {
+                loader.swapLib("./plugins/raytracer_cube.so");
+                return (createSphere(loader));
             } else {
                 throw Exception("Factory: invalid primitive form");
             }
@@ -41,6 +44,7 @@ class Factory
     private:
         Loader <IPrimitives> createSphere(Loader <IPrimitives> loader) const noexcept { loader.getNewInstance("loadSphere"); return loader; }
         Loader <IPrimitives> createPlane(Loader <IPrimitives> loader) const noexcept { loader.getNewInstance("loadPlane"); return loader; }
+        Loader <IPrimitives> createCube(Loader <IPrimitives> loader) const noexcept { loader.getNewInstance("loadCube"); return loader; }
 };
 
 #endif /* !FACTORY_HPP */

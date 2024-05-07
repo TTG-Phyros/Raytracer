@@ -22,55 +22,9 @@
 #include <utility>
 
 #include "Parser/Parser.hpp"
+#include "Core/Core.hpp"
+#include "Output/Output.hpp"
 #include "Utils/Exception/Exception.hpp"
-
-int create_header_ppm(std::vector<std::tuple<std::string, std::string>> camerasInfo, std::vector<std::tuple<std::string, std::string>> primitivesInfo)
-{
-    std::ofstream image;
-    image.open("image.ppm");
-
-    std::string width;
-    std::string height;
-    std::string color_r;
-    std::string color_g;
-    std::string color_b;
-
-    for (const auto& info : camerasInfo) {
-        if (std::get<0>(info) == "width_resolution")
-            width = std::get<1>(info);
-        if (std::get<0>(info) == "height_resolution")
-            height = std::get<1>(info);
-    }
-
-    for (const auto& info : primitivesInfo) {
-        if (std::get<0>(info) == "color_r")
-            color_r = std::get<1>(info);
-        if (std::get<0>(info) == "color_g")
-            color_g = std::get<1>(info);
-        if (std::get<0>(info) == "color_b")
-            color_b = std::get<1>(info);
-    }
-
-    if (image.is_open()) {
-        image << "p3" << std::endl;
-        image << width << " ";
-        image << height << std::endl;
-        image << color_r << " ";
-        image << color_g << " ";
-        image << color_b << std::endl;
-
-        for (int y = 0; y < 250; y++) {
-            for (int x = 0; x < 250; x++) {
-                image << x << " " << x << " " << x << std::endl;
-            }
-        }
-        image.close();
-    } else {
-        std::cerr << "Erreur: Impossible d'ouvrir le fichier image.ppm" << std::endl;
-        return -1;
-    }
-    return 0;
-}
 
 int main(int ac, char **av)
 {
@@ -78,10 +32,25 @@ int main(int ac, char **av)
         if (ac == 2 && (std::string(av[1]) == "--help")) {
             std::cout << "USAGE: ./raytracer <SCENE_FILE>\n\tSCENE_FILE: scene configuration" << std::endl;
         } if (ac == 2) {
+            // PARSING INPUT FILE
             Parser parser(av[1]);
-            create_header_ppm(parser.getCameraInfo(), parser.getPrimitivesInfo());
+
+            // DO FACTORY
+
+            // DO CORE
+
+            // WRITE OUTPUT FILE
+            Output output(parser.getCameraInfo(), parser.getPrimitivesInfo(), "./screenshots/image.ppm");
         } else if ((ac == 3) && (std::string(av[2]) == "--debug")) {
+            // PARSING INPUT FILE
             Parser parser(av[1], "--debug");
+
+            // DO FACTORY
+
+            // DO CORE
+            
+            // WRITE OUTPUT FILE
+            Output output(parser.getCameraInfo(), parser.getPrimitivesInfo(), "./screenshots/image.ppm", "--debug");
         } else {
             throw Exception("Error: invalid arguments");
         }

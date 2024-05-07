@@ -165,12 +165,10 @@ std::vector<std::pair<std::string, std::string>> Parser::GetInfo(const Parser& p
 {
     std::vector<std::pair<std::string, std::string>> allInfo;
 
-    // Récupérer les informations des caméras
     for (const auto& cameraInfo : parser._camerasInfo) {
         allInfo.emplace_back(std::get<0>(cameraInfo), std::get<1>(cameraInfo));
     }
 
-    // Récupérer les informations des primitives
     for (const auto& primitiveInfo : parser._primitivesInfo) {
         allInfo.emplace_back(std::get<0>(primitiveInfo), std::get<1>(primitiveInfo));
     }
@@ -180,13 +178,11 @@ std::vector<std::pair<std::string, std::string>> Parser::GetInfo(const Parser& p
 
 void Parser::printInfoFile() const
 {
-    // Affichage des informations sur les caméras
     std::cout << "Informations sur les caméras :" << std::endl;
     for (const auto& cameraInfo : _camerasInfo) {
         std::cout << std::get<0>(cameraInfo) << ": " << std::get<1>(cameraInfo) << std::endl;
     }
 
-    // Affichage des informations sur les primitives
     std::cout << "\nInformations sur les primitives :" << std::endl;
     for (const auto& primitiveInfo : _primitivesInfo) {
         std::cout << std::get<0>(primitiveInfo) << ": " << std::get<1>(primitiveInfo) << std::endl;
