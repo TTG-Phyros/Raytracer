@@ -35,6 +35,11 @@ class Core
     protected:
 
     private:
+        std::string _flag; ///< Additional flag for additional information, if needed.
+        
+        std::vector<std::tuple<std::string, std::string>> _camerasInfo;
+        std::vector<std::tuple<std::string, std::string>> _primitivesInfo;
+        std::vector<std::tuple<std::string, std::string>> _lightInfo;
 };
 
 #endif // !CORE_HPP

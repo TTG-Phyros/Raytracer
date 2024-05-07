@@ -52,8 +52,9 @@ class Parser
     protected:
 
     private:
-        std::string _filePath;            ///< The path to the file to be parsed.
-        std::string _flag;                ///< Additional flag for parsing, if needed.
+        std::string _filePath; ///< The path to the input file.
+        std::string _flag; ///< Additional flag for additional information, if needed.
+        
         std::vector<std::tuple<std::string, std::string>> _camerasInfo;
         std::vector<std::tuple<std::string, std::string>> _primitivesInfo;
         std::vector<std::tuple<std::string, std::string>> _lightInfo;

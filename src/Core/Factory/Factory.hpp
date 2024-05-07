@@ -28,12 +28,12 @@ class Factory
             if (form == "sphere") {
                 loader.swapLib("./plugins/raytracer_sphere.so");
                 return (createSphere(loader));
-            } else if (form == "plane") {
-                loader.swapLib("./plugins/raytracer_plane.so");
-                return (createPlane(loader));
             } else if (form == "cube") {
                 loader.swapLib("./plugins/raytracer_cube.so");
                 return (createSphere(loader));
+            } else if (form == "plane") {
+                loader.swapLib("./plugins/raytracer_plane.so");
+                return (createPlane(loader));
             } else {
                 throw Exception("Factory: invalid primitive form");
             }
@@ -43,8 +43,8 @@ class Factory
 
     private:
         Loader <IPrimitives> createSphere(Loader <IPrimitives> loader) const noexcept { loader.getNewInstance("loadSphere"); return loader; }
-        Loader <IPrimitives> createPlane(Loader <IPrimitives> loader) const noexcept { loader.getNewInstance("loadPlane"); return loader; }
         Loader <IPrimitives> createCube(Loader <IPrimitives> loader) const noexcept { loader.getNewInstance("loadCube"); return loader; }
+        Loader <IPrimitives> createPlane(Loader <IPrimitives> loader) const noexcept { loader.getNewInstance("loadPlane"); return loader; }
 };
 
 #endif /* !FACTORY_HPP */

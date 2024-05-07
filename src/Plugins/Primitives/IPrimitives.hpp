@@ -26,11 +26,13 @@ class IPrimitives
 
         virtual bool hits(RayTracer::Ray &ray) = 0;
 
+        // SETTER
         virtual void setForm(std::string form) = 0;
         virtual void setOrigin(Math::Point3D origin) = 0;
         virtual void setColor(Color color) = 0;
         virtual void setSize(std::vector<double> size) = 0;
 
+        // GETTER
         virtual std::string getForm() = 0;
         virtual Math::Point3D getOrigin() = 0;
         virtual Color getColor() = 0;

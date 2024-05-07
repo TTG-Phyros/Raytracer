@@ -35,8 +35,8 @@ class Output
     protected:
 
     private:
-        std::string _filePath;
-        std::string _flag;
+        std::string _filePath; ///< The path to the output file.
+        std::string _flag; ///< Additional flag for additional information, if needed.
 };
 
 #endif /* !OUTPUT_HPP_ */
