@@ -12,7 +12,7 @@
  *
  */
 
-#ifndef IPRIMITIVESphereS_HPP
+#ifndef IPRIMITIVES_HPP
 #define IPRIMITIVES_HPP
 
 #include "../../Utils/Coordinates/Coordinates.hpp"

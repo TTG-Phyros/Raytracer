@@ -13,7 +13,6 @@
  */
 
 #include "../IPrimitives.hpp"
-#include "../../../Utils/Ray/Ray.hpp"
 
 #ifndef CUBE_HPP
 #define CUBE_HPP

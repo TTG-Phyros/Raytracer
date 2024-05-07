@@ -56,9 +56,6 @@ bool Cube::hits(RayTracer::Ray &ray)
         ray._direction._y + offsetY,
         ray._direction._z + offsetZ
     );
-
-    
-
     return false;
 }
 

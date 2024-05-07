@@ -13,7 +13,6 @@
  */
 
 #include "../IPrimitives.hpp"
-#include "../../../Utils/Ray/Ray.hpp"
 
 #ifndef SPHERE_HPP
 #define SPHERE_HPP
