@@ -161,7 +161,7 @@ std::vector<std::pair<std::string, std::string>> Parser::GetInfo(const Parser& p
 
 void Parser::printInfoFile() const
 {
-    std::cout << "Informations sur les camÃ©ras :" << std::endl;
+    std::cout << "Informations sur les cameras :" << std::endl;
     for (const auto& cameraInfo : _camerasInfo) {
         std::cout << std::get<0>(cameraInfo) << ": " << std::get<1>(cameraInfo) << std::endl;
     }
