@@ -177,7 +177,7 @@ std::vector<std::tuple<std::string, std::string>> Parser::getCameraInfo()
     return _camerasInfo;
 }
 
-std::vector<IPrimitives *> Parser::getPrimitivesInfo()
+std::vector<IPrimitives *> Parser::getPrimitives()
 {
     return _primitivesInfo;
 }

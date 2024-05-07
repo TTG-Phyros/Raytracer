@@ -38,7 +38,7 @@ int main(int ac, char **av)
             // DO CORE
 
             // WRITE OUTPUT FILE
-            Output output(parser.getCameraInfo(), parser.getPrimitivesInfo(), "./screenshots/image.ppm");
+            // Output output(parser.getCameraInfo(), parser.getPrimitives(), "./screenshots/image.ppm");
         } else if ((ac == 3) && (std::string(av[2]) == "--debug")) {
             // PARSING INPUT FILE
             Parser parser(av[1], "--debug");
@@ -46,7 +46,7 @@ int main(int ac, char **av)
             // DO CORE
             
             // WRITE OUTPUT FILE
-            Output output(parser.getCameraInfo(), parser.getPrimitivesInfo(), "./screenshots/image.ppm", "--debug");
+            // Output output(parser.getCameraInfo(), parser.getPrimitives(), "./screenshots/image.ppm", "--debug");
         } else {
             throw Exception("Error: invalid arguments");
         }

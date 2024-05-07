@@ -24,12 +24,13 @@
 #include <utility>
 #include <map>
 
-#include "Factory/Factory.hpp"
+#include "../Parser/Factory/Factory.hpp"
+#include "../Parser/Parser.hpp"
 
 class Core
 {
     public:
-        Core();
+        Core(Parser parser);
         ~Core();
 
     protected:
