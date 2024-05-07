@@ -13,9 +13,11 @@
  */
 
 #include "Core.hpp"
+#include "../Parser/Parser.hpp"
 
-Core::Core()
+Core::Core(Parser parser)
 {
+    parser.getPrimitives();
 }
 
 Core::~Core()

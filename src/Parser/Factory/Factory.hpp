@@ -24,7 +24,7 @@
 class Factory
 {
     public:
-        Loader <IPrimitives> createPrimitives(const std::string &form, Loader <IPrimitives> loader) const {
+        IPrimitives *createPrimitives(const std::string &form, Loader <IPrimitives> loader) const {
             if (form == "sphere") {
                 loader.swapLib("./plugins/raytracer_sphere.so");
                 return (createSphere(loader));
@@ -42,9 +42,9 @@ class Factory
     protected:
 
     private:
-        Loader <IPrimitives> createSphere(Loader <IPrimitives> loader) const noexcept { loader.getNewInstance("loadSphere"); return loader; }
-        Loader <IPrimitives> createCube(Loader <IPrimitives> loader) const noexcept { loader.getNewInstance("loadCube"); return loader; }
-        Loader <IPrimitives> createPlane(Loader <IPrimitives> loader) const noexcept { loader.getNewInstance("loadPlane"); return loader; }
+        IPrimitives *createSphere(Loader <IPrimitives> loader) const noexcept { return loader.getNewInstance("loadSphere"); }
+        IPrimitives *createCube(Loader <IPrimitives> loader) const noexcept { return loader.getNewInstance("loadCube"); }
+        IPrimitives *createPlane(Loader <IPrimitives> loader) const noexcept { return loader.getNewInstance("loadPlane"); }
 };
 
 #endif /* !FACTORY_HPP */
