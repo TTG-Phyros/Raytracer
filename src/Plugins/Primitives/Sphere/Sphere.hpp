@@ -24,6 +24,7 @@ class Sphere : public IPrimitives
         Sphere(Math::Point3D origin, double radius, Color color);
         ~Sphere();
 
+        bool pointing(RayTracer::Ray &ray);
         bool hits(RayTracer::Ray &ray) override;
 
         // SETTER

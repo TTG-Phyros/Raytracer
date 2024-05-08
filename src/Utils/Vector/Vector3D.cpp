@@ -13,6 +13,7 @@
  */
 
 #include "Vector3D.hpp"
+#include "../Point/Point3D.hpp"
 
 Math::Vector3D::Vector3D(double x, double y, double z)
 {
@@ -98,9 +99,14 @@ void Math::Vector3D::operator/=(double nb)
     _z /= nb;
 }
 
-double Math::Vector3D::dot()
+double Math::Vector3D::dot(Math::Vector3D otherVector)
 {
-    return (_x + _y + _z);
+    return ((_x * otherVector._x) + (_y * otherVector._y) + (_z * otherVector._z));
+}
+
+double Math::Vector3D::dot(Math::Point3D otherPoint)
+{
+    return ((_x * otherPoint._x) + (_y * otherPoint._y) + (_z * otherPoint._z));
 }
 
 Math::Vector3D::~Vector3D()

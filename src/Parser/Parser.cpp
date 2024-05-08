@@ -74,29 +74,26 @@ void Parser::parserInfoCamera(const Setting& root)
         for(int i = 0; i < count; ++i) {
             const Setting &book = camera[i];
 
-            string width_resolution, height_resolution, position_x, position_y, position_z,
+            string width_resolution, height_resolution, pos_x, pos_y, pos_z,
             rotation_x, rotation_y, rotation_z, fov;
 
             if(!(book.lookupValue("width_resolution", width_resolution)
                 && book.lookupValue("height_resolution", height_resolution)
-                && book.lookupValue("position_x", position_x)
-                && book.lookupValue("position_y", position_y)
-                && book.lookupValue("position_z", position_z)
+                && book.lookupValue("pos_x", pos_x)
+                && book.lookupValue("pos_y", pos_y)
+                && book.lookupValue("pos_z", pos_z)
                 && book.lookupValue("rotation_x", rotation_x)
                 && book.lookupValue("rotation_y", rotation_y)
                 && book.lookupValue("rotation_z", rotation_z)
                 && book.lookupValue("fov", fov)))
                 continue;
 
-            _camerasInfo.push_back((std::make_tuple("width_resolution", width_resolution)));
-            _camerasInfo.push_back((std::make_tuple("height_resolution", height_resolution)));
-            _camerasInfo.push_back((std::make_tuple("position_x", position_x)));
-            _camerasInfo.push_back((std::make_tuple("position_y", position_y)));
-            _camerasInfo.push_back((std::make_tuple("position_z", position_z)));
-            _camerasInfo.push_back((std::make_tuple("rotation_x", rotation_x)));
-            _camerasInfo.push_back((std::make_tuple("rotation_y", rotation_y)));
-            _camerasInfo.push_back((std::make_tuple("rotation_z", rotation_z)));
-            _camerasInfo.push_back((std::make_tuple("fov", fov)));
+            _camera = new Camera();
+            _camera->setOrigin(Math::Point3D(atof(pos_x.c_str()), atof(pos_y.c_str()), atof(pos_z.c_str())));
+            _camera->setXSize(atoi(width_resolution.c_str()));
+            _camera->setYSize(atoi(height_resolution.c_str()));
+            _camera->setScreenCenter(Math::Point3D(atof(pos_x.c_str()), atof(pos_y.c_str()), (atof(pos_z.c_str()) + 10)));
+            _display = new Sfml(_camera->getXSize(), _camera->getYSize());
         }
     } catch(const SettingNotFoundException &nfex) {
         // Ignorer
@@ -137,49 +134,37 @@ void Parser::parserInfoPrimitives(const Setting& root)
             while (std::getline(iss, current_size, '/'))
                 size_list.push_back(atof(current_size.c_str()));
             current_Form->setSize(size_list);
-            _primitivesInfo.push_back(current_Form);
+            _primitives.push_back(current_Form);
         }
     } catch(const SettingNotFoundException &nfex) {
         // Ignorer
     }
-}   
-
-std::vector<std::pair<std::string, std::string>> Parser::GetInfo(const Parser& parser)
-{
-    std::vector<std::pair<std::string, std::string>> allInfo;
-
-    for (const auto& cameraInfo : parser._camerasInfo) {
-        allInfo.emplace_back(std::get<0>(cameraInfo), std::get<1>(cameraInfo));
-    }
-
-    // for (const auto& primitiveInfo : parser._primitivesInfo) {
-    //     allInfo.emplace_back(std::get<0>(primitiveInfo->getForm()), std::get<1>(primitiveInfo));
-    // }
-
-    return allInfo;
 }
 
 void Parser::printInfoFile() const
 {
     std::cout << "Informations sur les cameras :" << std::endl;
-    for (const auto& cameraInfo : _camerasInfo) {
-        std::cout << std::get<0>(cameraInfo) << ": " << std::get<1>(cameraInfo) << std::endl;
-    }
+    std::cout << _camera->getXSize() << " / " << _camera->getYSize() << std::endl;
 
     std::cout << "\nInformations sur les primitives :" << std::endl;
-    for (const auto& primitiveInfo : _primitivesInfo) {
+    for (const auto& primitiveInfo : _primitives) {
         std::cout << primitiveInfo->getForm() << std::endl;
     }
 }
 
-std::vector<std::tuple<std::string, std::string>> Parser::getCameraInfo()
+Camera *Parser::getCamera()
 {
-    return _camerasInfo;
+    return _camera;
+}
+
+IDisplay *Parser::getDisplay()
+{
+    return _display;
 }
 
 std::vector<IPrimitives *> Parser::getPrimitives()
 {
-    return _primitivesInfo;
+    return _primitives;
 }
 
 std::vector<std::tuple<std::string, std::string>> Parser::getLightInfo()

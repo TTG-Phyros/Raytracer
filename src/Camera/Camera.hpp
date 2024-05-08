@@ -15,13 +15,30 @@
 #ifndef CAMERA_HPP_
 #define CAMERA_HPP_
 
+#include "../Utils/Point/Point3D.hpp"
+#include "../Utils/Ray/Ray.hpp"
+
 class Camera {
     public:
         Camera();
+        Camera(Math::Point3D origin, Math::Point3D screenCenter, int xSize, int ySize);
+        void setXSize(int size);
+        void setYSize(int size);
+        int getXSize();
+        int getYSize();
+        void setOrigin(Math::Point3D origin);
+        void setScreenCenter(Math::Point3D screenCenter);
+        Math::Point3D getOrigin();
+        Math::Point3D getScreenCenter();
+        RayTracer::Ray generateRay(int x, int y);
         ~Camera();
 
     protected:
     private:
+        Math::Point3D _origin;
+        Math::Point3D _screenCenter;
+        int _xSize;
+        int _ySize;
 };
 
 #endif /* !CAMERA_HPP_ */

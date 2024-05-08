@@ -20,6 +20,7 @@
 #include <math.h>
 
 namespace Math {
+    class Point3D;
     class Vector3D {
         public:
             Vector3D(double x = 0, double y = 0, double z = 0);
@@ -40,7 +41,8 @@ namespace Math {
             void operator*=(double nb);
             Math::Vector3D operator/(double nb);
             void operator/=(double nb);
-            double dot();
+            double dot(Math::Vector3D otherVector);
+            double dot(Math::Point3D otherPoint);
 
         protected:
         private:

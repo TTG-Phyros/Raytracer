@@ -16,6 +16,10 @@ PATH_SRC    =   ./src/
 PATH_CORE   = $(PATH_SRC)Core/*.cpp
 ## END CORE
 
+## TREE CAMERA
+PATH_CAMERA   = $(PATH_SRC)Camera/*.cpp
+## END CAMERA
+
 ## TREE OUTPUT
 PATH_OUTPUT =	$(PATH_SRC)Output/*.cpp
 ## END OUTPUT
@@ -26,6 +30,13 @@ PATH_PARSER =	$(PATH_SRC)Parser/*.cpp
 
 ## TREE PLUGINS
 PATH_PLUGINS    =   $(PATH_SRC)Plugins/
+## TREE DISPLAY
+PATH_DISPLAY	=	$(PATH_PLUGINS)Display/
+FLAGS_DISPLAY	=	-lsfml-graphics -lsfml-window -lsfml-system
+## TREE SFML
+PATH_SFML	=	$(PATH_DISPLAY)SFML/*.cpp
+## END SFML
+## END DISPLAY
 ## TREE PRIMITIVES
 PATH_PRIMITIVES =   $(PATH_PLUGINS)Primitives/
 ## TREE SPHERE
@@ -66,7 +77,7 @@ generateSo:
 	g++ -shared -fPIC -o ./plugins/raytracer_cube.so $(PATH_CUBE) $(FLAGS_UTILS) -fno-gnu-unique
 
 core:
-	g++ $(PATH_SRC)main.cpp $(PATH_PARSER) $(PATH_CORE) $(PATH_OUTPUT) $(FLAGS_UTILS) -ldl -o $(NAME) -fno-gnu-unique -lconfig++ -g3
+	g++ $(PATH_SRC)main.cpp $(PATH_PARSER) $(PATH_CAMERA) $(PATH_CORE) $(PATH_SFML) $(PATH_OUTPUT) $(FLAGS_UTILS) $(FLAGS_DISPLAY) -ldl -o $(NAME) -fno-gnu-unique -lconfig++ -g3
 
 clean:
 	rm -f ./plugins/*.so

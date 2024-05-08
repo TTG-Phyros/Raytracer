@@ -26,11 +26,16 @@
 
 #include "../Parser/Factory/Factory.hpp"
 #include "../Parser/Parser.hpp"
+#include "../Camera/Camera.hpp"
+#include "../Plugins/Display/SFML/Sfml.hpp"
 
 class Core
 {
     public:
-        Core(Parser parser);
+        Core(Parser parser, std::string flag = "");
+        void processFrame();
+        void inRealTimeDisplay();
+        void displayOneFrame();
         ~Core();
 
     protected:
@@ -38,8 +43,11 @@ class Core
     private:
         std::string _flag; ///< Additional flag for additional information, if needed.
         
-        std::vector<std::tuple<std::string, std::string>> _camerasInfo;
-        std::vector<std::tuple<std::string, std::string>> _primitivesInfo;
+        std::vector<IPrimitives *> _primitives;
+        Camera *_camera;
+        IDisplay *_display;
+        // std::vector<std::tuple<std::string, std::string>> _camera;
+        // std::vector<std::tuple<std::string, std::string>> _primitives;
         std::vector<std::tuple<std::string, std::string>> _lightInfo;
 };
 

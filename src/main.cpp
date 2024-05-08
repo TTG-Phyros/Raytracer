@@ -34,6 +34,8 @@ int main(int ac, char **av)
         } if (ac == 2) {
             // PARSING INPUT FILE
             Parser parser(av[1]);
+            Core core(parser);
+            core.inRealTimeDisplay();
 
             // DO CORE
 
@@ -42,6 +44,8 @@ int main(int ac, char **av)
         } else if ((ac == 3) && (std::string(av[2]) == "--debug")) {
             // PARSING INPUT FILE
             Parser parser(av[1], "--debug");
+            Core core(parser, "--debug");
+            core.inRealTimeDisplay();
 
             // DO CORE
             
