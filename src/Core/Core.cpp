@@ -92,20 +92,23 @@ double getPercentageFromDistance(double minDistance, double maxDistance, double 
     return 1 - ((distance - minDistance) / (maxDistance - minDistance));
 }
 
-void Core::processFrame()
+std::vector<Color> Core::processFrame()
 {
     std::vector<RayTracer::Ray> cameraRays = _camera->generateCameraRays();
-    double minDistance = 99999999;
-    double maxDistance = -1;
     int x = 0;
     int y = 0;
     double offset = 0;
+    std::vector<Color> pixelList(cameraRays.size(), Color());
     for (int i = 0; _primitives[i]; i++) {
+        double minDistance = 99999999;
+        double maxDistance = -1;
         std::vector<double> distance = _primitives[i]->hits(cameraRays, minDistance, maxDistance);
         for (int j = 0; j < distance.size(); j++) {
             if (distance[j] != -1) {
                 offset = getPercentageFromDistance(minDistance, maxDistance, distance[j]);
-                _display->setPixel(x, y, _primitives[i]->getColor().getRed() * offset, _primitives[i]->getColor().getGreen() * offset, _primitives[i]->getColor().getBlue() * offset);
+                Color currentColor = Color(_primitives[i]->getColor().getRed() * offset, _primitives[i]->getColor().getGreen() * offset, _primitives[i]->getColor().getBlue() * offset, 255);
+                _display->setPixel(x, y, currentColor.getRed(), currentColor.getGreen(), currentColor.getBlue());
+                pixelList[j] = currentColor;
             }
             x++;
             if (x == _camera->getXResolution()) {
@@ -114,22 +117,23 @@ void Core::processFrame()
             }
         }
     }
+    return pixelList;
 }
 
 void Core::inRealTimeDisplay()
 {
-    while(1) {
+    while(_display->isOpen()) {
         _display->clear();
+        _display->move(_primitives);
         processFrame();
         _display->display();
     }
 }
 
-void Core::displayOneFrame()
+std::vector<Color> Core::displayOneFrame()
 {
-    _display->clear();
-    processFrame();
-    _display->display();
+    _display->close();
+    return processFrame();
 }
 
 Core::~Core()

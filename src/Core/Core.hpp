@@ -34,9 +34,9 @@ class Core
 {
     public:
         Core(Parser parser, std::string flag = "");
-        void processFrame();
+        std::vector<Color> processFrame();
         void inRealTimeDisplay();
-        void displayOneFrame();
+        std::vector<Color> displayOneFrame();
         ~Core();
 
     protected:

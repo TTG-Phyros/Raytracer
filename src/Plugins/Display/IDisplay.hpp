@@ -17,6 +17,7 @@
 
 #include "../../Utils/Color/Color.hpp"
 #include "../../Utils/Ray/Ray.hpp"
+#include "../../Plugins/Primitives/IPrimitives.hpp"
 
 class IDisplay
 {
@@ -26,6 +27,9 @@ class IDisplay
         virtual void setPixel(int x, int y, double red, double green, double blue) = 0;
         virtual void display() = 0;
         virtual void clear() = 0;
+        virtual void close() = 0;
+        virtual bool isOpen() = 0;
+        virtual void move(std::vector<IPrimitives *> primitives) = 0;
 };
 
 #endif // !IDISPLAY_HPP

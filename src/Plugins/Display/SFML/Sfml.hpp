@@ -20,6 +20,9 @@ class Sfml : public IDisplay {
         void setPixel(int x, int y, double red, double green, double blue);
         void display();
         void clear();
+        void close();
+        bool isOpen();
+        void move(std::vector<IPrimitives *> primitives);
         ~Sfml();
 
     protected:
