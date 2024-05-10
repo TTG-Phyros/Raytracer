@@ -97,6 +97,27 @@ Math::Point3D Camera::getScreenCenter()
     return _origin + _distance;
 }
 
+std::vector<RayTracer::Ray> Camera::generateCameraRays()
+{
+    std::vector<RayTracer::Ray> rays;
+    Math::Point3D topLeft = Math::Point3D(getScreenCenter()._x - (_xSize / 2), getScreenCenter()._y - (_ySize / 2), getScreenCenter()._z);
+    double pixelXSize = _xSize / _xResolution;
+    double pixelYSize = _ySize / _yResolution;
+    double distance = 0;
+    double offset = 0;
+
+    for (double y = 0; y < _yResolution; y++) {
+        for (double x = 0; x < _xResolution; x++) {
+            Math::Point3D pixelPosition = Math::Point3D(topLeft._x + (x * pixelXSize), topLeft._y + (y * pixelYSize), topLeft._z);
+            // std::cout << "PixelPosition (" << x << ", " << y << ") : " << pixelPosition << std::endl;
+            Math::Vector3D direction = Math::Vector3D(_origin, pixelPosition);
+            RayTracer::Ray ray = RayTracer::Ray(_origin, direction);
+            rays.push_back(ray);
+        }
+    }
+    return rays;
+}
+
 Camera::~Camera()
 {
 }

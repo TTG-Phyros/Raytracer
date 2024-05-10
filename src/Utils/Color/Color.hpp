@@ -30,7 +30,6 @@ class Color
 
         ~Color();
 
-        std::vector<std::tuple<std::string, int>> getColor();
         int getRed();
         int getGreen();
         int getBlue();
@@ -39,8 +38,10 @@ class Color
     protected:
 
     private:
-        std::vector<std::tuple<std::string, int>> _Color;
-
+        int _red;
+        int _green;
+        int _blue;
+        int _alpha;
 };
 
 #endif // !COLOR_HPP

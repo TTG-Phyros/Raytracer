@@ -84,24 +84,33 @@ Core::Core(Parser parser, std::string flag)
 //     }
 // }
 
+double getPercentageFromDistance(double minDistance, double maxDistance, double distance)
+{
+    if (distance >= maxDistance)
+        return 1;
+    // std::cout << "Percentage distance : 1 - ((" << distance << " - " << minDistance << ") / (" << maxDistance << " - " << minDistance << ")) = " << 1 - ((distance - minDistance) / (maxDistance - minDistance)) << std::endl;
+    return 1 - ((distance - minDistance) / (maxDistance - minDistance));
+}
+
 void Core::processFrame()
 {
-    Math::Point3D topLeft = Math::Point3D(_camera->getScreenCenter()._x - (_camera->getXSize() / 2), _camera->getScreenCenter()._y - (_camera->getYSize() / 2), _camera->getScreenCenter()._z);
-    double pixelXSize = _camera->getXSize() / _camera->getXResolution();
-    double pixelYSize = _camera->getYSize() / _camera->getYResolution();
-
-    for (double y = 0; y < _camera->getYResolution(); y++) {
-        for (double x = 0; x < _camera->getXResolution(); x++) {
-            Math::Point3D pixelPosition = Math::Point3D(topLeft._x + (x * pixelXSize), topLeft._y + (y * pixelYSize), topLeft._z);
-
-            // std::cout << "PixelPosition (" << x << ", " << y << ") : " << pixelPosition << std::endl;
-            Math::Vector3D direction = Math::Vector3D(_camera->getOrigin(), pixelPosition);
-
-            RayTracer::Ray ray = RayTracer::Ray(_camera->getOrigin(), direction);
-            for (int i = 0; _primitives[i]; i++) {
-                if (_primitives[i]->hits(ray)) {
-                    _display->setPixel(x, y, _primitives[i]->getColor().getRed(), _primitives[i]->getColor().getGreen(), _primitives[i]->getColor().getBlue());
-                }
+    std::vector<RayTracer::Ray> cameraRays = _camera->generateCameraRays();
+    double minDistance = 99999999;
+    double maxDistance = -1;
+    int x = 0;
+    int y = 0;
+    double offset = 0;
+    for (int i = 0; _primitives[i]; i++) {
+        std::vector<double> distance = _primitives[i]->hits(cameraRays, minDistance, maxDistance);
+        for (int j = 0; j < distance.size(); j++) {
+            if (distance[j] != -1) {
+                offset = getPercentageFromDistance(minDistance, maxDistance, distance[j]);
+                _display->setPixel(x, y, _primitives[i]->getColor().getRed() * offset, _primitives[i]->getColor().getGreen() * offset, _primitives[i]->getColor().getBlue() * offset);
+            }
+            x++;
+            if (x == _camera->getXResolution()) {
+                x = 0;
+                y++;
             }
         }
     }

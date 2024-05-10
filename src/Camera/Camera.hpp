@@ -17,6 +17,7 @@
 
 #include "../Utils/Point/Point3D.hpp"
 #include "../Utils/Ray/Ray.hpp"
+#include <vector>
 
 class Camera {
     public:
@@ -35,6 +36,7 @@ class Camera {
         Math::Point3D getOrigin();
         Math::Point3D getScreenDistance();
         Math::Point3D getScreenCenter();
+        std::vector<RayTracer::Ray> generateCameraRays();
         ~Camera();
 
     protected:

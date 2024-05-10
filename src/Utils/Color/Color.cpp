@@ -16,65 +16,40 @@
 
 Color::Color()
 {
-    _Color.push_back(std::make_tuple("R", 0));
-    _Color.push_back(std::make_tuple("G", 0));
-    _Color.push_back(std::make_tuple("B", 0));
-    _Color.push_back(std::make_tuple("O", 0));
+    _red = 0;
+    _green = 0;
+    _blue = 0;
+    _alpha = 0;
 }
 
 Color::Color(int red, int green, int blue, int opacity)
 {
-    _Color.push_back(std::make_tuple("R", red));
-    _Color.push_back(std::make_tuple("G", green));
-    _Color.push_back(std::make_tuple("B", blue));
-    _Color.push_back(std::make_tuple("O", opacity));
+    _red = red;
+    _green = green;
+    _blue = blue;
+    _alpha = opacity;
 }
 
 Color::~Color()
 {
 }
 
-std::vector<std::tuple<std::string, int>> Color::getColor()
-{
-    return _Color;
-}
-
 int Color::getRed()
 {
-    for (const auto& coord : _Color) {
-        if (std::get<0>(coord) == "R") {
-            return std::get<1>(coord);
-        }
-    }
-    return 0.0;
+    return _red;
 }
 
 int Color::getGreen()
 {
-    for (const auto& coord : _Color) {
-        if (std::get<0>(coord) == "G") {
-            return std::get<1>(coord);
-        }
-    }
-    return 0.0;
+    return _green;
 }
 
 int Color::getBlue()
 {
-    for (const auto& coord : _Color) {
-        if (std::get<0>(coord) == "B") {
-            return std::get<1>(coord);
-        }
-    }
-    return 0.0;
+    return _blue;
 }
 
 int Color::getOpacity()
 {
-    for (const auto& coord : _Color) {
-        if (std::get<0>(coord) == "O") {
-            return std::get<1>(coord);
-        }
-    }
-    return 0.0;
+    return _alpha;
 }

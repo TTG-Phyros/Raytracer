@@ -40,9 +40,10 @@ void Sfml::setPixel(int x, int y, double red, double green, double blue)
         return;
     if (y < 0 || y > _ySize)
         return;
+    // std::cout << "Pixel at pos : (" << x << ", " << y << ") and color : (" << round(red) << ", " << round(green) << ", " << round(blue) << ")" << std::endl;
     sf::RectangleShape pixel = sf::RectangleShape(sf::Vector2f(1,1));
     pixel.setPosition(sf::Vector2f(x, y));
-    pixel.setFillColor(sf::Color(red, green, blue));
+    pixel.setFillColor(sf::Color(round(red), round(green), round(blue)));
     _window.draw(pixel);
 }
 

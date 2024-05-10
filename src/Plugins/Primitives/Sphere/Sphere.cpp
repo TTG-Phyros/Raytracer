@@ -74,15 +74,82 @@ bool Sphere::pointing(RayTracer::Ray &ray)
     return dotProduct >= 0;
 }
 
-bool Sphere::hits(RayTracer::Ray &ray)
+bool Sphere::hits(RayTracer::Ray &ray, double &distance)
 {
+    if (!pointing(ray))
+        return false;
+
+    distance = -1;
     Math::Vector3D oc = {ray._origin._x - _origin._x, ray._origin._y - _origin._y, ray._origin._z - _origin._z};
     float a = ray._direction._x * ray._direction._x + ray._direction._y * ray._direction._y + ray._direction._z * ray._direction._z;
     float b = 2.0f * (oc._x * ray._direction._x + oc._y * ray._direction._y + oc._z * ray._direction._z);
     float c = oc._x * oc._x + oc._y * oc._y + oc._z * oc._z - _radius * _radius;
     float discriminant = b * b - 4 * a * c;
 
-    return pointing(ray) && discriminant >= 0;
+    if (discriminant > 0.0) {
+        double t1 = (-b + sqrt(discriminant)) / (2.0 * a);
+        double t2 = (-b - sqrt(discriminant)) / (2.0 * a);
+
+        // std::cout << "Delta first solution : " << t1 << ", Delta second solution : " << t2 << std::endl;
+        if (t1 < 0.0 || t2 < 0.0) {
+            return false;
+        } else {
+            distance = t1 <= t2 ? t1 : t2;
+            return true;
+        }
+    } else if (discriminant == 0) {
+        // std::cout << "Delta only solution : " << -b / (2 * a) << std::endl;
+        distance = -b / (2 * a);
+        return true;
+    } else {
+        return false;
+    }
+}
+
+std::vector<double> Sphere::hits(std::vector<RayTracer::Ray> rays, double &minDistance, double &maxDistance)
+{
+    std::vector<double> distanceRays;
+
+    double distance = 0;
+    for (unsigned int i = 0; i < rays.size(); i++) {
+        if (!pointing(rays[i])) {
+            distanceRays.push_back(-1);
+            continue;
+        }
+        Math::Vector3D oc = {rays[i]._origin._x - _origin._x, rays[i]._origin._y - _origin._y, rays[i]._origin._z - _origin._z};
+        float a = rays[i]._direction._x * rays[i]._direction._x + rays[i]._direction._y * rays[i]._direction._y + rays[i]._direction._z * rays[i]._direction._z;
+        float b = 2.0f * (oc._x * rays[i]._direction._x + oc._y * rays[i]._direction._y + oc._z * rays[i]._direction._z);
+        float c = oc._x * oc._x + oc._y * oc._y + oc._z * oc._z - _radius * _radius;
+        float discriminant = b * b - 4 * a * c;
+
+        if (discriminant > 0.0) {
+            double t1 = (-b + sqrt(discriminant)) / (2.0 * a);
+            double t2 = (-b - sqrt(discriminant)) / (2.0 * a);
+
+            // std::cout << "Delta first solution : " << t1 << ", Delta second solution : " << t2 << std::endl;
+            if (t1 < 0.0 || t2 < 0.0) {
+                distanceRays.push_back(-1);
+                continue;
+            } else {
+                distance = t1 <= t2 ? t1 : t2;
+                minDistance = distance < minDistance ? distance : minDistance;
+                maxDistance = distance > maxDistance ? distance : maxDistance;
+                distanceRays.push_back(distance);
+                continue;
+            }
+        } else if (discriminant == 0) {
+            // std::cout << "Delta only solution : " << -b / (2 * a) << std::endl;
+            distance = -b / (2 * a);
+            minDistance = distance < minDistance ? distance : minDistance;
+            maxDistance = distance > maxDistance ? distance : maxDistance;
+            distanceRays.push_back(distance);
+            continue;
+        } else {
+            distanceRays.push_back(-1);
+            continue;
+        }
+    }
+    return distanceRays;
 }
 
 // bool Sphere::hits(RayTracer::Ray &ray)

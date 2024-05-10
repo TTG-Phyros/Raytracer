@@ -12,7 +12,6 @@
  *
  */
 
-#include "../../Utils/Coordinates/Coordinates.hpp"
 #include "../../Utils/Color/Color.hpp"
 #include "../../Utils/Ray/Ray.hpp"
 
