@@ -40,44 +40,67 @@ Core::Core(Parser parser, std::string flag)
 //     }
 // }
 
+// void Core::processFrame()
+// {
+//     // Calculate the direction from the _camera origin to the screen center
+//     Math::Vector3D screenDirection = Math::Vector3D(_camera->getOrigin(), _camera->getScreenCenter());
+
+//     // Normalize the screen direction vector
+//     float length = sqrt(screenDirection._x * screenDirection._x + screenDirection._y * screenDirection._y + screenDirection._z * screenDirection._z);
+//     screenDirection._x /= length;
+//     screenDirection._y /= length;
+//     screenDirection._z /= length;
+
+//     // Calculate the right and up vectors based on the screen direction
+//     Math::Point3D right = Math::Point3D(screenDirection._y, -screenDirection._x, 0); // Cross product with (0, 0, 1)
+//     Math::Point3D up = Math::Point3D(right._y * screenDirection._z - right._z * screenDirection._y, right._z * screenDirection._x - right._x * screenDirection._z, right._x * screenDirection._y - right._y * screenDirection._x);
+
+//     // Calculate the top left corner of the screen
+//     Math::Point3D topLeft = Math::Point3D(_camera->getScreenCenter()._x - (_camera->getXSize() / 2), _camera->getScreenCenter()._y + (_camera->getYSize() / 2), _camera->getScreenCenter()._z);
+
+//     // Generate rays for each pixel
+//     for (int y = 0; y < _camera->getYSize(); ++y) {
+//         for (int x = 0; x < _camera->getXSize(); ++x) {
+//             // Calculate the position of the current pixel
+//             Math::Point3D pixelPosition = Math::Point3D(topLeft._x + (x + 0.5) * 1, topLeft._y - (y + 0.5) * 1, topLeft._z);
+
+//             // Calculate the direction from the _camera origin to the current pixel
+//             Math::Vector3D direction = Math::Vector3D(_camera->getOrigin(), pixelPosition);
+
+//             // Normalize the direction vector
+//             length = sqrt(direction._x * direction._x + direction._y * direction._y + direction._z * direction._z);
+//             direction._x /= length;
+//             direction._y /= length;
+//             direction._z /= length;
+
+//             // Create a ray from the _camera origin to the current pixel
+//             RayTracer::Ray ray = RayTracer::Ray(_camera->getOrigin(), direction);
+//             for (int i = 0; _primitives[i]; i++) {
+//                 if (_primitives[i]->hits(ray)) {
+//                     _display->setPixel(x, y, 255, 0, 0);
+//                 }
+//             }
+//         }
+//     }
+// }
+
 void Core::processFrame()
 {
-    // Calculate the direction from the _camera origin to the screen center
-    Math::Vector3D screenDirection = Math::Vector3D(_camera->getScreenCenter()._x - _camera->getOrigin()._x, _camera->getScreenCenter()._y - _camera->getOrigin()._y, _camera->getScreenCenter()._z - _camera->getOrigin()._z);
+    Math::Point3D topLeft = Math::Point3D(_camera->getScreenCenter()._x - (_camera->getXSize() / 2), _camera->getScreenCenter()._y - (_camera->getYSize() / 2), _camera->getScreenCenter()._z);
+    double pixelXSize = _camera->getXSize() / _camera->getXResolution();
+    double pixelYSize = _camera->getYSize() / _camera->getYResolution();
 
-    // Normalize the screen direction vector
-    float length = sqrt(screenDirection._x * screenDirection._x + screenDirection._y * screenDirection._y + screenDirection._z * screenDirection._z);
-    screenDirection._x /= length;
-    screenDirection._y /= length;
-    screenDirection._z /= length;
+    for (double y = 0; y < _camera->getYResolution(); y++) {
+        for (double x = 0; x < _camera->getXResolution(); x++) {
+            Math::Point3D pixelPosition = Math::Point3D(topLeft._x + (x * pixelXSize), topLeft._y + (y * pixelYSize), topLeft._z);
 
-    // Calculate the right and up vectors based on the screen direction
-    Math::Vector3D right = Math::Vector3D(screenDirection._y, -screenDirection._x, 0); // Cross product with (0, 0, 1)
-    Math::Vector3D up = Math::Vector3D(right._y * screenDirection._z - right._z * screenDirection._y, right._z * screenDirection._x - right._x * screenDirection._z, right._x * screenDirection._y - right._y * screenDirection._x);
+            // std::cout << "PixelPosition (" << x << ", " << y << ") : " << pixelPosition << std::endl;
+            Math::Vector3D direction = Math::Vector3D(_camera->getOrigin(), pixelPosition);
 
-    // Calculate the top left corner of the screen
-    Math::Vector3D topLeft = Math::Vector3D(_camera->getScreenCenter()._x - (_camera->getXSize() / 2), _camera->getScreenCenter()._y + (_camera->getYSize() / 2), _camera->getScreenCenter()._z);
-
-    // Generate rays for each pixel
-    for (int y = 0; y < _camera->getYSize(); ++y) {
-        for (int x = 0; x < _camera->getXSize(); ++x) {
-            // Calculate the position of the current pixel
-            Math::Vector3D pixelPosition = Math::Vector3D(topLeft._x + (x + 0.5) * 1, topLeft._y - (y + 0.5) * 1, topLeft._z);
-
-            // Calculate the direction from the _camera origin to the current pixel
-            Math::Vector3D direction = Math::Vector3D(pixelPosition._x - _camera->getOrigin()._x, pixelPosition._y - _camera->getOrigin()._y, pixelPosition._z - _camera->getOrigin()._z);
-
-            // Normalize the direction vector
-            length = sqrt(direction._x * direction._x + direction._y * direction._y + direction._z * direction._z);
-            direction._x /= length;
-            direction._y /= length;
-            direction._z /= length;
-
-            // Create a ray from the _camera origin to the current pixel
             RayTracer::Ray ray = RayTracer::Ray(_camera->getOrigin(), direction);
             for (int i = 0; _primitives[i]; i++) {
                 if (_primitives[i]->hits(ray)) {
-                    _display->setPixel(x, y, 255, 0, 0);
+                    _display->setPixel(x, y, _primitives[i]->getColor().getRed(), _primitives[i]->getColor().getGreen(), _primitives[i]->getColor().getBlue());
                 }
             }
         }

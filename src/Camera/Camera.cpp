@@ -17,37 +17,59 @@
 Camera::Camera()
 {
     _origin = Math::Point3D();
-    _screenCenter = Math::Point3D();
+    _distance = Math::Point3D();
     _xSize = 0;
     _ySize = 0;
 }
 
-Camera::Camera(Math::Point3D origin, Math::Point3D screenCenter, int xSize, int ySize)
+Camera::Camera(Math::Point3D origin, Math::Point3D distance, double resWidth, double resHeight)
 {
     _origin = origin;
-    _screenCenter = screenCenter;
-    _xSize = xSize;
-    _ySize = ySize;
+    _distance = distance;
+    _xSize = 2;
+    _ySize = 2 * (resHeight / resWidth);
+    _xResolution = resWidth;
+    _yResolution = resHeight;
 }
 
-void Camera::setXSize(int size)
+void Camera::setXSize(double size)
 {
     _xSize = size;
 }
 
-void Camera::setYSize(int size)
+void Camera::setYSize(double size)
 {
     _ySize = size;
 }
 
-int Camera::getXSize()
+double Camera::getXSize()
 {
     return _xSize;
 }
 
-int Camera::getYSize()
+double Camera::getYSize()
 {
     return _ySize;
+}
+
+void Camera::setXResolution(double resolution)
+{
+    _xResolution = resolution;
+}
+
+void Camera::setYResolution(double resolution)
+{
+    _yResolution = resolution;
+}
+
+double Camera::getXResolution()
+{
+    return _xResolution;
+}
+
+double Camera::getYResolution()
+{
+    return _yResolution;
 }
 
 void Camera::setOrigin(Math::Point3D origin)
@@ -55,28 +77,24 @@ void Camera::setOrigin(Math::Point3D origin)
     _origin = origin;
 }
 
-void Camera::setScreenCenter(Math::Point3D screenCenter)
-{
-    _screenCenter = screenCenter;
-}
-
 Math::Point3D Camera::getOrigin()
 {
     return _origin;
 }
 
-Math::Point3D Camera::getScreenCenter()
+void Camera::setScreenDistance(Math::Point3D distance)
 {
-    return _screenCenter;
+    _distance = distance;
 }
 
-RayTracer::Ray Camera::generateRay(int x, int y)
+Math::Point3D Camera::getScreenDistance()
 {
-    double xMultiplier = 1 / (static_cast<double>(_xSize) / 2);
-    double yMultiplier = 1 / (static_cast<double>(_ySize) / 2);
+    return _distance;
+}
 
-    // std::cout << "Camera Ray Multipliers : " << xMultiplier << " | " << yMultiplier << std::endl;
-    return RayTracer::Ray(_origin, Math::Vector3D((static_cast<double>(x) * xMultiplier) - 1, (static_cast<double>(y) * yMultiplier) - 1));
+Math::Point3D Camera::getScreenCenter()
+{
+    return _origin + _distance;
 }
 
 Camera::~Camera()

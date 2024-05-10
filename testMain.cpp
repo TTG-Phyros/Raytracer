@@ -13,7 +13,7 @@
 
 int main (void)
 {
-    RayTracer::Ray ray = RayTracer::Ray(Math::Point3D(0, 0, 0), Math::Vector3D(1, 1, 1));
+    RayTracer::Ray ray = RayTracer::Ray(Math::Point3D(0, 0, 0), Math::Point3D(1, 1, 1));
     Sphere sphere = Sphere(Math::Point3D(5, 5, 5), 2, Color(255, 0, 0, 100));
 
     if (sphere.hits(ray))

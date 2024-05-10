@@ -21,24 +21,31 @@
 class Camera {
     public:
         Camera();
-        Camera(Math::Point3D origin, Math::Point3D screenCenter, int xSize, int ySize);
-        void setXSize(int size);
-        void setYSize(int size);
-        int getXSize();
-        int getYSize();
+        Camera(Math::Point3D origin, Math::Point3D distance, double resWidth, double resHeight);
+        void setXSize(double size);
+        void setYSize(double size);
+        void setXResolution(double resolution);
+        void setYResolution(double resolution);
+        double getXSize();
+        double getYSize();
+        double getXResolution();
+        double getYResolution();
         void setOrigin(Math::Point3D origin);
-        void setScreenCenter(Math::Point3D screenCenter);
+        void setScreenDistance(Math::Point3D distance);
         Math::Point3D getOrigin();
+        Math::Point3D getScreenDistance();
         Math::Point3D getScreenCenter();
-        RayTracer::Ray generateRay(int x, int y);
         ~Camera();
 
     protected:
     private:
         Math::Point3D _origin;
+        Math::Point3D _distance;
         Math::Point3D _screenCenter;
-        int _xSize;
-        int _ySize;
+        double _xSize;
+        double _ySize;
+        double _xResolution;
+        double _yResolution;
 };
 
 #endif /* !CAMERA_HPP_ */

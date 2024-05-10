@@ -88,12 +88,9 @@ void Parser::parserInfoCamera(const Setting& root)
                 && book.lookupValue("fov", fov)))
                 continue;
 
-            _camera = new Camera();
-            _camera->setOrigin(Math::Point3D(atof(pos_x.c_str()), atof(pos_y.c_str()), atof(pos_z.c_str())));
-            _camera->setXSize(atoi(width_resolution.c_str()));
-            _camera->setYSize(atoi(height_resolution.c_str()));
-            _camera->setScreenCenter(Math::Point3D(atof(pos_x.c_str()), atof(pos_y.c_str()), (atof(pos_z.c_str()) + 10)));
-            _display = new Sfml(_camera->getXSize(), _camera->getYSize());
+            Math::Point3D origin = Math::Point3D(atof(pos_x.c_str()), atof(pos_y.c_str()), atof(pos_z.c_str()));
+            _camera = new Camera(origin, Math::Point3D(0, 0, 2), atoi(width_resolution.c_str()), atoi(height_resolution.c_str()));
+            _display = new Sfml(atoi(width_resolution.c_str()), atoi(height_resolution.c_str()));
         }
     } catch(const SettingNotFoundException &nfex) {
         // Ignorer

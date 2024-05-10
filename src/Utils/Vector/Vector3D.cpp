@@ -13,13 +13,21 @@
  */
 
 #include "Vector3D.hpp"
-#include "../Point/Point3D.hpp"
 
 Math::Vector3D::Vector3D(double x, double y, double z)
 {
     _x = x;
     _y = y;
     _z = z;
+}
+
+Math::Vector3D::Vector3D(Math::Point3D origin, Math::Point3D end)
+{
+    _origin = origin;
+    _end = end;
+    _x = _end._x - _origin._x;
+    _y = _end._y - _origin._y;
+    _z = _end._z - _origin._z;
 }
 
 double Math::Vector3D::getLength()
