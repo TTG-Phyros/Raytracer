@@ -47,7 +47,7 @@ int main(int ac, char **av)
 
             // DO CORE
             Core core(parser, "--debug");
-            std::vector<Color> pixelList = core.displayOneFrame();
+            std::vector<Color> pixelList = core.displayOneFrame("--debug");
 
             // WRITE OUTPUT FILE
             Output output(parser.getCamera(), parser.getPrimitives(), pixelList, "./screenshots/image.ppm", "--debug");

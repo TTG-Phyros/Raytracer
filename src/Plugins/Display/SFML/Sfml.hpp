@@ -22,7 +22,7 @@ class Sfml : public IDisplay {
         void clear();
         void close();
         bool isOpen();
-        void move(std::vector<IPrimitives *> primitives);
+        void move(Camera *camera);
         ~Sfml();
 
     protected:

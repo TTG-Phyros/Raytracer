@@ -97,41 +97,46 @@ void Parser::parserInfoCamera(const Setting& root)
     }
 }
 
+void Parser::ParseOnePrimitive(const Setting &primitive)
+{
+    IPrimitives *current_Form;
+
+    Factory factory;
+    Loader <IPrimitives> loader;
+    std::vector<double> size_list;
+
+    string forme, color_r, color_g, color_b, pos_x, pos_y, pos_z, size, current_size;
+
+    if (!(primitive.lookupValue("forme", forme)
+        && primitive.lookupValue("color_r", color_r)
+        && primitive.lookupValue("color_g", color_g)
+        && primitive.lookupValue("color_b", color_b)
+        && primitive.lookupValue("pos_x", pos_x)
+        && primitive.lookupValue("pos_y", pos_y)
+        && primitive.lookupValue("pos_z", pos_z)
+        && primitive.lookupValue("size", size)))
+        return;
+
+    current_Form = factory.createPrimitives(forme, loader);
+    current_Form->setOrigin(Math::Point3D(atof(pos_x.c_str()), atof(pos_y.c_str()), atof(pos_z.c_str())));
+    current_Form->setColor(Color(atoi(color_r.c_str()), atoi(color_g.c_str()), atoi(color_b.c_str()), 255));
+
+    std::istringstream iss(size);
+    while (std::getline(iss, current_size, '/'))
+        size_list.push_back(atof(current_size.c_str()));
+    current_Form->setSize(size_list);
+
+    _primitives.push_back(current_Form);
+}
+
 void Parser::parserInfoPrimitives(const Setting& root)
 {
     try {
-        Loader <IPrimitives> loader;
-        Factory factory;
-        IPrimitives *current_Form;
-        std::vector<double> size_list;
-        std::string current_size;
         const Setting &primitive = root["inventory"]["primitive"];
         int count = primitive.getLength();
 
         for(int i = 0; i < count; ++i) {
-            const Setting &movie = primitive[i];
-
-            string forme, color_r, color_g, color_b, pos_x, pos_y, pos_z, size;
-
-            if(!(movie.lookupValue("forme", forme)
-                && movie.lookupValue("color_r", color_r)
-                && movie.lookupValue("color_g", color_g)
-                && movie.lookupValue("color_b", color_b)
-                && movie.lookupValue("pos_x", pos_x)
-                && movie.lookupValue("pos_y", pos_y)
-                && movie.lookupValue("pos_z", pos_z)
-                && movie.lookupValue("size", size)))
-                continue;
-
-            current_Form = factory.createPrimitives(forme, loader);
-            current_Form->setOrigin(Math::Point3D(atof(pos_x.c_str()), atof(pos_y.c_str()), atof(pos_z.c_str())));
-            current_Form->setColor(Color(atoi(color_r.c_str()), atoi(color_g.c_str()), atoi(color_b.c_str()), 255));
-
-            std::istringstream iss(size);
-            while (std::getline(iss, current_size, '/'))
-                size_list.push_back(atof(current_size.c_str()));
-            current_Form->setSize(size_list);
-            _primitives.push_back(current_Form);
+            ParseOnePrimitive(primitive[i]);
         }
     } catch(const SettingNotFoundException &nfex) {
         // Ignorer

@@ -40,32 +40,6 @@ Sphere::~Sphere()
 {
 }
 
-// bool Sphere::hits(RayTracer::Ray &ray)
-// {
-//     double offsetX = _origin._x;
-//     double offsetY = _origin._y;
-//     double offsetZ = _origin._z;
-
-//     Math::Point3D point = Math::Point3D(
-//         ray._origin._x + offsetX,
-//         ray._origin._y + offsetY,
-//         ray._origin._z + offsetZ
-//     );
-//     Math::Vector3D vector = Math::Vector3D(
-//         ray._direction._x + offsetX,
-//         ray._direction._y + offsetY,
-//         ray._direction._z + offsetZ
-//     );
-
-//     double a = ((vector._x * vector._x) + (vector._y * vector._y) + (vector._z * vector._z));
-//     double b = (2 * ((point._x * vector._x) + (point._y * vector._y) + (point._z * vector._z)));
-//     double c = ((point._x * point._x) + (point._y * point._y) + (point._z * point._z) - (_radius * _radius));
-
-//     double delta = (b * b) - (4 * a * c);
-
-//     return delta < 0 ? false : true;
-// }
-
 bool Sphere::pointing(RayTracer::Ray &ray)
 {
     Math::Vector3D toCenter = {_origin._x - ray._origin._x, _origin._y - ray._origin._y, _origin._z - ray._origin._z};
@@ -109,8 +83,10 @@ bool Sphere::hits(RayTracer::Ray &ray, double &distance)
 std::vector<double> Sphere::hits(std::vector<RayTracer::Ray> rays, double &minDistance, double &maxDistance)
 {
     std::vector<double> distanceRays;
-
     double distance = 0;
+    minDistance = 99999999;
+    maxDistance = -1;
+
     for (unsigned int i = 0; i < rays.size(); i++) {
         if (!pointing(rays[i])) {
             distanceRays.push_back(-1);
@@ -151,63 +127,6 @@ std::vector<double> Sphere::hits(std::vector<RayTracer::Ray> rays, double &minDi
     }
     return distanceRays;
 }
-
-// bool Sphere::hits(RayTracer::Ray &ray)
-// {
-//     Math::Point3D uv = 
-// }
-
-// bool Sphere::hits(RayTracer::Ray &ray)
-// {
-//     double offsetX = _origin._x;
-//     double offsetY = _origin._y;
-//     double offsetZ = _origin._z;
-
-//     Math::Point3D point = Math::Point3D(
-//         ray._origin._x + offsetX,
-//         ray._origin._y + offsetY,
-//         ray._origin._z + offsetZ
-//     );
-//     Math::Vector3D vector = Math::Vector3D(
-//         ray._direction._x + offsetX,
-//         ray._direction._y + offsetY,
-//         ray._direction._z + offsetZ
-//     );
-
-//     double a = ((vector._x * vector._x) + (vector._y * vector._y) + (vector._z * vector._z));
-//     double b = (2 * ((point._x * vector._x) + (point._y * vector._y) + (point._z * vector._z)));
-//     double c = ((point._x * point._x) + (point._y * point._y) + (point._z * point._z) - (_radius * _radius));
-
-//     double delta = (b * b) - (4 * a * c);
-
-//     // std::cout << "Delta : " << delta << " = (" << b << " * " << b << ") - (4 * " << a << " * " << c << ")" << std::endl;
-
-//     if (delta > 0.0) {
-//         double numSQRT = sqrtf(delta);
-//         double t1 = (-b + numSQRT) / 2.0;
-//         double t2 = (-b - numSQRT) / 2.0;
-
-//         // std::cout << "Squared delta : " << numSQRT << ", t1 : " << t1 << ", t2 : " << t2 << std::endl;
-//         if (t1 < 0.0 || t2 < 0.0) {
-//             return true;
-//         } else {
-//             return false;
-//         }
-//     } else {
-//         return false;
-//     }
-// }
-
-// bool Sphere::hits(RayTracer::Ray &ray)
-// {
-//     double a = 1.0;
-//     double b = 2.0 * ray._direction.dot(ray._origin);
-//     double c = ray._direction.dot(ray._direction) - 1.0;
-
-//     double delta = (b * b) - (4 * a * c);
-
-//     return delta > 0.0 ? true : false;
-// }
 
 void Sphere::setForm(std::string form)
 {

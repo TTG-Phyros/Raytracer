@@ -67,72 +67,62 @@ bool Sfml::isOpen()
     return _window.isOpen();
 }
 
-void Sfml::move(std::vector<IPrimitives *> primitives)
+void Sfml::move(Camera *camera)
 {
     Math::Point3D origin;
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-        std::cout << "Moved in x -5" << std::endl;
-        for (int i = 0; primitives[i]; i++) {
-            origin = primitives[i]->getOrigin();
-            Math::Point3D offset = Math::Point3D(-5, 0, 0);
-            origin = origin + offset;
-            primitives[i]->setOrigin(origin);
-            origin = primitives[i]->getOrigin();
-            std::cout << "New Coords : " << origin << std::endl;
-        }
-    }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-        std::cout << "Moved in x +5" << std::endl;
-        for (int i = 0; primitives[i]; i++) {
-            origin = primitives[i]->getOrigin();
-            Math::Point3D offset = Math::Point3D(5, 0, 0);
-            origin = origin + offset;
-            primitives[i]->setOrigin(origin);
-            origin = primitives[i]->getOrigin();
-            std::cout << "New Coords : " << origin << std::endl;
-        }
+        std::cout << "Moved in x -5" << std::endl;
+        origin = camera->getOrigin();
+        Math::Point3D offset = Math::Point3D(-5, 0, 0);
+        origin = origin + offset;
+        camera->setOrigin(origin);
+        origin = camera->getOrigin();
+        std::cout << "New Coords : " << origin << std::endl;
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-        std::cout << "Moved in y +5" << std::endl;
-        for (int i = 0; primitives[i]; i++) {
-            origin = primitives[i]->getOrigin();
-            Math::Point3D offset = Math::Point3D(0, 5, 0);
-            origin = origin + offset;
-            primitives[i]->setOrigin(origin);
-            origin = primitives[i]->getOrigin();
-            std::cout << "New Coords : " << origin << std::endl;
-        }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+        std::cout << "Moved in x +5" << std::endl;
+        origin = camera->getOrigin();
+        Math::Point3D offset = Math::Point3D(5, 0, 0);
+        origin = origin + offset;
+        camera->setOrigin(origin);
+        origin = camera->getOrigin();
+        std::cout << "New Coords : " << origin << std::endl;
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-        std::cout << "Moved in y -5" << std::endl;
-        for (int i = 0; primitives[i]; i++) {
-            origin = primitives[i]->getOrigin();
-            Math::Point3D offset = Math::Point3D(0, -5, 0);
-            origin = origin + offset;
-            primitives[i]->setOrigin(origin);
-            origin = primitives[i]->getOrigin();
-            std::cout << "New Coords : " << origin << std::endl;
-        }
+        std::cout << "Moved in y +5" << std::endl;
+        origin = camera->getOrigin();
+        Math::Point3D offset = Math::Point3D(0, 5, 0);
+        origin = origin + offset;
+        camera->setOrigin(origin);
+        origin = camera->getOrigin();
+        std::cout << "New Coords : " << origin << std::endl;
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::PageUp)) {
-        std::cout << "Moved in z -5" << std::endl;
-        for (int i = 0; primitives[i]; i++) {
-            origin = primitives[i]->getOrigin();
-            Math::Point3D offset = Math::Point3D(0, 0, -5);
-            origin = origin + offset;
-            primitives[i]->setOrigin(origin);
-        }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+        std::cout << "Moved in y -5" << std::endl;
+        origin = camera->getOrigin();
+        Math::Point3D offset = Math::Point3D(0, -5, 0);
+        origin = origin + offset;
+        camera->setOrigin(origin);
+        origin = camera->getOrigin();
+        std::cout << "New Coords : " << origin << std::endl;
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::PageDown)) {
+        std::cout << "Moved in z -5" << std::endl;
+        origin = camera->getOrigin();
+        Math::Point3D offset = Math::Point3D(0, 0, -5);
+        origin = origin + offset;
+        camera->setOrigin(origin);
+        origin = camera->getOrigin();
+        std::cout << "New Coords : " << origin << std::endl;
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::PageUp)) {
         std::cout << "Moved in z +5" << std::endl;
-        for (int i = 0; primitives[i]; i++) {
-            origin = primitives[i]->getOrigin();
-            Math::Point3D offset = Math::Point3D(0, 0, 5);
-            origin = origin + offset;
-            primitives[i]->setOrigin(origin);
-            origin = primitives[i]->getOrigin();
-            std::cout << "New Coords : " << origin << std::endl;
-        }
+        origin = camera->getOrigin();
+        Math::Point3D offset = Math::Point3D(0, 0, 5);
+        origin = origin + offset;
+        camera->setOrigin(origin);
+        origin = camera->getOrigin();
+        std::cout << "New Coords : " << origin << std::endl;
     }
 }
 

@@ -75,6 +75,7 @@ double Camera::getYResolution()
 void Camera::setOrigin(Math::Point3D origin)
 {
     _origin = origin;
+    _screenCenter = _origin + _distance;
 }
 
 Math::Point3D Camera::getOrigin()

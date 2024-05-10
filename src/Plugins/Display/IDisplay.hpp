@@ -18,6 +18,7 @@
 #include "../../Utils/Color/Color.hpp"
 #include "../../Utils/Ray/Ray.hpp"
 #include "../../Plugins/Primitives/IPrimitives.hpp"
+#include "../../Camera/Camera.hpp"
 
 class IDisplay
 {
@@ -29,7 +30,7 @@ class IDisplay
         virtual void clear() = 0;
         virtual void close() = 0;
         virtual bool isOpen() = 0;
-        virtual void move(std::vector<IPrimitives *> primitives) = 0;
+        virtual void move(Camera *camera) = 0;
 };
 
 #endif // !IDISPLAY_HPP

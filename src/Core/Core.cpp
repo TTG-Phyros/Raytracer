@@ -84,39 +84,48 @@ Core::Core(Parser parser, std::string flag)
 //     }
 // }
 
-double getPercentageFromDistance(double minDistance, double maxDistance, double distance)
+double getPercentageFromDistance(double minDistance, double maxDistance, double distance, std::string flags)
 {
     if (distance >= maxDistance)
         return 1;
-    // std::cout << "Percentage distance : 1 - ((" << distance << " - " << minDistance << ") / (" << maxDistance << " - " << minDistance << ")) = " << 1 - ((distance - minDistance) / (maxDistance - minDistance)) << std::endl;
+    if (flags == "--debug")
+        std::cout << "Percentage distance : 1 - ((" << distance << " - " << minDistance << ") / (" << maxDistance << " - " << minDistance << ")) = " << 1 - ((distance - minDistance) / (maxDistance - minDistance)) << std::endl;
     return 1 - ((distance - minDistance) / (maxDistance - minDistance));
 }
 
-std::vector<Color> Core::processFrame()
+void Core::processSinglePrimitive(std::vector<RayTracer::Ray> cameraRays, std::vector<Color> &pixelList, IPrimitives *primitive, std::string flags)
 {
-    std::vector<RayTracer::Ray> cameraRays = _camera->generateCameraRays();
     int x = 0;
     int y = 0;
     double offset = 0;
-    std::vector<Color> pixelList(cameraRays.size(), Color());
-    for (int i = 0; _primitives[i]; i++) {
-        double minDistance = 99999999;
-        double maxDistance = -1;
-        std::vector<double> distance = _primitives[i]->hits(cameraRays, minDistance, maxDistance);
-        for (int j = 0; j < distance.size(); j++) {
-            if (distance[j] != -1) {
-                offset = getPercentageFromDistance(minDistance, maxDistance, distance[j]);
-                Color currentColor = Color(_primitives[i]->getColor().getRed() * offset, _primitives[i]->getColor().getGreen() * offset, _primitives[i]->getColor().getBlue() * offset, 255);
-                _display->setPixel(x, y, currentColor.getRed(), currentColor.getGreen(), currentColor.getBlue());
-                pixelList[j] = currentColor;
-            }
-            x++;
-            if (x == _camera->getXResolution()) {
-                x = 0;
-                y++;
-            }
+    double minDistance;
+    double maxDistance;
+    std::vector<double> distance = primitive->hits(cameraRays, minDistance, maxDistance);
+    if (flags == "--debug") {
+        std::cout << "Min distance : " << minDistance << " | Max distance : " << maxDistance << std::endl;
+        std::cout << "Number of Rays generated : " << cameraRays.size() << std::endl;
+    }
+    for (int i = 0; i < cameraRays.size(); i++) {
+        if (distance[i] != -1) {
+            offset = getPercentageFromDistance(minDistance, maxDistance, distance[i], flags);
+            Color currentColor = Color(primitive->getColor().getRed() * offset, primitive->getColor().getGreen() * offset, primitive->getColor().getBlue() * offset, 255);
+            _display->setPixel(x, y, currentColor.getRed(), currentColor.getGreen(), currentColor.getBlue());
+            pixelList[i] = currentColor;
+        }
+        x++;
+        if (x == _camera->getXResolution()) {
+            x = 0;
+            y++;
         }
     }
+}
+
+std::vector<Color> Core::processFrame(std::string flags)
+{
+    std::vector<RayTracer::Ray> cameraRays = _camera->generateCameraRays();
+    std::vector<Color> pixelList(cameraRays.size(), Color());
+    for (int i = 0; _primitives[i]; i++)
+        processSinglePrimitive(cameraRays, pixelList, _primitives[i], flags);
     return pixelList;
 }
 
@@ -124,16 +133,21 @@ void Core::inRealTimeDisplay()
 {
     while(_display->isOpen()) {
         _display->clear();
-        _display->move(_primitives);
+        _display->move(_camera);
         processFrame();
         _display->display();
     }
 }
 
-std::vector<Color> Core::displayOneFrame()
+std::vector<Color> Core::displayOneFrame(std::string flags)
 {
+    if (flags == "--debug") {
+        std::cout << "--------------------------------" << std::endl;
+        std::cout << "|   Core : Display One Frame.  |" << std::endl;
+        std::cout << "--------------------------------" << std::endl;
+    }
     _display->close();
-    return processFrame();
+    return processFrame(flags);
 }
 
 Core::~Core()
