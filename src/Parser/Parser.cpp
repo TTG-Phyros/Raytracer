@@ -89,7 +89,7 @@ void Parser::parserInfoCamera(const Setting& root)
                 continue;
 
             Math::Point3D origin = Math::Point3D(atof(pos_x.c_str()), atof(pos_y.c_str()), atof(pos_z.c_str()));
-            _camera = new Camera(origin, Math::Point3D(0, 0, 2), atoi(width_resolution.c_str()), atoi(height_resolution.c_str()));
+            _camera = new Camera(origin, Math::Point3D(0, 0, ((atoi (fov.c_str())) / 45)), atoi(width_resolution.c_str()), atoi(height_resolution.c_str()));
             _display = new Sfml(atoi(width_resolution.c_str()), atoi(height_resolution.c_str()));
         }
     } catch(const SettingNotFoundException &nfex) {

@@ -34,7 +34,7 @@ class Core
 {
     public:
         Core(Parser parser, std::string flag = "");
-        void processSinglePrimitive(std::vector<RayTracer::Ray> cameraRays, std::vector<Color> &pixelList, IPrimitives *primitive, std::string flags = "");
+        void processSinglePrimitive(std::vector<RayTracer::Ray> cameraRays, std::vector<Color> &pixelList, IPrimitives *primitive, std::vector<double> &minDistances, std::string flags = "");
         std::vector<Color> processFrame(std::string flags = "");
         void inRealTimeDisplay();
         std::vector<Color> displayOneFrame(std::string flags = "");

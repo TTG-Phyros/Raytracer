@@ -93,7 +93,7 @@ double getPercentageFromDistance(double minDistance, double maxDistance, double 
     return 1 - ((distance - minDistance) / (maxDistance - minDistance));
 }
 
-void Core::processSinglePrimitive(std::vector<RayTracer::Ray> cameraRays, std::vector<Color> &pixelList, IPrimitives *primitive, std::string flags)
+void Core::processSinglePrimitive(std::vector<RayTracer::Ray> cameraRays, std::vector<Color> &pixelList, IPrimitives *primitive, std::vector<double> &minDistances, std::string flags)
 {
     int x = 0;
     int y = 0;
@@ -110,7 +110,10 @@ void Core::processSinglePrimitive(std::vector<RayTracer::Ray> cameraRays, std::v
             offset = getPercentageFromDistance(minDistance, maxDistance, distance[i], flags);
             Color currentColor = Color(primitive->getColor().getRed() * offset, primitive->getColor().getGreen() * offset, primitive->getColor().getBlue() * offset, 255);
             _display->setPixel(x, y, currentColor.getRed(), currentColor.getGreen(), currentColor.getBlue());
-            pixelList[i] = currentColor;
+            if (distance[i] < minDistances[i]) {
+                pixelList[i] = currentColor;
+                minDistances[i] = distance[i];
+            }
         }
         x++;
         if (x == _camera->getXResolution()) {
@@ -124,8 +127,9 @@ std::vector<Color> Core::processFrame(std::string flags)
 {
     std::vector<RayTracer::Ray> cameraRays = _camera->generateCameraRays();
     std::vector<Color> pixelList(cameraRays.size(), Color());
+    std::vector<double> minDistances(cameraRays.size(), 99999);
     for (int i = 0; _primitives[i]; i++)
-        processSinglePrimitive(cameraRays, pixelList, _primitives[i], flags);
+        processSinglePrimitive(cameraRays, pixelList, _primitives[i], minDistances, flags);
     return pixelList;
 }
 
