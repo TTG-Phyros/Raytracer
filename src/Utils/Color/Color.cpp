@@ -16,65 +16,97 @@
 
 Color::Color()
 {
-    _Color.push_back(std::make_tuple("R", 0));
-    _Color.push_back(std::make_tuple("G", 0));
-    _Color.push_back(std::make_tuple("B", 0));
-    _Color.push_back(std::make_tuple("O", 0));
+    _red = 0;
+    _green = 0;
+    _blue = 0;
+    _opacity = 0;
 }
 
-Color::Color(int red, int green, int blue, int opacity)
+Color::Color(double red, double green, double blue, double opacity)
 {
-    _Color.push_back(std::make_tuple("R", red));
-    _Color.push_back(std::make_tuple("G", green));
-    _Color.push_back(std::make_tuple("B", blue));
-    _Color.push_back(std::make_tuple("O", opacity));
+    _red = red;
+    _green = green;
+    _blue = blue;
+    _opacity = opacity;
+    if (red > 255)
+        _red = 255;
+    if (green > 255)
+        _green = 255;
+    if (blue > 255)
+        _blue = 255;
+    if (opacity > 255)
+        _opacity = 255;
 }
 
 Color::~Color()
 {
 }
 
-std::vector<std::tuple<std::string, int>> Color::getColor()
+double Color::getRed()
 {
-    return _Color;
+    return _red;
 }
 
-int Color::getRed()
+double Color::getGreen()
 {
-    for (const auto& coord : _Color) {
-        if (std::get<0>(coord) == "R") {
-            return std::get<1>(coord);
-        }
-    }
-    return 0.0;
+    return _green;
 }
 
-int Color::getGreen()
+double Color::getBlue()
 {
-    for (const auto& coord : _Color) {
-        if (std::get<0>(coord) == "G") {
-            return std::get<1>(coord);
-        }
-    }
-    return 0.0;
+    return _blue;
 }
 
-int Color::getBlue()
+double Color::getOpacity()
 {
-    for (const auto& coord : _Color) {
-        if (std::get<0>(coord) == "B") {
-            return std::get<1>(coord);
-        }
-    }
-    return 0.0;
+    return _opacity;
 }
 
-int Color::getOpacity()
+void Color::setRed(double red)
 {
-    for (const auto& coord : _Color) {
-        if (std::get<0>(coord) == "O") {
-            return std::get<1>(coord);
-        }
-    }
-    return 0.0;
+    _red = red;
+    if (red > 255)
+        _red = 255;
+}
+
+void Color::setGreen(double green)
+{
+    _green = green;
+    if (green > 255)
+        _green = 255;
+}
+
+void Color::setBlue(double blue)
+{
+    _blue = blue;
+    if (blue > 255)
+        _blue = 255;
+}
+
+void Color::setOpacity(double opacity)
+{
+    _opacity = opacity;
+    if (opacity > 255)
+        _opacity = 255;
+}
+
+Color Color::operator+(Color color)
+{
+    return Color(_red + color.getRed(), _green + color.getGreen(), _blue + color.getBlue(), _opacity + color.getOpacity());
+}
+
+void Color::operator+=(Color color)
+{
+    _red += color.getRed();
+    _green += color.getGreen();
+    _blue += color.getBlue();
+    _opacity += color.getOpacity();
+    if (_red > 255)
+        _red = 255;
+    if (_green > 255)
+        _green = 255;
+    if (_blue > 255)
+        _blue = 255;
+    if (_opacity > 255)
+        _opacity = 255;
 }

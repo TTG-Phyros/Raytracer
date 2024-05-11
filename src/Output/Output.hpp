@@ -25,11 +25,14 @@
 #include <map>
 
 #include "../Utils/Exception/Exception.hpp"
+#include "../Camera/Camera.hpp"
+#include "../Plugins/Primitives/IPrimitives.hpp"
+#include "../Utils/Color/Color.hpp"
 
 class Output
 {
     public:
-        Output(std::vector<std::tuple<std::string, std::string>> camerasInfo, std::vector<std::tuple<std::string, std::string>> primitivesInfo, const std::string &filepath = "", const std::string &flag = "");
+        Output(Camera *camera, std::vector<IPrimitives *> primitives, std::vector<Color> pixels, const std::string &filepath, const std::string &flag = "");
         ~Output();
 
     protected:

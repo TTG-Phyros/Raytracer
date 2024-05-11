@@ -15,9 +15,10 @@
 #ifndef POINT3D_HPP_
 #define POINT3D_HPP_
 
-#include "../Vector/Vector3D.hpp"
+#include <iostream>
 
 namespace Math {
+    class Vector3D;
     class Point3D {
         public:
             Point3D(double x = 0, double y = 0, double z = 0);
@@ -25,9 +26,9 @@ namespace Math {
             double _x;
             double _y;
             double _z;
+            Math::Point3D operator+(Math::Point3D &secondVector);
             Math::Point3D operator+(Math::Vector3D &secondVector);
-        protected:
-        private:
+            protected : private:
     };
 }
 std::ostream &operator<<(std::ostream &cout, Math::Point3D &point);

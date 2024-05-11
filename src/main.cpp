@@ -36,17 +36,28 @@ int main(int ac, char **av)
             Parser parser(av[1]);
 
             // DO CORE
+            Core core(parser);
+            std::vector<Color> pixelList = core.displayOneFrame();
 
             // WRITE OUTPUT FILE
-            // Output output(parser.getCameraInfo(), parser.getPrimitives(), "./screenshots/image.ppm");
+            Output output(parser.getCamera(), parser.getPrimitives(), pixelList, "./screenshots/image.ppm");
         } else if ((ac == 3) && (std::string(av[2]) == "--debug")) {
             // PARSING INPUT FILE
             Parser parser(av[1], "--debug");
 
             // DO CORE
-            
+            Core core(parser, "--debug");
+            std::vector<Color> pixelList = core.displayOneFrame("--debug");
+
             // WRITE OUTPUT FILE
-            // Output output(parser.getCameraInfo(), parser.getPrimitives(), "./screenshots/image.ppm", "--debug");
+            Output output(parser.getCamera(), parser.getPrimitives(), pixelList, "./screenshots/image.ppm", "--debug");
+        } else if ((ac == 3) && (std::string(av[2]) == "--display")) {
+            // PARSING INPUT FILE
+            Parser parser(av[1]);
+
+            // DO CORE
+            Core core(parser);
+            core.inRealTimeDisplay();
         } else {
             throw Exception("Error: invalid arguments");
         }

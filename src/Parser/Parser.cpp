@@ -37,6 +37,7 @@ Parser::Parser(const std::string &filepath, const std::string &flag)
         const Setting &root = cfg.getRoot();
         parserInfoCamera(root);
         parserInfoPrimitives(root);
+        parserInfoLight(root, flag);
         if (!_flag.empty())
             printInfoFile();
 
@@ -68,121 +69,165 @@ bool Parser::readFileConfig(Config& cfg)
 void Parser::parserInfoCamera(const Setting& root)
 {
     try {
-        const Setting &camera = root["inventory"]["camera"];
-        int count = camera.getLength();
+        const Setting &cameras = root["inventory"]["camera"];
+        int count = cameras.getLength();
 
         for(int i = 0; i < count; ++i) {
-            const Setting &book = camera[i];
+            const Setting &camera = cameras[i];
 
-            string width_resolution, height_resolution, position_x, position_y, position_z,
+            string width_resolution, height_resolution, pos_x, pos_y, pos_z,
             rotation_x, rotation_y, rotation_z, fov;
 
-            if(!(book.lookupValue("width_resolution", width_resolution)
-                && book.lookupValue("height_resolution", height_resolution)
-                && book.lookupValue("position_x", position_x)
-                && book.lookupValue("position_y", position_y)
-                && book.lookupValue("position_z", position_z)
-                && book.lookupValue("rotation_x", rotation_x)
-                && book.lookupValue("rotation_y", rotation_y)
-                && book.lookupValue("rotation_z", rotation_z)
-                && book.lookupValue("fov", fov)))
+            if(!(camera.lookupValue("width_resolution", width_resolution)
+                && camera.lookupValue("height_resolution", height_resolution)
+                && camera.lookupValue("pos_x", pos_x)
+                && camera.lookupValue("pos_y", pos_y)
+                && camera.lookupValue("pos_z", pos_z)
+                && camera.lookupValue("rotation_x", rotation_x)
+                && camera.lookupValue("rotation_y", rotation_y)
+                && camera.lookupValue("rotation_z", rotation_z)
+                && camera.lookupValue("fov", fov)))
                 continue;
 
-            _camerasInfo.push_back((std::make_tuple("width_resolution", width_resolution)));
-            _camerasInfo.push_back((std::make_tuple("height_resolution", height_resolution)));
-            _camerasInfo.push_back((std::make_tuple("position_x", position_x)));
-            _camerasInfo.push_back((std::make_tuple("position_y", position_y)));
-            _camerasInfo.push_back((std::make_tuple("position_z", position_z)));
-            _camerasInfo.push_back((std::make_tuple("rotation_x", rotation_x)));
-            _camerasInfo.push_back((std::make_tuple("rotation_y", rotation_y)));
-            _camerasInfo.push_back((std::make_tuple("rotation_z", rotation_z)));
-            _camerasInfo.push_back((std::make_tuple("fov", fov)));
+            Math::Point3D origin = Math::Point3D(atof(pos_x.c_str()), atof(pos_y.c_str()), atof(pos_z.c_str()));
+            _camera = new Camera(origin, Math::Point3D(0, 0, ((atoi (fov.c_str())) / 45)), atoi(width_resolution.c_str()), atoi(height_resolution.c_str()));
+            _display = new Sfml(atoi(width_resolution.c_str()), atoi(height_resolution.c_str()));
         }
     } catch(const SettingNotFoundException &nfex) {
         // Ignorer
     }
+}
+
+void Parser::ParseOnePrimitive(const Setting &primitive)
+{
+    IPrimitives *current_Form;
+
+    PrimitiveFactory factory;
+    Loader <IPrimitives> loader;
+    std::vector<double> size_list;
+
+    string forme, color_r, color_g, color_b, pos_x, pos_y, pos_z, size, current_size;
+
+    if (!(primitive.lookupValue("forme", forme)
+        && primitive.lookupValue("color_r", color_r)
+        && primitive.lookupValue("color_g", color_g)
+        && primitive.lookupValue("color_b", color_b)
+        && primitive.lookupValue("pos_x", pos_x)
+        && primitive.lookupValue("pos_y", pos_y)
+        && primitive.lookupValue("pos_z", pos_z)
+        && primitive.lookupValue("size", size)))
+        return;
+
+    current_Form = factory.createPrimitives(forme, loader);
+    current_Form->setOrigin(Math::Point3D(atof(pos_x.c_str()), atof(pos_y.c_str()), atof(pos_z.c_str())));
+    current_Form->setColor(Color(atoi(color_r.c_str()), atoi(color_g.c_str()), atoi(color_b.c_str()), 255));
+
+    std::istringstream iss(size);
+    while (std::getline(iss, current_size, '/'))
+        size_list.push_back(atof(current_size.c_str()));
+    current_Form->setSize(size_list);
+
+    _primitives.push_back(current_Form);
 }
 
 void Parser::parserInfoPrimitives(const Setting& root)
 {
     try {
-        Loader <IPrimitives> loader;
-        Factory factory;
-        IPrimitives *current_Form;
-        std::vector<double> size_list;
-        std::string current_size;
         const Setting &primitive = root["inventory"]["primitive"];
         int count = primitive.getLength();
 
         for(int i = 0; i < count; ++i) {
-            const Setting &movie = primitive[i];
-
-            string forme, color_r, color_g, color_b, pos_x, pos_y, pos_z, size;
-
-            if(!(movie.lookupValue("forme", forme)
-                && movie.lookupValue("color_r", color_r)
-                && movie.lookupValue("color_g", color_g)
-                && movie.lookupValue("color_b", color_b)
-                && movie.lookupValue("pos_x", pos_x)
-                && movie.lookupValue("pos_y", pos_y)
-                && movie.lookupValue("pos_z", pos_z)
-                && movie.lookupValue("size", size)))
-                continue;
-
-            current_Form = factory.createPrimitives(forme, loader);
-            current_Form->setOrigin(Math::Point3D(atof(pos_x.c_str()), atof(pos_y.c_str()), atof(pos_z.c_str())));
-            current_Form->setColor(Color(atoi(color_r.c_str()), atoi(color_g.c_str()), atoi(color_b.c_str()), 255));
-
-            std::istringstream iss(size);
-            while (std::getline(iss, current_size, '/'))
-                size_list.push_back(atof(current_size.c_str()));
-            current_Form->setSize(size_list);
-            _primitivesInfo.push_back(current_Form);
+            ParseOnePrimitive(primitive[i]);
         }
     } catch(const SettingNotFoundException &nfex) {
         // Ignorer
     }
-}   
+}
 
-std::vector<std::pair<std::string, std::string>> Parser::GetInfo(const Parser& parser)
+void Parser::parserInfoLight(const Setting &root, std::string flags)
 {
-    std::vector<std::pair<std::string, std::string>> allInfo;
+    LightFactory factory;
+    Loader<ILight> loader;
+    try {
+        const Setting &lights = root["inventory"]["lights"];
+        int count = lights.getLength();
 
-    for (const auto& cameraInfo : parser._camerasInfo) {
-        allInfo.emplace_back(std::get<0>(cameraInfo), std::get<1>(cameraInfo));
+        for (int i = 0; i < count; ++i) {
+            const Setting &light = lights[i];
+
+            string strengh, type,
+            pos_x, pos_y, pos_z,
+            direction_x, direction_y, direction_z,
+            color_r, color_g, color_b;
+
+            if (!(light.lookupValue("strengh", strengh)
+                && light.lookupValue("type", type)
+                && light.lookupValue("pos_x", pos_x)
+                && light.lookupValue("pos_y", pos_y)
+                && light.lookupValue("pos_z", pos_z)
+                && light.lookupValue("direction_x", direction_x)
+                && light.lookupValue("direction_y", direction_y)
+                && light.lookupValue("direction_z", direction_z)
+                && light.lookupValue("color_r", color_r)
+                && light.lookupValue("color_g", color_g)
+                && light.lookupValue("color_b", color_b)))
+                continue;
+
+            if (flags == "--debug") {
+                std::cout << "Light Info : {\n\tType : " << type
+                << "\n\tStrengh : " << strengh
+                << "\n\tPosition : {\n\t\tx : " << pos_x << "\n\t\ty : " << pos_y << "\n\t\tz : " << pos_z
+                << "\n\t}\n\tDirection : {\n\t\tx : " << direction_x << "\n\t\ty : " << direction_y << "\n\t\tz : " << direction_z
+                << "\n\t}\n\tColor :{\n\t\tr : " << color_r << "\n\t\tg : " << color_g << "\n\t\tb : " << color_b << "\n\t}\n}" << std::endl;
+            }
+
+            Math::Point3D origin = Math::Point3D(atof(pos_x.c_str()), atof(pos_y.c_str()), atof(pos_z.c_str()));
+            Math::Vector3D direction = Math::Vector3D(Math::Point3D(), Math::Point3D(atof(direction_x.c_str()), atof(direction_y.c_str()), atof(direction_z.c_str())));
+            Color color = Color(atoi(color_r.c_str()), atoi(color_g.c_str()), atoi(color_b.c_str()), atoi(strengh.c_str()));
+
+            ILight *newLight = factory.createLights(type, loader);
+            newLight->setOrigin(origin);
+            newLight->setDirection(direction);
+            newLight->setColor(color);
+            newLight->setStrengh(atoi(strengh.c_str()));
+            _lights.push_back(newLight);
+        }
+    } catch (const SettingNotFoundException &nfex) {
+        // Ignorer
     }
-
-    // for (const auto& primitiveInfo : parser._primitivesInfo) {
-    //     allInfo.emplace_back(std::get<0>(primitiveInfo->getForm()), std::get<1>(primitiveInfo));
-    // }
-
-    return allInfo;
 }
 
 void Parser::printInfoFile() const
 {
     std::cout << "Informations sur les cameras :" << std::endl;
-    for (const auto& cameraInfo : _camerasInfo) {
-        std::cout << std::get<0>(cameraInfo) << ": " << std::get<1>(cameraInfo) << std::endl;
-    }
+    std::cout << _camera->getXSize() << " / " << _camera->getYSize() << std::endl;
 
     std::cout << "\nInformations sur les primitives :" << std::endl;
-    for (const auto& primitiveInfo : _primitivesInfo) {
+    for (const auto& primitiveInfo : _primitives) {
         std::cout << primitiveInfo->getForm() << std::endl;
+    }
+    std::cout << "\nInformations sur les lights :" << std::endl;
+    for (auto &lightInfo : _lights) {
+        std::cout << lightInfo->getType() << std::endl;
     }
 }
 
-std::vector<std::tuple<std::string, std::string>> Parser::getCameraInfo()
+Camera *Parser::getCamera()
 {
-    return _camerasInfo;
+    return _camera;
+}
+
+IDisplay *Parser::getDisplay()
+{
+    return _display;
 }
 
 std::vector<IPrimitives *> Parser::getPrimitives()
 {
-    return _primitivesInfo;
+    return _primitives;
 }
 
-std::vector<std::tuple<std::string, std::string>> Parser::getLightInfo()
+std::vector<ILight *> Parser::getLights()
 {
-    return _lightInfo;
+    return _lights;
 }

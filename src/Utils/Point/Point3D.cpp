@@ -13,12 +13,18 @@
  */
 
 #include "Point3D.hpp"
+#include "../Vector/Vector3D.hpp"
 
 Math::Point3D::Point3D(double x, double y, double z)
 {
     _x = x;
     _y = y;
     _z = z;
+}
+
+Math::Point3D Math::Point3D::operator+(Math::Point3D &secondPoint)
+{
+    return Math::Point3D(_x + secondPoint._x, _y + secondPoint._y, _z + secondPoint._z);
 }
 
 Math::Point3D Math::Point3D::operator+(Math::Vector3D &secondVector)

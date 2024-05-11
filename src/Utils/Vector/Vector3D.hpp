@@ -15,15 +15,19 @@
 #ifndef RAYTRACER_HPP_
 #define RAYTRACER_HPP_
 
-#include <string>
+#include "../Point/Point3D.hpp"
 #include <iostream>
 #include <math.h>
+#include <string>
 
 namespace Math {
     class Vector3D {
         public:
             Vector3D(double x = 0, double y = 0, double z = 0);
+            Vector3D(Math::Point3D origin, Math::Point3D end);
             ~Vector3D();
+            Math::Point3D _origin;
+            Math::Point3D _end;
             double _x;
             double _y;
             double _z;
@@ -40,8 +44,8 @@ namespace Math {
             void operator*=(double nb);
             Math::Vector3D operator/(double nb);
             void operator/=(double nb);
-            double dot();
-
+            double dot(Math::Vector3D otherVector);
+            double dot(Math::Point3D otherPoint);
         protected:
         private:
     };

@@ -13,6 +13,7 @@
  */
 
 #include "../IPrimitives.hpp"
+#include <vector>
 
 #ifndef SPHERE_HPP
 #define SPHERE_HPP
@@ -24,7 +25,9 @@ class Sphere : public IPrimitives
         Sphere(Math::Point3D origin, double radius, Color color);
         ~Sphere();
 
-        bool hits(RayTracer::Ray &ray) override;
+        bool pointing(RayTracer::Ray &ray);
+        bool hits(RayTracer::Ray &ray, double &distance) override;
+        std::vector<double> hits(std::vector<RayTracer::Ray> rays, double &minDistance, double &maxDistance) override;
 
         // SETTER
         void setForm(std::string form) override;

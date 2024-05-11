@@ -40,7 +40,7 @@ Cube::~Cube()
 {
 }
 
-bool Cube::hits(RayTracer::Ray &ray)
+bool Cube::hits(RayTracer::Ray &ray, double &distance)
 {
     double offsetX = _origin._x;
     double offsetY = _origin._y;
@@ -57,6 +57,12 @@ bool Cube::hits(RayTracer::Ray &ray)
         ray._direction._z + offsetZ
     );
     return false;
+}
+
+std::vector<double> Cube::hits(std::vector<RayTracer::Ray> rays, double &minDistance, double &maxDistance)
+{
+    std::vector<double> distanceRays;
+    return distanceRays;
 }
 
 void Cube::setForm(std::string form)

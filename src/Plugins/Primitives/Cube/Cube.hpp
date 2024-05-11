@@ -13,6 +13,7 @@
  */
 
 #include "../IPrimitives.hpp"
+#include <map>
 
 #ifndef CUBE_HPP
 #define CUBE_HPP
@@ -24,7 +25,8 @@ class Cube : public IPrimitives
         Cube(Math::Point3D origin, double side, Color color);
         ~Cube();
 
-        bool hits(RayTracer::Ray &ray) override;
+        bool hits(RayTracer::Ray &ray, double &distance) override;
+        std::vector<double> hits(std::vector<RayTracer::Ray> rays, double &minDistance, double &maxDistance) override;
 
         // SETTER
         void setForm(std::string form) override;

@@ -14,7 +14,7 @@
 
 #include "Output.hpp"
 
-Output::Output(std::vector<std::tuple<std::string, std::string>> camerasInfo, std::vector<std::tuple<std::string, std::string>> primitivesInfo, const std::string &filepath, const std::string &flag)
+Output::Output(Camera *camera, std::vector<IPrimitives *> primitives, std::vector<Color> pixels, const std::string &filepath, const std::string &flag)
     : _filePath(filepath), _flag(flag)
 {
     if (!_flag.empty()) {
@@ -30,41 +30,14 @@ Output::Output(std::vector<std::tuple<std::string, std::string>> camerasInfo, st
         std::ofstream image;
         image.open(_filePath);
 
-        std::string width;
-        std::string height;
-        std::string color_r;
-        std::string color_g;
-        std::string color_b;
-
-        for (const auto& info : camerasInfo) {
-            if (std::get<0>(info) == "width_resolution")
-                width = std::get<1>(info);
-            if (std::get<0>(info) == "height_resolution")
-                height = std::get<1>(info);
-        }
-
-        for (const auto& info : primitivesInfo) {
-            if (std::get<0>(info) == "color_r")
-                color_r = std::get<1>(info);
-            if (std::get<0>(info) == "color_g")
-                color_g = std::get<1>(info);
-            if (std::get<0>(info) == "color_b")
-                color_b = std::get<1>(info);
-        }
-
         if (image.is_open()) {
-            image << "p3" << std::endl;
-            image << width << " ";
-            image << height << std::endl;
-            image << color_r << " ";
-            image << color_g << " ";
-            image << color_b << std::endl;
+            image << "P3" << std::endl;
+            image << camera->getXResolution() << " ";
+            image << camera->getYResolution() << std::endl;
+            image << 255 << std::endl;
 
-            for (int y = 0; y < 250; y++) {
-                for (int x = 0; x < 250; x++) {
-                    image << x << " " << x << " " << x << std::endl;
-                }
-            }
+            for (auto pixel : pixels)
+                image << round(pixel.getRed()) << " " << round(pixel.getGreen()) << " " << round(pixel.getBlue()) << std::endl;
             image.close();
         } else {
             std::cerr << "Error: Can't open image.ppm file" << std::endl;

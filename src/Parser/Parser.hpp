@@ -22,7 +22,11 @@
 #include <tuple>
 
 #include "../Utils/Exception/Exception.hpp"
-#include "Factory/Factory.hpp"
+#include "Factory/PrimitiveFactory.hpp"
+#include "Factory/LightFactory.hpp"
+#include "../Camera/Camera.hpp"
+#include "../Plugins/Display/IDisplay.hpp"
+#include "../Plugins/Display/SFML/Sfml.hpp"
 
 using namespace std;
 using namespace libconfig;
@@ -39,16 +43,17 @@ class Parser
         ~Parser();
 
         // Getter
-        std::vector<std::tuple<std::string, std::string>> getCameraInfo();
         std::vector<IPrimitives *> getPrimitives();
-        std::vector<std::tuple<std::string, std::string>> getLightInfo();
+        Camera *getCamera();
+        IDisplay *getDisplay();
+        std::vector<ILight *> getLights();
 
         bool readFileConfig(Config& cfg);
         void parserInfoCamera(const Setting& root);
-        void parserInfoPrimitives(const Setting& root);
-        void parserInfoLight(const Setting& root);
+        void ParseOnePrimitive(const Setting &primitive);
+        void parserInfoPrimitives(const Setting &root);
+        void parserInfoLight(const Setting &root, std::string flags = "");
         void printInfoFile() const ;
-        std::vector<std::pair<std::string, std::string>> GetInfo(const Parser& parser);
 
     protected:
 
@@ -56,9 +61,10 @@ class Parser
         std::string _filePath; ///< The path to the input file.
         std::string _flag; ///< Additional flag for additional information, if needed.
         
-        std::vector<std::tuple<std::string, std::string>> _camerasInfo;
-        std::vector<IPrimitives *> _primitivesInfo;
-        std::vector<std::tuple<std::string, std::string>> _lightInfo;
+        Camera *_camera;
+        std::vector<IPrimitives *> _primitives;
+        IDisplay *_display;
+        std::vector<ILight *> _lights;
 };
 
 #endif // !PARSER_HPP

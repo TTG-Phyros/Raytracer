@@ -15,16 +15,17 @@
 #ifndef IPRIMITIVES_HPP
 #define IPRIMITIVES_HPP
 
-#include "../../Utils/Coordinates/Coordinates.hpp"
 #include "../../Utils/Color/Color.hpp"
 #include "../../Utils/Ray/Ray.hpp"
+#include <vector>
 
 class IPrimitives
 {
     public:
         ~IPrimitives() = default;
 
-        virtual bool hits(RayTracer::Ray &ray) = 0;
+        virtual bool hits(RayTracer::Ray &ray, double &distance) = 0;
+        virtual std::vector<double> hits(std::vector<RayTracer::Ray> rays, double &minDistance, double &maxDistance) = 0;
 
         // SETTER
         virtual void setForm(std::string form) = 0;
