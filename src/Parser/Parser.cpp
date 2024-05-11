@@ -68,6 +68,8 @@ bool Parser::readFileConfig(Config& cfg)
 
 void Parser::parserInfoCamera(const Setting& root)
 {
+    DisplayFactory factory;
+    Loader<IDisplay> loader;
     try {
         const Setting &cameras = root["inventory"]["camera"];
         int count = cameras.getLength();
@@ -91,7 +93,8 @@ void Parser::parserInfoCamera(const Setting& root)
 
             Math::Point3D origin = Math::Point3D(atof(pos_x.c_str()), atof(pos_y.c_str()), atof(pos_z.c_str()));
             _camera = new Camera(origin, Math::Point3D(0, 0, ((atoi (fov.c_str())) / 45)), atoi(width_resolution.c_str()), atoi(height_resolution.c_str()));
-            _display = new Sfml(atoi(width_resolution.c_str()), atoi(height_resolution.c_str()));
+            _display = factory.createDisplay("sfml", loader);
+            _display->setResolution(atoi(width_resolution.c_str()), atoi(height_resolution.c_str()));
         }
     } catch(const SettingNotFoundException &nfex) {
         // Ignorer

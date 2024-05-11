@@ -31,6 +31,7 @@ class IDisplay
         virtual void close() = 0;
         virtual bool isOpen() = 0;
         virtual void move(Camera *camera) = 0;
+        virtual void setResolution(int xSize, int ySize) = 0;
 };
 
 #endif // !IDISPLAY_HPP

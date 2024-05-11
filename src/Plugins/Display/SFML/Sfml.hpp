@@ -23,6 +23,7 @@ class Sfml : public IDisplay {
         void close();
         bool isOpen();
         void move(Camera *camera);
+        void setResolution(int xSize, int ySize);
         ~Sfml();
 
     protected:

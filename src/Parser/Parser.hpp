@@ -24,6 +24,7 @@
 #include "../Utils/Exception/Exception.hpp"
 #include "Factory/PrimitiveFactory.hpp"
 #include "Factory/LightFactory.hpp"
+#include "Factory/DisplayFactory.hpp"
 #include "../Camera/Camera.hpp"
 #include "../Plugins/Display/IDisplay.hpp"
 #include "../Plugins/Display/SFML/Sfml.hpp"

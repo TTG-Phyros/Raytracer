@@ -47,6 +47,14 @@ void Sfml::setPixel(int x, int y, double red, double green, double blue)
     _window.draw(pixel);
 }
 
+void Sfml::setResolution(int xSize, int ySize)
+{
+    _window.close();
+    _window.create(sf::VideoMode(xSize, ySize), "RayTracer");
+    _xSize = xSize;
+    _ySize = ySize;
+}
+
 void Sfml::display()
 {
     _window.display();
