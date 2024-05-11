@@ -26,6 +26,7 @@ namespace Math {
             Vector3D(double x = 0, double y = 0, double z = 0);
             Vector3D(Math::Point3D origin, Math::Point3D end);
             ~Vector3D();
+            void Normalize();
             Math::Point3D _origin;
             Math::Point3D _end;
             double _x;
@@ -46,6 +47,9 @@ namespace Math {
             void operator/=(double nb);
             double dot(Math::Vector3D otherVector);
             double dot(Math::Point3D otherPoint);
+            double Dot(const Vector3D &otherVector) const {
+                return _x * otherVector._x + _y * otherVector._y + _z * otherVector._z;
+            }
         protected:
         private:
     };

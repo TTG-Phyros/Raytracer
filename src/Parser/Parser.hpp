@@ -50,6 +50,7 @@ class Parser
         bool readFileConfig(Config& cfg);
         void parserInfoCamera(const Setting& root);
         void ParseOnePrimitive(const Setting &primitive);
+        void ParsePlanesPrimitive(const Setting &primitive);
         void parserInfoPrimitives(const Setting &root);
         void parserInfoLight(const Setting& root);
         void printInfoFile() const ;

@@ -129,6 +129,30 @@ void Parser::ParseOnePrimitive(const Setting &primitive)
     _primitives.push_back(current_Form);
 }
 
+void Parser::ParsePlanesPrimitive(const Setting &primitive)
+{
+    IPrimitives *current_Form;
+
+    Factory factory;
+    Loader <IPrimitives> loader;
+    std::vector<double> size_list;
+
+    string forme, color_r, color_g, color_b, axis, position;
+
+    if (!(primitive.lookupValue("forme", forme)
+        && primitive.lookupValue("color_r", color_r)
+        && primitive.lookupValue("color_g", color_g)
+        && primitive.lookupValue("color_b", color_b)
+        && primitive.lookupValue("axis", axis)
+        && primitive.lookupValue("position", position)))
+        return;
+
+    current_Form = factory.createPrimitives(forme, loader);
+    current_Form->setColor(Color(atoi(color_r.c_str()), atoi(color_g.c_str()), atoi(color_b.c_str()), 255));
+
+    _primitives.push_back(current_Form);
+}
+
 void Parser::parserInfoPrimitives(const Setting& root)
 {
     try {
@@ -137,6 +161,7 @@ void Parser::parserInfoPrimitives(const Setting& root)
 
         for(int i = 0; i < count; ++i) {
             ParseOnePrimitive(primitive[i]);
+            ParsePlanesPrimitive(primitive[i]);
         }
     } catch(const SettingNotFoundException &nfex) {
         // Ignorer
