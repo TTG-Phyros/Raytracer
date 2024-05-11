@@ -24,13 +24,15 @@ Plane::Plane()
 {
     _form = "Plane";
     _origin = Math::Point3D();
+    _radius = 0.0;
     _color = Color();
 }
 
-Plane::Plane(Math::Point3D origin, Color color)
+Plane::Plane(Math::Point3D origin, double radius, Color color)
 {
     _form = "Plane";
     _origin = origin;
+    _radius = radius;
     _color = color;
 }
 
@@ -85,6 +87,11 @@ bool Plane::hits(RayTracer::Ray &ray, double &distance)
     return false; 
 }
 
+std::vector<double> Plane::hits(std::vector<RayTracer::Ray> rays, double &minDistance, double &maxDistance)
+{
+    std::vector<double> distanceRays;
+    return distanceRays;
+}
 
 // bool hits(const RayTracer::Ray &ray, double &distance)
 // {
@@ -132,6 +139,13 @@ void Plane::setColor(Color color)
     _color = color;
 }
 
+void Plane::setSize(std::vector<double> size)
+{
+    if (size.size() != 1)
+        return;
+    _radius = size[0];
+}
+
 std::string Plane::getForm()
 {
     return _form;
@@ -145,4 +159,9 @@ Math::Point3D Plane::getOrigin()
 Color Plane::getColor()
 {
     return _color;
+}
+
+std::vector<double> Plane::getSize()
+{
+    return std::vector<double>(1, _radius);
 }

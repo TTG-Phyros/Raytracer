@@ -22,20 +22,23 @@ class Plane : public IPrimitives
 {
     public:
         Plane();
-        Plane(Math::Point3D origin, Color color);
+        Plane(Math::Point3D origin, double radius, Color color);
         ~Plane();
 
         bool hits(RayTracer::Ray &ray, double &distance) override;
+        std::vector<double> hits(std::vector<RayTracer::Ray> rays, double &minDistance, double &maxDistance) override;
 
         // SETTER
         void setForm(std::string form) override;
         void setOrigin(Math::Point3D origin) override;
         void setColor(Color color) override;
+        void setSize(std::vector<double> size) override;
 
         // GETTER
         std::string getForm() override;
         Math::Point3D getOrigin() override;
         Color getColor() override;
+        std::vector<double> getSize() override;
 
     protected:
 
@@ -43,6 +46,7 @@ class Plane : public IPrimitives
         std::string _form;
         Color _color;
         Math::Point3D _origin;
+        double _radius;
 };
 
 #endif // !Plane_HPP
