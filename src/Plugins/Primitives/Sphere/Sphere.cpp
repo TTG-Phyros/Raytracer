@@ -66,7 +66,7 @@ bool Sphere::hits(RayTracer::Ray &ray, double &distance)
 
         // std::cout << "Delta first solution : " << t1 << ", Delta second solution : " << t2 << std::endl;
         if (t1 < 0.0 || t2 < 0.0) {
-            return false;
+            return true;
         } else {
             distance = t1 <= t2 ? t1 : t2;
             return true;

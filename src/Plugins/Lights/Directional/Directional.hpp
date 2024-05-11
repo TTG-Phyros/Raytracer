@@ -17,4 +17,32 @@
 #ifndef DIRECTIONAL_HPP
 #define DIRECTIONAL_HPP
 
+class DirectionalLight : public ILight {
+    public:
+        DirectionalLight();
+        DirectionalLight(Math::Point3D origin, Math::Vector3D direction, Color color, double strengh);
+        ~DirectionalLight();
+
+        // SETTER
+        void setType(std::string type) override;
+        void setOrigin(Math::Point3D origin) override;
+        void setDirection(Math::Vector3D direction) override;
+        void setColor(Color color) override;
+        void setStrengh(double strengh) override;
+
+        // GETTER
+        std::string getType() override;
+        Math::Point3D getOrigin() override;
+        Math::Vector3D getDirection() override;
+        Color getColor() override;
+        double getStrengh() override;
+    protected:
+    private:
+        std::string _type;
+        Math::Point3D _origin;
+        Math::Vector3D _direction;
+        Color _color;
+        double _strengh;
+};
+
 #endif // !DIRECTIONAL_HPP

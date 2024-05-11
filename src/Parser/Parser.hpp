@@ -22,7 +22,8 @@
 #include <tuple>
 
 #include "../Utils/Exception/Exception.hpp"
-#include "Factory/Factory.hpp"
+#include "Factory/PrimitiveFactory.hpp"
+#include "Factory/LightFactory.hpp"
 #include "../Camera/Camera.hpp"
 #include "../Plugins/Display/IDisplay.hpp"
 #include "../Plugins/Display/SFML/Sfml.hpp"
@@ -45,13 +46,13 @@ class Parser
         std::vector<IPrimitives *> getPrimitives();
         Camera *getCamera();
         IDisplay *getDisplay();
-        std::vector<std::tuple<std::string, std::string>> getLightInfo();
+        std::vector<ILight *> getLights();
 
         bool readFileConfig(Config& cfg);
         void parserInfoCamera(const Setting& root);
         void ParseOnePrimitive(const Setting &primitive);
         void parserInfoPrimitives(const Setting &root);
-        void parserInfoLight(const Setting& root);
+        void parserInfoLight(const Setting &root, std::string flags = "");
         void printInfoFile() const ;
 
     protected:
@@ -63,7 +64,7 @@ class Parser
         Camera *_camera;
         std::vector<IPrimitives *> _primitives;
         IDisplay *_display;
-        std::vector<std::tuple<std::string, std::string>> _lightInfo;
+        std::vector<ILight *> _lights;
 };
 
 #endif // !PARSER_HPP

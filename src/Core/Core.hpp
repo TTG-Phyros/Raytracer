@@ -25,7 +25,8 @@
 #include <map>
 #include <tuple>
 
-#include "../Parser/Factory/Factory.hpp"
+#include "../Parser/Factory/PrimitiveFactory.hpp"
+#include "../Parser/Factory/LightFactory.hpp"
 #include "../Parser/Parser.hpp"
 #include "../Camera/Camera.hpp"
 #include "../Plugins/Display/SFML/Sfml.hpp"
@@ -34,6 +35,9 @@ class Core
 {
     public:
         Core(Parser parser, std::string flag = "");
+        bool checkIfPrimitiveInTheWay(RayTracer::Ray PrimitiveToLight);
+        Color processSingleLight(Math::Point3D PrimitiveHitPoint, ILight *light, std::string flags);
+        Color processLights(Math::Point3D PrimitiveHitPoint, std::string flags = "");
         void processSinglePrimitive(std::vector<RayTracer::Ray> cameraRays, std::vector<Color> &pixelList, IPrimitives *primitive, std::vector<double> &minDistances, std::string flags = "");
         std::vector<Color> processFrame(std::string flags = "");
         void inRealTimeDisplay();
@@ -48,9 +52,7 @@ class Core
         std::vector<IPrimitives *> _primitives;
         Camera *_camera;
         IDisplay *_display;
-        // std::vector<std::tuple<std::string, std::string>> _camera;
-        // std::vector<std::tuple<std::string, std::string>> _primitives;
-        std::vector<std::tuple<std::string, std::string>> _lightInfo;
+        std::vector<ILight *> _lights;
 };
 
 #endif // !CORE_HPP

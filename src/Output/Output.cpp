@@ -37,7 +37,7 @@ Output::Output(Camera *camera, std::vector<IPrimitives *> primitives, std::vecto
             image << 255 << std::endl;
 
             for (auto pixel : pixels)
-                image << pixel.getRed() << " " << pixel.getGreen() << " " << pixel.getBlue() << std::endl;
+                image << round(pixel.getRed()) << " " << round(pixel.getGreen()) << " " << round(pixel.getBlue()) << std::endl;
             image.close();
         } else {
             std::cerr << "Error: Can't open image.ppm file" << std::endl;
