@@ -44,7 +44,7 @@ PATH_SPHERE =   $(PATH_PRIMITIVES)Sphere/*.cpp
 ## END SPHERE
 
 ## TREE PLANE
-PATH_Plane =   $(PATH_PRIMITIVES)Plane/*.cpp
+PATH_PLANE =   $(PATH_PRIMITIVES)Planes/*.cpp
 ## END PLANE
 
 ## TREE CUBE
@@ -80,6 +80,7 @@ all: generateSo core
 generateSo:
 	g++ -shared -fPIC -o ./plugins/raytracer_sphere.so $(PATH_SPHERE) $(FLAGS_UTILS) -fno-gnu-unique
 	g++ -shared -fPIC -o ./plugins/raytracer_cube.so $(PATH_CUBE) $(FLAGS_UTILS) -fno-gnu-unique
+	g++ -shared -fPIC -o ./plugins/raytracer_plane.so $(PATH_PLANE) $(FLAGS_UTILS) -fno-gnu-unique
 
 core:
 	g++ $(PATH_SRC)main.cpp $(PATH_PARSER) $(PATH_CAMERA) $(PATH_CORE) $(PATH_SFML) $(PATH_OUTPUT) $(FLAGS_UTILS) $(FLAGS_DISPLAY) -ldl -o $(NAME) -fno-gnu-unique -lconfig++ -g3

@@ -22,7 +22,7 @@ class Plane : public IPrimitives
 {
     public:
         Plane();
-        Plane(Math::Point3D origin, double radius, Color color);
+        Plane(Math::Point3D origin, Color color);
         ~Plane();
 
         bool hits(RayTracer::Ray &ray, double &distance) override;
@@ -46,7 +46,6 @@ class Plane : public IPrimitives
         std::string _form;
         Color _color;
         Math::Point3D _origin;
-        double _radius;
 };
 
 #endif // !Plane_HPP

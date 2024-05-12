@@ -149,6 +149,12 @@ void Parser::ParsePlanesPrimitive(const Setting &primitive)
 
     current_Form = factory.createPrimitives(forme, loader);
     current_Form->setColor(Color(atoi(color_r.c_str()), atoi(color_g.c_str()), atoi(color_b.c_str()), 255));
+    std::vector<double> size;
+    double pos = atof(position.c_str());
+    size.push_back(axis == "X" || axis == "x" ? (pos < 0 ? pos - 1 : pos + 1) : 0);
+    size.push_back(axis == "Y" || axis == "y" ? (pos < 0 ? pos - 1 : pos + 1) : 0);
+    size.push_back(axis == "Z" || axis == "z" ? (pos < 0 ? pos - 1 : pos + 1) : 0);
+    current_Form->setSize(size);
 
     _primitives.push_back(current_Form);
 }
