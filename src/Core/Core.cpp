@@ -42,9 +42,9 @@ bool checkIfDirectionIsExactInverse(Math::Vector3D direction1, Math::Vector3D di
 
 bool Core::checkIfPrimitiveInTheWay(RayTracer::Ray primitiveToLight)
 {
-    for (int j = 0; _primitives[j]; j++) {
+    for (int i = 0; i < _primitives.size(); i++) {
         double distance;
-        if (_primitives[j]->hits(primitiveToLight, distance)) {
+        if (_primitives[i]->hits(primitiveToLight, distance)) {
             return false;
         }
     }
@@ -96,7 +96,7 @@ Color Core::processSingleLight(Math::Point3D PrimitiveHitPoint, ILight *light, s
 Color Core::processLights(Math::Point3D PrimitiveHitPoint, std::string flags)
 {
     Color finalColor;
-    for (int i = 0; _lights[i]; i++)
+    for (int i = 0; i < _lights.size(); i++)
         finalColor += processSingleLight(PrimitiveHitPoint, _lights[i], flags);
     return finalColor;
 }
@@ -142,7 +142,7 @@ std::vector<Color> Core::processFrame(std::string flags)
     std::vector<RayTracer::Ray> cameraRays = _camera->generateCameraRays();
     std::vector<Color> pixelList(cameraRays.size(), Color());
     std::vector<double> minDistances(cameraRays.size(), 99999);
-    for (int i = 0; _primitives[i]; i++)
+    for (int i = 0; i < _primitives.size(); i++)
         processSinglePrimitive(cameraRays, pixelList, _primitives[i], minDistances, flags);
     return pixelList;
 }

@@ -93,7 +93,7 @@ generateSo:
 	g++ -shared -fPIC -o ./plugins/raytracer_sphere.so $(PATH_SPHERE) $(FLAGS_UTILS) -fno-gnu-unique
 	g++ -shared -fPIC -o ./plugins/raytracer_cube.so $(PATH_CUBE) $(FLAGS_UTILS) -fno-gnu-unique
 	g++ -shared -fPIC -o ./plugins/raytracer_directional_light.so $(PATH_DIRECTIONAL) $(FLAGS_UTILS) -fno-gnu-unique
-	g++ -shared -fPIC -o ./plugins/raytracer_sfml.so $(PATH_SFML) $(FLAGS_UTILS) $(FLAGS_DISPLAY) -fno-gnu-unique
+	g++ -shared -fPIC -o ./plugins/raytracer_sfml.so $(PATH_SFML) $(PATH_CAMERA) $(FLAGS_UTILS) $(FLAGS_DISPLAY) -fno-gnu-unique
 	g++ -shared -fPIC -o ./plugins/raytracer_plane.so $(PATH_PLANE) $(FLAGS_UTILS) -fno-gnu-unique
 
 core:

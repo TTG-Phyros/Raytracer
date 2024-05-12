@@ -12,6 +12,7 @@
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
 #include "../IDisplay.hpp"
+#include "../../../Camera/Camera.hpp"
 
 class Sfml : public IDisplay {
     public:

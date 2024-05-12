@@ -42,33 +42,24 @@ bool Plane::hits(RayTracer::Ray &ray, double &distance)
 {
     double multiplier;
     if (_origin._x != 0) {
-        std::cout << "Axe X" << std::endl;
-        if (ray._direction._x * _origin._x > 0 && abs(ray._origin._x) > abs(_origin._x)) {
-            multiplier = _origin._x / ray._direction._x;
-            distance = (ray._direction * multiplier).getLength();
-            return true;
-        }
-        return false;
+        multiplier = _origin._x / -(ray._direction._x);
+        if (multiplier < 0)
+            return false;
+        distance = (ray._direction * multiplier).getLength();
     }
     if (_origin._y != 0) {
-        std::cout << "Axe Y" << std::endl;
-        if (ray._direction._y * _origin._y > 0 && abs(ray._origin._y) > abs(_origin._y)) {
-            multiplier = _origin._y / ray._direction._y;
-            distance = (ray._direction * multiplier).getLength();
-            return true;
-        }
-        return false;
+        multiplier = _origin._y / -(ray._direction._y);
+        if (multiplier < 0)
+            return false;
+        distance = (ray._direction * multiplier).getLength();
     }
     if (_origin._z != 0) {
-        std::cout << "Axe Z" << std::endl;
-        if (ray._direction._z * _origin._z > 0 && abs(ray._origin._z) > abs(_origin._z)) {
-            multiplier = _origin._z / ray._direction._z;
-            distance = (ray._direction * multiplier).getLength();
-            return true;
-        }
-        return false;
+        multiplier = _origin._z / -(ray._direction._z);
+        if (multiplier < 0)
+            return false;
+        distance = (ray._direction * multiplier).getLength();
     }
-    return false;
+    return true;
 }
 
 std::vector<double> Plane::hits(std::vector<RayTracer::Ray> rays, double &minDistance, double &maxDistance)

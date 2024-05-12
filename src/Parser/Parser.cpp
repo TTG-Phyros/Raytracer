@@ -137,7 +137,7 @@ void Parser::ParsePlanesPrimitive(const Setting &primitive)
 {
     IPrimitives *current_Form;
 
-    Factory factory;
+    PrimitiveFactory factory;
     Loader <IPrimitives> loader;
     std::vector<double> size_list;
 
