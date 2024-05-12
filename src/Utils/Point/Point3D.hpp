@@ -17,9 +17,8 @@
 
 #include <iostream>
 
-// #include "../Vector/Vector3D.hpp"
-
 namespace Math {
+    class Vector3D;
     class Point3D {
         public:
             Point3D(double x = 0, double y = 0, double z = 0);
@@ -28,8 +27,8 @@ namespace Math {
             double _y;
             double _z;
             Math::Point3D operator+(Math::Point3D &secondVector);
-        protected:
-        private:
+            Math::Point3D operator+(Math::Vector3D &secondVector);
+            protected : private:
     };
 }
 std::ostream &operator<<(std::ostream &cout, Math::Point3D &point);

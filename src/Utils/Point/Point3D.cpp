@@ -13,6 +13,7 @@
  */
 
 #include "Point3D.hpp"
+#include "../Vector/Vector3D.hpp"
 
 Math::Point3D::Point3D(double x, double y, double z)
 {
@@ -24,6 +25,11 @@ Math::Point3D::Point3D(double x, double y, double z)
 Math::Point3D Math::Point3D::operator+(Math::Point3D &secondPoint)
 {
     return Math::Point3D(_x + secondPoint._x, _y + secondPoint._y, _z + secondPoint._z);
+}
+
+Math::Point3D Math::Point3D::operator+(Math::Vector3D &secondVector)
+{
+    return Math::Point3D(_x + secondVector._x, _y + secondVector._y, _z + secondVector._z);
 }
 
 std::ostream &operator<<(std::ostream &cout, Math::Point3D &point)
