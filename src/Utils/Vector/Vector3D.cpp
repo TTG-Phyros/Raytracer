@@ -117,6 +117,16 @@ double Math::Vector3D::dot(Math::Point3D otherPoint)
     return ((_x * otherPoint._x) + (_y * otherPoint._y) + (_z * otherPoint._z));
 }
 
+void Math::Vector3D::Normalize()
+{
+    double length = getLength();
+    if (length != 0.0) {
+        _x /= length;
+        _y /= length;
+        _z /= length;
+    }
+}
+
 Math::Vector3D::~Vector3D()
 {
 }

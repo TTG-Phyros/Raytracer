@@ -43,11 +43,22 @@ PATH_LIGHTS	=	$(PATH_PLUGINS)Lights/
 PATH_DIRECTIONAL	=	$(PATH_LIGHTS)Directional/*.cpp
 ## END DIRECTIONAL
 ## END LIGHTS
+## TREE LIGHTS
+PATH_LIGHTS	=	$(PATH_PLUGINS)Lights/
+## TREE DIRECTIONAL
+PATH_DIRECTIONAL	=	$(PATH_LIGHTS)Directional/*.cpp
+## END DIRECTIONAL
+## END LIGHTS
 ## TREE PRIMITIVES
 PATH_PRIMITIVES =   $(PATH_PLUGINS)Primitives/
 ## TREE SPHERE
 PATH_SPHERE =   $(PATH_PRIMITIVES)Sphere/*.cpp
 ## END SPHERE
+
+## TREE PLANE
+PATH_PLANE =   $(PATH_PRIMITIVES)Planes/*.cpp
+## END PLANE
+
 ## TREE CUBE
 PATH_CUBE =   $(PATH_PRIMITIVES)Cube/*.cpp
 ## END CUBE
@@ -83,8 +94,10 @@ generateSo:
 	g++ -shared -fPIC -o ./plugins/raytracer_cube.so $(PATH_CUBE) $(FLAGS_UTILS) -fno-gnu-unique
 	g++ -shared -fPIC -o ./plugins/raytracer_directional_light.so $(PATH_DIRECTIONAL) $(FLAGS_UTILS) -fno-gnu-unique
 	g++ -shared -fPIC -o ./plugins/raytracer_sfml.so $(PATH_SFML) $(FLAGS_UTILS) $(FLAGS_DISPLAY) -fno-gnu-unique
+	g++ -shared -fPIC -o ./plugins/raytracer_plane.so $(PATH_PLANE) $(FLAGS_UTILS) -fno-gnu-unique
 
 core:
+	g++ $(PATH_SRC)main.cpp $(PATH_PARSER) $(PATH_CAMERA) $(PATH_CORE) $(PATH_OUTPUT) $(FLAGS_UTILS) -ldl -o $(NAME) -fno-gnu-unique -lconfig++ -g3
 	g++ $(PATH_SRC)main.cpp $(PATH_PARSER) $(PATH_CAMERA) $(PATH_CORE) $(PATH_OUTPUT) $(FLAGS_UTILS) -ldl -o $(NAME) -fno-gnu-unique -lconfig++ -g3
 
 clean:
