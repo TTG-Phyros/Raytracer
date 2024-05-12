@@ -43,6 +43,12 @@ PATH_LIGHTS	=	$(PATH_PLUGINS)Lights/
 PATH_DIRECTIONAL	=	$(PATH_LIGHTS)Directional/*.cpp
 ## END DIRECTIONAL
 ## END LIGHTS
+## TREE LIGHTS
+PATH_LIGHTS	=	$(PATH_PLUGINS)Lights/
+## TREE DIRECTIONAL
+PATH_DIRECTIONAL	=	$(PATH_LIGHTS)Directional/*.cpp
+## END DIRECTIONAL
+## END LIGHTS
 ## TREE PRIMITIVES
 PATH_PRIMITIVES =   $(PATH_PLUGINS)Primitives/
 ## TREE SPHERE
@@ -91,6 +97,7 @@ generateSo:
 	g++ -shared -fPIC -o ./plugins/raytracer_plane.so $(PATH_PLANE) $(FLAGS_UTILS) -fno-gnu-unique
 
 core:
+	g++ $(PATH_SRC)main.cpp $(PATH_PARSER) $(PATH_CAMERA) $(PATH_CORE) $(PATH_OUTPUT) $(FLAGS_UTILS) -ldl -o $(NAME) -fno-gnu-unique -lconfig++ -g3
 	g++ $(PATH_SRC)main.cpp $(PATH_PARSER) $(PATH_CAMERA) $(PATH_CORE) $(PATH_OUTPUT) $(FLAGS_UTILS) -ldl -o $(NAME) -fno-gnu-unique -lconfig++ -g3
 
 clean:
