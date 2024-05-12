@@ -1,0 +1,81 @@
+\hypertarget{classException}{}\doxysection{Exception Class Reference}
+\label{classException}\index{Exception@{Exception}}
+
+
+Custom exception class for handling errors.  
+
+
+
+
+{\ttfamily \#include $<$Exception.\+hpp$>$}
+
+Inheritance diagram for Exception\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classException}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classException_a23377e759e716ec42bf5d94789228369}{Exception}} (const std\+::string \&error\+Msg) noexcept
+\begin{DoxyCompactList}\small\item\em Construct a new \mbox{\hyperlink{classException}{Exception}}\+:\+: \mbox{\hyperlink{classException}{Exception}} object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classException_a6b214cd8627d0968bdeebc1fbb9556b8}{$\sim$\+Exception}} ()
+\begin{DoxyCompactList}\small\item\em Destroy the \mbox{\hyperlink{classException}{Exception}}\+:\+: \mbox{\hyperlink{classException}{Exception}} object. \end{DoxyCompactList}\item 
+virtual const char $\ast$ \mbox{\hyperlink{classException_ae4ae632af33e87093b26682be69078b6}{what}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Returns the error message associated with the exception. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Custom exception class for handling errors. 
+
+This class inherits from std\+::exception and provides a custom error message. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classException_a23377e759e716ec42bf5d94789228369}\label{classException_a23377e759e716ec42bf5d94789228369}} 
+\index{Exception@{Exception}!Exception@{Exception}}
+\index{Exception@{Exception}!Exception@{Exception}}
+\doxysubsubsection{\texorpdfstring{Exception()}{Exception()}}
+{\footnotesize\ttfamily Exception\+::\+Exception (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{error\+Msg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Construct a new \mbox{\hyperlink{classException}{Exception}}\+:\+: \mbox{\hyperlink{classException}{Exception}} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em error\+Msg} & The error message associated with the exception.\\
+\hline
+\end{DoxyParams}
+Initializes a new \mbox{\hyperlink{classException}{Exception}} object with the provided error message. \mbox{\Hypertarget{classException_a6b214cd8627d0968bdeebc1fbb9556b8}\label{classException_a6b214cd8627d0968bdeebc1fbb9556b8}} 
+\index{Exception@{Exception}!````~Exception@{$\sim$Exception}}
+\index{````~Exception@{$\sim$Exception}!Exception@{Exception}}
+\doxysubsubsection{\texorpdfstring{$\sim$Exception()}{~Exception()}}
+{\footnotesize\ttfamily Exception\+::$\sim$\+Exception (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Destroy the \mbox{\hyperlink{classException}{Exception}}\+:\+: \mbox{\hyperlink{classException}{Exception}} object. 
+
+Destructor for the \mbox{\hyperlink{classException}{Exception}} object. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classException_ae4ae632af33e87093b26682be69078b6}\label{classException_ae4ae632af33e87093b26682be69078b6}} 
+\index{Exception@{Exception}!what@{what}}
+\index{what@{what}!Exception@{Exception}}
+\doxysubsubsection{\texorpdfstring{what()}{what()}}
+{\footnotesize\ttfamily const char $\ast$ Exception\+::what (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [noexcept]}}
+
+
+
+Returns the error message associated with the exception. 
+
+\begin{DoxyReturn}{Returns}
+const char$\ast$ A pointer to the C-\/style string containing the error message. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Utils/\+Exception/\mbox{\hyperlink{Exception_8hpp}{Exception.\+hpp}}\item 
+src/\+Utils/\+Exception/\mbox{\hyperlink{Exception_8cpp}{Exception.\+cpp}}\end{DoxyCompactItemize}

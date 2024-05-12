@@ -1,0 +1,50 @@
+\hypertarget{classPlane}{}\doxysection{Plane Class Reference}
+\label{classPlane}\index{Plane@{Plane}}
+Inheritance diagram for Plane\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classPlane}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classPlane_a723e341a2e18a9945a0f0b1068e1511c}\label{classPlane_a723e341a2e18a9945a0f0b1068e1511c}} 
+{\bfseries Plane} (\mbox{\hyperlink{classMath_1_1Point3D}{Math\+::\+Point3D}} origin, \mbox{\hyperlink{classColor}{Color}} color)
+\item 
+\mbox{\Hypertarget{classPlane_a2aaea69ae411709fe2fb1fd426404ca1}\label{classPlane_a2aaea69ae411709fe2fb1fd426404ca1}} 
+bool {\bfseries hits} (\mbox{\hyperlink{classRayTracer_1_1Ray}{Ray\+Tracer\+::\+Ray}} \&ray, double \&distance) override
+\item 
+\mbox{\Hypertarget{classPlane_aba5197338caf88ca8d313b536fa2abe9}\label{classPlane_aba5197338caf88ca8d313b536fa2abe9}} 
+std\+::vector$<$ double $>$ {\bfseries hits} (std\+::vector$<$ \mbox{\hyperlink{classRayTracer_1_1Ray}{Ray\+Tracer\+::\+Ray}} $>$ rays, double \&min\+Distance, double \&max\+Distance) override
+\item 
+\mbox{\Hypertarget{classPlane_a8470dc3c8b104bddd303a29f6b9f6adb}\label{classPlane_a8470dc3c8b104bddd303a29f6b9f6adb}} 
+void {\bfseries set\+Form} (std\+::string form) override
+\item 
+\mbox{\Hypertarget{classPlane_a44f1b72b0d7d3ac4ca38d9c56d2e80de}\label{classPlane_a44f1b72b0d7d3ac4ca38d9c56d2e80de}} 
+void {\bfseries set\+Origin} (\mbox{\hyperlink{classMath_1_1Point3D}{Math\+::\+Point3D}} origin) override
+\item 
+\mbox{\Hypertarget{classPlane_ac6d2fc5c957157e1bf9e5806ad11997d}\label{classPlane_ac6d2fc5c957157e1bf9e5806ad11997d}} 
+void {\bfseries set\+Color} (\mbox{\hyperlink{classColor}{Color}} color) override
+\item 
+\mbox{\Hypertarget{classPlane_a63b841aa94491f5009b7fddc3070ab9e}\label{classPlane_a63b841aa94491f5009b7fddc3070ab9e}} 
+void {\bfseries set\+Size} (std\+::vector$<$ double $>$ size) override
+\item 
+\mbox{\Hypertarget{classPlane_a6002d342dc81387910c76aab743caead}\label{classPlane_a6002d342dc81387910c76aab743caead}} 
+std\+::string {\bfseries get\+Form} () override
+\item 
+\mbox{\Hypertarget{classPlane_afb790e6f237a1cc4d60328c594d53349}\label{classPlane_afb790e6f237a1cc4d60328c594d53349}} 
+\mbox{\hyperlink{classMath_1_1Point3D}{Math\+::\+Point3D}} {\bfseries get\+Origin} () override
+\item 
+\mbox{\Hypertarget{classPlane_a9afbb7aa2557688e23fefca7a9223342}\label{classPlane_a9afbb7aa2557688e23fefca7a9223342}} 
+\mbox{\hyperlink{classColor}{Color}} {\bfseries get\+Color} () override
+\item 
+\mbox{\Hypertarget{classPlane_abc1c36797205404d2f3774e9cd61e647}\label{classPlane_abc1c36797205404d2f3774e9cd61e647}} 
+std\+::vector$<$ double $>$ {\bfseries get\+Size} () override
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Plugins/\+Primitives/\+Planes/\mbox{\hyperlink{Plane_8hpp}{Plane.\+hpp}}\item 
+src/\+Plugins/\+Primitives/\+Planes/\mbox{\hyperlink{Plane_8cpp}{Plane.\+cpp}}\end{DoxyCompactItemize}

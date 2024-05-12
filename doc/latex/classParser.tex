@@ -1,0 +1,61 @@
+\hypertarget{classParser}{}\doxysection{Parser Class Reference}
+\label{classParser}\index{Parser@{Parser}}
+
+
+Class for parsing files.  
+
+
+
+
+{\ttfamily \#include $<$Parser.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classParser_a6c67a8c886f0a602c8cfa4db2f4c8fea}\label{classParser_a6c67a8c886f0a602c8cfa4db2f4c8fea}} 
+{\bfseries Parser} (const std\+::string \&filepath=\char`\"{}\char`\"{}, const std\+::string \&flag=\char`\"{}\char`\"{})
+\item 
+\mbox{\Hypertarget{classParser_a78415fd1d0d4e923f32c91eb1525f215}\label{classParser_a78415fd1d0d4e923f32c91eb1525f215}} 
+std\+::vector$<$ \mbox{\hyperlink{classIPrimitives}{IPrimitives}} $\ast$ $>$ {\bfseries get\+Primitives} ()
+\item 
+\mbox{\Hypertarget{classParser_a74a566a128acdd546de6c5e63bac8c2b}\label{classParser_a74a566a128acdd546de6c5e63bac8c2b}} 
+\mbox{\hyperlink{classCamera}{Camera}} $\ast$ {\bfseries get\+Camera} ()
+\item 
+\mbox{\Hypertarget{classParser_a5511346723ed95e765bb69e2c79231a5}\label{classParser_a5511346723ed95e765bb69e2c79231a5}} 
+\mbox{\hyperlink{classIDisplay}{IDisplay}} $\ast$ {\bfseries get\+Display} ()
+\item 
+\mbox{\Hypertarget{classParser_a19ce65664f99f4485b068e46f8f424ed}\label{classParser_a19ce65664f99f4485b068e46f8f424ed}} 
+std\+::vector$<$ \mbox{\hyperlink{classILight}{ILight}} $\ast$ $>$ {\bfseries get\+Lights} ()
+\item 
+\mbox{\Hypertarget{classParser_a830b9730701fac3bbd7e4d5e45db11df}\label{classParser_a830b9730701fac3bbd7e4d5e45db11df}} 
+bool {\bfseries read\+File\+Config} (\mbox{\hyperlink{classlibconfig_1_1Config}{Config}} \&cfg)
+\item 
+\mbox{\Hypertarget{classParser_a505b8e0d5497e8dc37453dc495425d42}\label{classParser_a505b8e0d5497e8dc37453dc495425d42}} 
+void {\bfseries parser\+Info\+Camera} (const \mbox{\hyperlink{classlibconfig_1_1Setting}{Setting}} \&root)
+\item 
+\mbox{\Hypertarget{classParser_a3585d081d4c26410db38480954acf9ae}\label{classParser_a3585d081d4c26410db38480954acf9ae}} 
+void {\bfseries Parse\+One\+Primitive} (const \mbox{\hyperlink{classlibconfig_1_1Setting}{Setting}} \&primitive)
+\item 
+\mbox{\Hypertarget{classParser_a19d69593879125f6ce99986174a1f223}\label{classParser_a19d69593879125f6ce99986174a1f223}} 
+void {\bfseries Parse\+Planes\+Primitive} (const \mbox{\hyperlink{classlibconfig_1_1Setting}{Setting}} \&primitive)
+\item 
+\mbox{\Hypertarget{classParser_adfad8aab9f1b67d9577e57ef40d935e9}\label{classParser_adfad8aab9f1b67d9577e57ef40d935e9}} 
+void {\bfseries parser\+Info\+Primitives} (const \mbox{\hyperlink{classlibconfig_1_1Setting}{Setting}} \&root)
+\item 
+\mbox{\Hypertarget{classParser_a39db49814e50640cccd9394c5a7bf0f4}\label{classParser_a39db49814e50640cccd9394c5a7bf0f4}} 
+void {\bfseries parser\+Info\+Light} (const \mbox{\hyperlink{classlibconfig_1_1Setting}{Setting}} \&root, std\+::string flags=\char`\"{}\char`\"{})
+\item 
+\mbox{\Hypertarget{classParser_a57c3f79ad2fbc8d65faf97f0297a7ebf}\label{classParser_a57c3f79ad2fbc8d65faf97f0297a7ebf}} 
+void {\bfseries print\+Info\+File} () const
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class for parsing files. 
+
+This class provides functionality to parse a file containing information. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Parser/\mbox{\hyperlink{Parser_8hpp}{Parser.\+hpp}}\item 
+src/\+Parser/\mbox{\hyperlink{Parser_8cpp}{Parser.\+cpp}}\end{DoxyCompactItemize}

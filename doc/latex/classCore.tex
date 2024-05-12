@@ -1,0 +1,35 @@
+\hypertarget{classCore}{}\doxysection{Core Class Reference}
+\label{classCore}\index{Core@{Core}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classCore_a80e45501ad3800f6a2b864292c9c93fb}\label{classCore_a80e45501ad3800f6a2b864292c9c93fb}} 
+{\bfseries Core} (\mbox{\hyperlink{classParser}{Parser}} parser, std\+::string flag=\char`\"{}\char`\"{})
+\item 
+\mbox{\Hypertarget{classCore_a1cef55e6dec33c65d5547af5d7e33d3a}\label{classCore_a1cef55e6dec33c65d5547af5d7e33d3a}} 
+bool {\bfseries check\+If\+Primitive\+In\+The\+Way} (\mbox{\hyperlink{classRayTracer_1_1Ray}{Ray\+Tracer\+::\+Ray}} Primitive\+To\+Light)
+\item 
+\mbox{\Hypertarget{classCore_ab2a93eb7671b393282448a744b4e29f2}\label{classCore_ab2a93eb7671b393282448a744b4e29f2}} 
+\mbox{\hyperlink{classColor}{Color}} {\bfseries process\+Single\+Light} (\mbox{\hyperlink{classMath_1_1Point3D}{Math\+::\+Point3D}} Primitive\+Hit\+Point, \mbox{\hyperlink{classILight}{ILight}} $\ast$light, std\+::string flags)
+\item 
+\mbox{\Hypertarget{classCore_ae1326a78a0a137c2dadd245c16c27323}\label{classCore_ae1326a78a0a137c2dadd245c16c27323}} 
+\mbox{\hyperlink{classColor}{Color}} {\bfseries process\+Lights} (\mbox{\hyperlink{classMath_1_1Point3D}{Math\+::\+Point3D}} Primitive\+Hit\+Point, std\+::string flags=\char`\"{}\char`\"{})
+\item 
+\mbox{\Hypertarget{classCore_a700da346164af064528fa4c694d12db1}\label{classCore_a700da346164af064528fa4c694d12db1}} 
+void {\bfseries process\+Single\+Primitive} (std\+::vector$<$ \mbox{\hyperlink{classRayTracer_1_1Ray}{Ray\+Tracer\+::\+Ray}} $>$ camera\+Rays, std\+::vector$<$ \mbox{\hyperlink{classColor}{Color}} $>$ \&pixel\+List, \mbox{\hyperlink{classIPrimitives}{IPrimitives}} $\ast$primitive, std\+::vector$<$ double $>$ \&min\+Distances, std\+::string flags=\char`\"{}\char`\"{})
+\item 
+\mbox{\Hypertarget{classCore_a429099bccf544f39e39b1473f957e018}\label{classCore_a429099bccf544f39e39b1473f957e018}} 
+std\+::vector$<$ \mbox{\hyperlink{classColor}{Color}} $>$ {\bfseries process\+Frame} (std\+::string flags=\char`\"{}\char`\"{})
+\item 
+\mbox{\Hypertarget{classCore_a3f3b2a63a61cd5ce867637c18e66bb16}\label{classCore_a3f3b2a63a61cd5ce867637c18e66bb16}} 
+void {\bfseries in\+Real\+Time\+Display} ()
+\item 
+\mbox{\Hypertarget{classCore_ab1830290579fe06c878c746828d67886}\label{classCore_ab1830290579fe06c878c746828d67886}} 
+std\+::vector$<$ \mbox{\hyperlink{classColor}{Color}} $>$ {\bfseries display\+One\+Frame} (std\+::string flags=\char`\"{}\char`\"{})
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Core/\mbox{\hyperlink{Core_8hpp}{Core.\+hpp}}\item 
+src/\+Core/\mbox{\hyperlink{Core_8cpp}{Core.\+cpp}}\end{DoxyCompactItemize}

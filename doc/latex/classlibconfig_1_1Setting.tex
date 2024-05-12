@@ -1,0 +1,267 @@
+\hypertarget{classlibconfig_1_1Setting}{}\doxysection{libconfig\+::Setting Class Reference}
+\label{classlibconfig_1_1Setting}\index{libconfig::Setting@{libconfig::Setting}}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_a42f760ff88654e784477a6f040267bb4}\label{classlibconfig_1_1Setting_a42f760ff88654e784477a6f040267bb4}} 
+enum {\bfseries Type} \{ \newline
+{\bfseries Type\+None} = 0
+, {\bfseries Type\+Int}
+, {\bfseries Type\+Int64}
+, {\bfseries Type\+Float}
+, \newline
+{\bfseries Type\+String}
+, {\bfseries Type\+Boolean}
+, {\bfseries Type\+Group}
+, {\bfseries Type\+Array}
+, \newline
+{\bfseries Type\+List}
+ \}
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_a35034c3fd8c1b2e8e590b6f53083106e}\label{classlibconfig_1_1Setting_a35034c3fd8c1b2e8e590b6f53083106e}} 
+enum {\bfseries Format} \{ {\bfseries Format\+Default} = 0
+, {\bfseries Format\+Hex} = 1
+ \}
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_a9a55b4e5fd88fd0bd982ff4a43d3e81b}\label{classlibconfig_1_1Setting_a9a55b4e5fd88fd0bd982ff4a43d3e81b}} 
+typedef \mbox{\hyperlink{classlibconfig_1_1SettingIterator}{Setting\+Iterator}} {\bfseries iterator}
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_a4249561e5bcd8afc876b9c0fc10bd129}\label{classlibconfig_1_1Setting_a4249561e5bcd8afc876b9c0fc10bd129}} 
+typedef \mbox{\hyperlink{classlibconfig_1_1SettingConstIterator}{Setting\+Const\+Iterator}} {\bfseries const\+\_\+iterator}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_ae00feda5dfe5efcfeb8f07bf646516b5}\label{classlibconfig_1_1Setting_ae00feda5dfe5efcfeb8f07bf646516b5}} 
+Type {\bfseries get\+Type} () const
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_a67b576f1d0e22a8e165c12c160e6a44b}\label{classlibconfig_1_1Setting_a67b576f1d0e22a8e165c12c160e6a44b}} 
+Format {\bfseries get\+Format} () const
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_aa3d550a5658d40655113497a17c9d282}\label{classlibconfig_1_1Setting_aa3d550a5658d40655113497a17c9d282}} 
+void {\bfseries set\+Format} (Format format)
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_a5c488d2bf7bb0e73f9c8f2145a77ede1}\label{classlibconfig_1_1Setting_a5c488d2bf7bb0e73f9c8f2145a77ede1}} 
+{\bfseries operator bool} () const
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_af66a6da960b6dca3bf28e1b48e9d2137}\label{classlibconfig_1_1Setting_af66a6da960b6dca3bf28e1b48e9d2137}} 
+{\bfseries operator int} () const
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_a5f5e374c2b3631facd3c428cbc560236}\label{classlibconfig_1_1Setting_a5f5e374c2b3631facd3c428cbc560236}} 
+{\bfseries operator unsigned int} () const
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_af2eefc19311e7dec1e5f0822ae21f4a2}\label{classlibconfig_1_1Setting_af2eefc19311e7dec1e5f0822ae21f4a2}} 
+{\bfseries operator long} () const
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_aad94b9d9303239b262e371ff4555334d}\label{classlibconfig_1_1Setting_aad94b9d9303239b262e371ff4555334d}} 
+{\bfseries operator unsigned long} () const
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_a617233ca8eafc366ccf2c2573e12bd66}\label{classlibconfig_1_1Setting_a617233ca8eafc366ccf2c2573e12bd66}} 
+{\bfseries operator long long} () const
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_a73929fb27e8b09e30c4d340ce8979750}\label{classlibconfig_1_1Setting_a73929fb27e8b09e30c4d340ce8979750}} 
+{\bfseries operator unsigned long long} () const
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_a116ff9278a90141c81f8995cd8b95581}\label{classlibconfig_1_1Setting_a116ff9278a90141c81f8995cd8b95581}} 
+{\bfseries operator double} () const
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_a816a5bcfe5eb00c0c33b01f6be45df4b}\label{classlibconfig_1_1Setting_a816a5bcfe5eb00c0c33b01f6be45df4b}} 
+{\bfseries operator float} () const
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_aa7358e134d7c7d048a0cea6504488c3a}\label{classlibconfig_1_1Setting_aa7358e134d7c7d048a0cea6504488c3a}} 
+{\bfseries operator const char $\ast$} () const
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_a51fe3605721228563e0df370cd6ef7d8}\label{classlibconfig_1_1Setting_a51fe3605721228563e0df370cd6ef7d8}} 
+{\bfseries operator std\+::string} () const
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_a03daae4251e33196cba534fe255befc3}\label{classlibconfig_1_1Setting_a03daae4251e33196cba534fe255befc3}} 
+const char $\ast$ {\bfseries c\+\_\+str} () const
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_ae4fbfd433ace5e208d360039b35b1e3b}\label{classlibconfig_1_1Setting_ae4fbfd433ace5e208d360039b35b1e3b}} 
+\mbox{\hyperlink{classlibconfig_1_1Setting}{Setting}} \& {\bfseries operator=} (bool value)
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_a37680aab61410d260cbc7412bc67084f}\label{classlibconfig_1_1Setting_a37680aab61410d260cbc7412bc67084f}} 
+\mbox{\hyperlink{classlibconfig_1_1Setting}{Setting}} \& {\bfseries operator=} (int value)
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_a650dab8ad4c74394a95ad6340ddec739}\label{classlibconfig_1_1Setting_a650dab8ad4c74394a95ad6340ddec739}} 
+\mbox{\hyperlink{classlibconfig_1_1Setting}{Setting}} \& {\bfseries operator=} (long value)
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_ad96973806dd215219a184f71c4041b78}\label{classlibconfig_1_1Setting_ad96973806dd215219a184f71c4041b78}} 
+\mbox{\hyperlink{classlibconfig_1_1Setting}{Setting}} \& {\bfseries operator=} (const long long \&value)
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_a0d381efc7077f55154b9e43000d07d5e}\label{classlibconfig_1_1Setting_a0d381efc7077f55154b9e43000d07d5e}} 
+\mbox{\hyperlink{classlibconfig_1_1Setting}{Setting}} \& {\bfseries operator=} (const double \&value)
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_a1d77e68b6b8c82ae4a22d8bb867ff1a7}\label{classlibconfig_1_1Setting_a1d77e68b6b8c82ae4a22d8bb867ff1a7}} 
+\mbox{\hyperlink{classlibconfig_1_1Setting}{Setting}} \& {\bfseries operator=} (float value)
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_ad55703724f7725d4b975261b38617945}\label{classlibconfig_1_1Setting_ad55703724f7725d4b975261b38617945}} 
+\mbox{\hyperlink{classlibconfig_1_1Setting}{Setting}} \& {\bfseries operator=} (const char $\ast$value)
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_a56f957281e4e097d1d172a26e68a827e}\label{classlibconfig_1_1Setting_a56f957281e4e097d1d172a26e68a827e}} 
+\mbox{\hyperlink{classlibconfig_1_1Setting}{Setting}} \& {\bfseries operator=} (const std\+::string \&value)
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_aabe9cb0596acf134fe64dba7debfbb42}\label{classlibconfig_1_1Setting_aabe9cb0596acf134fe64dba7debfbb42}} 
+\mbox{\hyperlink{classlibconfig_1_1Setting}{Setting}} \& {\bfseries lookup} (const char $\ast$path) const
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_a901ab6200b01486b30adb623a88a139d}\label{classlibconfig_1_1Setting_a901ab6200b01486b30adb623a88a139d}} 
+\mbox{\hyperlink{classlibconfig_1_1Setting}{Setting}} \& {\bfseries lookup} (const std\+::string \&path) const
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_ad529b88dd21c312cd64d36286eb2721f}\label{classlibconfig_1_1Setting_ad529b88dd21c312cd64d36286eb2721f}} 
+\mbox{\hyperlink{classlibconfig_1_1Setting}{Setting}} \& {\bfseries operator\mbox{[}$\,$\mbox{]}} (const char $\ast$name) const
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_ad7bf8f9c86e49f167d713e316340960e}\label{classlibconfig_1_1Setting_ad7bf8f9c86e49f167d713e316340960e}} 
+\mbox{\hyperlink{classlibconfig_1_1Setting}{Setting}} \& {\bfseries operator\mbox{[}$\,$\mbox{]}} (const std\+::string \&name) const
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_ae10d4865fbf5e29759074a15e419d02c}\label{classlibconfig_1_1Setting_ae10d4865fbf5e29759074a15e419d02c}} 
+\mbox{\hyperlink{classlibconfig_1_1Setting}{Setting}} \& {\bfseries operator\mbox{[}$\,$\mbox{]}} (int index) const
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_a2c7e3f404eff5bdbe6b8c8892bee71c8}\label{classlibconfig_1_1Setting_a2c7e3f404eff5bdbe6b8c8892bee71c8}} 
+bool {\bfseries lookup\+Value} (const char $\ast$name, bool \&value) const
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_aa168d1a012ec5e9d3d079737af13ce8b}\label{classlibconfig_1_1Setting_aa168d1a012ec5e9d3d079737af13ce8b}} 
+bool {\bfseries lookup\+Value} (const char $\ast$name, int \&value) const
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_ae57bd87b34ac15ddee77913632d9bb66}\label{classlibconfig_1_1Setting_ae57bd87b34ac15ddee77913632d9bb66}} 
+bool {\bfseries lookup\+Value} (const char $\ast$name, unsigned int \&value) const
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_a2d5c45291de39b6ea47b9c948c08e998}\label{classlibconfig_1_1Setting_a2d5c45291de39b6ea47b9c948c08e998}} 
+bool {\bfseries lookup\+Value} (const char $\ast$name, long long \&value) const
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_ab61cf45ddec7f2e6063459de4c14aa91}\label{classlibconfig_1_1Setting_ab61cf45ddec7f2e6063459de4c14aa91}} 
+bool {\bfseries lookup\+Value} (const char $\ast$name, unsigned long long \&value) const
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_a2aa18e2d8bd40192461f92f5fe38a2c7}\label{classlibconfig_1_1Setting_a2aa18e2d8bd40192461f92f5fe38a2c7}} 
+bool {\bfseries lookup\+Value} (const char $\ast$name, double \&value) const
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_aaa46eaa539f8ea815ceababf76d2a958}\label{classlibconfig_1_1Setting_aaa46eaa539f8ea815ceababf76d2a958}} 
+bool {\bfseries lookup\+Value} (const char $\ast$name, float \&value) const
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_a63bf799f198bfa39ddbdfa41b9755d48}\label{classlibconfig_1_1Setting_a63bf799f198bfa39ddbdfa41b9755d48}} 
+bool {\bfseries lookup\+Value} (const char $\ast$name, const char $\ast$\&value) const
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_a62504d556fe96c5782796a066ebd4f52}\label{classlibconfig_1_1Setting_a62504d556fe96c5782796a066ebd4f52}} 
+bool {\bfseries lookup\+Value} (const char $\ast$name, std\+::string \&value) const
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_a8fb79abb42ac9a7c1a825232b1370595}\label{classlibconfig_1_1Setting_a8fb79abb42ac9a7c1a825232b1370595}} 
+bool {\bfseries lookup\+Value} (const std\+::string \&name, bool \&value) const
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_aa884de8b3fd2b1b7ee79d6ad0adc50ee}\label{classlibconfig_1_1Setting_aa884de8b3fd2b1b7ee79d6ad0adc50ee}} 
+bool {\bfseries lookup\+Value} (const std\+::string \&name, int \&value) const
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_a330d7270fd8606cdf6c3eec917731f4e}\label{classlibconfig_1_1Setting_a330d7270fd8606cdf6c3eec917731f4e}} 
+bool {\bfseries lookup\+Value} (const std\+::string \&name, unsigned int \&value) const
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_a25fb078b348ef9ee40efdcedc5c437fb}\label{classlibconfig_1_1Setting_a25fb078b348ef9ee40efdcedc5c437fb}} 
+bool {\bfseries lookup\+Value} (const std\+::string \&name, long long \&value) const
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_a63f9655606f537c8d4cbd6b947784379}\label{classlibconfig_1_1Setting_a63f9655606f537c8d4cbd6b947784379}} 
+bool {\bfseries lookup\+Value} (const std\+::string \&name, unsigned long long \&value) const
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_a8c59101bb52c2c915cb5ffc551537c0e}\label{classlibconfig_1_1Setting_a8c59101bb52c2c915cb5ffc551537c0e}} 
+bool {\bfseries lookup\+Value} (const std\+::string \&name, double \&value) const
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_a09e0302a09540be8eacfd373a07feccb}\label{classlibconfig_1_1Setting_a09e0302a09540be8eacfd373a07feccb}} 
+bool {\bfseries lookup\+Value} (const std\+::string \&name, float \&value) const
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_aecd26d2abe86776d8b6693103b3ebe42}\label{classlibconfig_1_1Setting_aecd26d2abe86776d8b6693103b3ebe42}} 
+bool {\bfseries lookup\+Value} (const std\+::string \&name, const char $\ast$\&value) const
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_aef105d5e79156c114aa88feeac3b5e60}\label{classlibconfig_1_1Setting_aef105d5e79156c114aa88feeac3b5e60}} 
+bool {\bfseries lookup\+Value} (const std\+::string \&name, std\+::string \&value) const
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_a52f173e9d7abd9d3e8e0ba4151ed89d1}\label{classlibconfig_1_1Setting_a52f173e9d7abd9d3e8e0ba4151ed89d1}} 
+void {\bfseries remove} (const char $\ast$name)
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_a577708b2a0164024ea88894626b3f24b}\label{classlibconfig_1_1Setting_a577708b2a0164024ea88894626b3f24b}} 
+void {\bfseries remove} (const std\+::string \&name)
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_abc80ebd07bbca2cc65b37b74a452104a}\label{classlibconfig_1_1Setting_abc80ebd07bbca2cc65b37b74a452104a}} 
+void {\bfseries remove} (unsigned int idx)
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_ac6538b68c75a6fe965923658deeb6f81}\label{classlibconfig_1_1Setting_ac6538b68c75a6fe965923658deeb6f81}} 
+\mbox{\hyperlink{classlibconfig_1_1Setting}{Setting}} \& {\bfseries add} (const char $\ast$name, Type type)
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_ae1860aa1886a488b33da41da33f334f5}\label{classlibconfig_1_1Setting_ae1860aa1886a488b33da41da33f334f5}} 
+\mbox{\hyperlink{classlibconfig_1_1Setting}{Setting}} \& {\bfseries add} (const std\+::string \&name, Type type)
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_a7e21e2d0f09b9c56808465957d10ed0f}\label{classlibconfig_1_1Setting_a7e21e2d0f09b9c56808465957d10ed0f}} 
+\mbox{\hyperlink{classlibconfig_1_1Setting}{Setting}} \& {\bfseries add} (Type type)
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_a98e977823b56c7d3f7d4abe719a8f143}\label{classlibconfig_1_1Setting_a98e977823b56c7d3f7d4abe719a8f143}} 
+bool {\bfseries exists} (const char $\ast$name) const
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_a4700efdefb4dc6335bd3e180b9c67867}\label{classlibconfig_1_1Setting_a4700efdefb4dc6335bd3e180b9c67867}} 
+bool {\bfseries exists} (const std\+::string \&name) const
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_a62ea77c0806c8d4f3d4d9ebfaf56baa6}\label{classlibconfig_1_1Setting_a62ea77c0806c8d4f3d4d9ebfaf56baa6}} 
+int {\bfseries get\+Length} () const
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_aa95f367458df6e1102fe7eed4cd77392}\label{classlibconfig_1_1Setting_aa95f367458df6e1102fe7eed4cd77392}} 
+const char $\ast$ {\bfseries get\+Name} () const
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_a20f860c3c09cd28ddf6123c5695c7969}\label{classlibconfig_1_1Setting_a20f860c3c09cd28ddf6123c5695c7969}} 
+std\+::string {\bfseries get\+Path} () const
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_a66f98beec8a3f9638da67402499b1fcd}\label{classlibconfig_1_1Setting_a66f98beec8a3f9638da67402499b1fcd}} 
+int {\bfseries get\+Index} () const
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_a3204e621a4f168f927ce816153e756c6}\label{classlibconfig_1_1Setting_a3204e621a4f168f927ce816153e756c6}} 
+const \mbox{\hyperlink{classlibconfig_1_1Setting}{Setting}} \& {\bfseries get\+Parent} () const
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_aacac2f6d4d568805aeefd563ad38d408}\label{classlibconfig_1_1Setting_aacac2f6d4d568805aeefd563ad38d408}} 
+\mbox{\hyperlink{classlibconfig_1_1Setting}{Setting}} \& {\bfseries get\+Parent} ()
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_ac2eb9e7551bc14720a1f251694d2a3ad}\label{classlibconfig_1_1Setting_ac2eb9e7551bc14720a1f251694d2a3ad}} 
+bool {\bfseries is\+Root} () const
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_a618cd65ec0d5de158a1124cb17aa88f7}\label{classlibconfig_1_1Setting_a618cd65ec0d5de158a1124cb17aa88f7}} 
+bool {\bfseries is\+Group} () const
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_a135c0212bf7906d48200b0a171e8d70d}\label{classlibconfig_1_1Setting_a135c0212bf7906d48200b0a171e8d70d}} 
+bool {\bfseries is\+Array} () const
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_a1b8ce6aa781452cf995b78ad0739a0e3}\label{classlibconfig_1_1Setting_a1b8ce6aa781452cf995b78ad0739a0e3}} 
+bool {\bfseries is\+List} () const
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_ab150d99dc4a7514b47945849eb9743f1}\label{classlibconfig_1_1Setting_ab150d99dc4a7514b47945849eb9743f1}} 
+bool {\bfseries is\+Aggregate} () const
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_a383c123057f54e7549e29f4ba6b9950a}\label{classlibconfig_1_1Setting_a383c123057f54e7549e29f4ba6b9950a}} 
+bool {\bfseries is\+Scalar} () const
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_ac26da717d257ad1ca1bdd71e05baf3cb}\label{classlibconfig_1_1Setting_ac26da717d257ad1ca1bdd71e05baf3cb}} 
+bool {\bfseries is\+Number} () const
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_a2d39fbfc5d9ceb0e0aba919239abea30}\label{classlibconfig_1_1Setting_a2d39fbfc5d9ceb0e0aba919239abea30}} 
+bool {\bfseries is\+String} () const
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_a4fa7616ddac4f5905369128994bad21b}\label{classlibconfig_1_1Setting_a4fa7616ddac4f5905369128994bad21b}} 
+unsigned int {\bfseries get\+Source\+Line} () const
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_a2b0e2ef0fe38226bb761c1e23f95faa1}\label{classlibconfig_1_1Setting_a2b0e2ef0fe38226bb761c1e23f95faa1}} 
+const char $\ast$ {\bfseries get\+Source\+File} () const
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_a19e861614e8cff234be13c30829745e7}\label{classlibconfig_1_1Setting_a19e861614e8cff234be13c30829745e7}} 
+\mbox{\hyperlink{classlibconfig_1_1SettingIterator}{iterator}} {\bfseries begin} ()
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_a539a0f74555e01f8e3d26d9694b7172b}\label{classlibconfig_1_1Setting_a539a0f74555e01f8e3d26d9694b7172b}} 
+\mbox{\hyperlink{classlibconfig_1_1SettingIterator}{iterator}} {\bfseries end} ()
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_a384767f1f68f66694c1c0dd7cce905ec}\label{classlibconfig_1_1Setting_a384767f1f68f66694c1c0dd7cce905ec}} 
+\mbox{\hyperlink{classlibconfig_1_1SettingConstIterator}{const\+\_\+iterator}} {\bfseries begin} () const
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_aee3cdb5b509b7b725f0a66b99461bf6c}\label{classlibconfig_1_1Setting_aee3cdb5b509b7b725f0a66b99461bf6c}} 
+\mbox{\hyperlink{classlibconfig_1_1SettingConstIterator}{const\+\_\+iterator}} {\bfseries end} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classlibconfig_1_1Setting_ac3da7e21a05bf8852638db7e4dd1b81a}\label{classlibconfig_1_1Setting_ac3da7e21a05bf8852638db7e4dd1b81a}} 
+class {\bfseries Config}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Parser/libconfig.\+h++\end{DoxyCompactItemize}
